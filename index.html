@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AURENSTAR | Centro de Operaciones</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <style>
+    /* =========================================
+       1. CONFIGURACIÓN BASE Y VARIABLES
+       ========================================= */
+    :root {
+      /* Paleta AURENSTAR - High Definition */
+      --bg: #050608;          /* Negro profundo */
+      --bg-card: rgba(20, 21, 26, 0.6); 
+      --bg-modal: #1c1d24;    
+      --border: rgba(255, 255, 255, 0.08); 
+      --border-hover: rgba(212, 175, 55, 0.5); /* Dorado */
+      
+      --text: #ffffff;        
+      --text-muted: #9ca3af;  
+      
+      /* Acentos de Marca */
+      --gold: #d4af37;        
+      --primary: #58a6ff;     
+    }
+
+    * { box-sizing: border-box; }
+
+    /* =========================================
+       2. AMBIENTE VISUAL (FONDO IMPONENTE)
+       ========================================= */
+    body { 
+    margin: 0; 
+    color: var(--text); 
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #050608; /* Color de respaldo */
+    position: relative;
+}
+
+/* Nueva capa para el fondo animado */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2;
+    background: 
+        linear-gradient(rgba(5, 6, 8, 0.7), rgba(5, 6, 8, 0.8)), 
+        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    animation: earthOrbit 40s linear infinite alternate; /* Movimiento lento */
+}
+
+@keyframes earthOrbit {
+    0% { transform: scale(1.0); background-position: center; }
+    100% { transform: scale(1.05); background-position: 55% 45%; }
+}
+
+    /* Malla sutil para toque técnico */
+    body::before {
+    content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    /* Efecto de estrellas/partículas pequeñas */
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px);
+    background-size: 550px 550px, 350px 350px;
+    background-position: 0 0, 40px 60px;
+    opacity: 0.2; 
+    z-index: -1; 
+    pointer-events: none;
+    animation: stardustMove 100s linear infinite;
+}
+
+@keyframes stardustMove {
+    from { background-position: 0 0, 40px 60px; }
+    to { background-position: 550px 1100px, 400px 800px; }
+}
+
+    /* =========================================
+       3. NAVEGACIÓN
+       ========================================= */
+    .navbar { 
+        background: rgba(5, 6, 8, 0.7); 
+        border-bottom: 1px solid var(--border); 
+        position: sticky; top: 0; z-index: 1000; 
+        backdrop-filter: blur(15px);
+    }
+    .navbar .container { 
+        max-width: 1080px; margin: 0 auto; padding: 14px 16px; 
+        display: flex; align-items: center; justify-content: space-between; 
+    }
+    .brand { 
+        font-weight: 700; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; 
+        color: #fff; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .brand .star { color: var(--gold); animation: pulseStar 3s infinite; }
+    @keyframes pulseStar { 50% { text-shadow: 0 0 15px var(--gold); } }
+
+    .status-badge {
+        font-size: 0.75rem; color: var(--gold); border: 1px solid rgba(212, 175, 55, 0.3);
+        padding: 4px 10px; border-radius: 20px; background: rgba(212, 175, 55, 0.05);
+    }
+
+    /* =========================================
+       3.5. HÉROE & BIENVENIDA (CENTRO DE MANDO)
+       ========================================= */
+    .hero { 
+        padding: 80px 16px 60px; 
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+
+    .welcome-container {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* ESTO CENTRA TODO VERTICALMENTE */
+    }
+    
+    /* El Resplandor Dorado detrás del título */
+    .welcome-container::before {
+        content: "";
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%); /* Centrado perfecto */
+        width: 500px; height: 300px;
+        background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
+        filter: blur(80px);
+        z-index: -1;
+        pointer-events: none;
+        animation: pulseGlow 6s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+        0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.9); }
+        100% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    .hero-title {
+        font-size: 3.2rem; /* Más grande e imponente */
+        font-weight: 800;
+        margin: 0 0 15px;
+        background: linear-gradient(180deg, #ffffff 20%, var(--gold) 100%); 
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -1.5px;
+        filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+    }
+    
+    .gold-subtitle {
+        display: block;
+        font-size: 0.5em;
+        color: var(--gold) !important;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-top: 10px;
+        background: none !important;
+        -webkit-text-fill-color: var(--gold) !important;
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); /* Un toque de resplandor */
+     }    
+
+    .wisdom-capsule {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        font-style: italic;
+        margin-bottom: 40px;
+        opacity: 0.9;
+        letter-spacing: 0.5px;
+    }
+
+    /* INPUT MÁGICO */
+    .magic-input-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+    }
+    .magic-input {
+        width: 100%;
+        padding: 20px 30px;
+        border-radius: 50px;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(10, 11, 15, 0.6); /* Oscuro y translúcido */
+        color: white;
+        font-size: 1.15rem;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        text-align: center;
+        backdrop-filter: blur(10px);
+    }
+    .magic-input::placeholder { color: rgba(255,255,255,0.3); letter-spacing: 1px; }
+    
+    .magic-input:focus {
+        border-color: var(--gold);
+        background: rgba(0,0,0,0.8);
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+        outline: none;
+        transform: scale(1.02);
+    }
+
+    /* Feedback visual */
+    .search-sent {
+        border-color: #2ecc71 !important;
+        background: rgba(46, 204, 113, 0.1) !important;
+    }
+    .search-feedback {
+        font-size: 0.9rem; color: #2ecc71;
+        margin-top: 15px; opacity: 0; transition: 0.3s;
+        font-weight: 600; letter-spacing: 0.5px;
+    }
+    .search-feedback.show { opacity: 1; transform: translateY(-5px); }
+
+    /* =========================================
+       4. GRID & TARJETAS (GLASSMORPHISM)
+       ========================================= */
+    .main { max-width: 1080px; margin: 0 auto; padding: 0 16px 80px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    
+    ..card { 
+    background: rgba(255, 255, 255, 0.05) !important; 
+    backdrop-filter: blur(15px) saturate(150%); /* Esto hace que el fondo se vea borroso detrás de la tarjeta */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* ... resto de tu código ... */
+}
+
+    .card:hover { 
+        background: rgba(212, 175, 55, 0.04);
+        border-color: var(--gold); 
+        transform: translateY(-8px); 
+        box-shadow: 0 15px 40px -10px rgba(0,0,0,0.8);
+    }
+    
+    .card .icon { font-size: 32px; margin-bottom: 16px; transition: 0.3s; display: inline-block; }
+    .card:hover .icon { transform: scale(1.2) rotate(5deg); filter: drop-shadow(0 0 10px currentColor); }
+    
+    .card h5 { margin: 0 0 8px; font-size: 1.2rem; color: #fff; font-weight: 600; }
+    .card p { margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+    
+    .card::after {
+        content: "➜"; position: absolute; bottom: 20px; right: 20px;
+        color: var(--gold); opacity: 0; transform: translateX(-10px); transition: 0.3s;
+    }
+    .card:hover::after { opacity: 1; transform: translateX(0); }
+
+    /* =========================================
+       5. MODALES (UI)
+       ========================================= */
+    .modal-backdrop { 
+        position: fixed; inset: 0; background: rgba(0,0,0,0.85); 
+        display: none; align-items: center; justify-content: center; 
+        padding: 16px; z-index: 9999; backdrop-filter: blur(8px); 
+    }
+    .modal-backdrop.show { display: flex; animation: fadeIn 0.2s ease; }
+    
+    .modal { 
+        width: min(700px, 95vw); background: var(--bg-modal); 
+        border: 1px solid var(--border); border-radius: 20px; 
+        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7); overflow: hidden; 
+        transform: scale(0.95); transition: 0.3s;
+    }
+    .modal-backdrop.show .modal { transform: scale(1); }
+
+    .modal-header { 
+        background: rgba(255,255,255,0.03); padding: 20px 24px; 
+        border-bottom: 1px solid var(--border); 
+        display: flex; align-items: center; justify-content: space-between; 
+    }
+    .modal-title { font-size: 1.1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; }
+    .modal-body { padding: 30px 24px; color: var(--text); }
+    
+    .btn-close { 
+        border: 0; background: transparent; color: var(--text-muted); 
+        font-size: 1.5rem; cursor: pointer; transition: 0.2s; 
+    }
+    .btn-close:hover { color: #fff; transform: rotate(90deg); }
+
+    /* Listas y Formularios */
+    .list { display: grid; gap: 12px; }
+    .list-item { 
+        display: flex; align-items: center; justify-content: space-between; 
+        border: 1px solid var(--border); border-radius: 12px; padding: 16px; 
+        background: rgba(0,0,0,0.2); color: var(--text) !important; transition: 0.2s;
+    }
+    .list-item:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.02); }
+
+    .form { display: grid; gap: 20px; }
+    .form label { font-size: 0.9rem; font-weight: 600; color: var(--gold); margin-bottom: 8px; display: block; }
+    .form input { 
+        padding: 14px; border-radius: 10px; border: 1px solid var(--border); 
+        background: rgba(0,0,0,0.3); color: #fff; width: 100%; font-family: inherit;
+    }
+    .form input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 15px rgba(88,166,255,0.1); }
+    
+    .btn { 
+        display: inline-flex; align-items: center; justify-content: center; 
+        gap: 10px; padding: 14px 24px; border-radius: 12px; border: 0; 
+        cursor: pointer; font-weight: 700; transition: 0.3s; width: 100%; margin-top: 10px;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--primary), #2b6cb0); color: white; }
+    .btn-success { background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; }
+    .btn:hover { filter: brightness(1.2); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* =========================================
+       6. ESTILOS NUEVOS: ICONOS DORADOS
+       ========================================= */
+    .gold-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        display: inline-block;
+        
+        /* Degradado Oro Metálico */
+        background: linear-gradient(135deg, #D4AF37 0%, #F5E0A3 50%, #B8860B 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        
+        /* Resplandor elegante */
+        filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+        transition: transform 0.3s ease;
+    }
+
+    /* Efecto al pasar el mouse sobre la tarjeta */
+    .card:hover .gold-icon {
+        transform: scale(1.15) translateY(-5px);
+        filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.7));
+    }
+   
+    /* =========================================
+       7. ANIMACIÓN DE SATÉLITES REALISTAS
+       ========================================= */
+    .space-overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: -1; /* Entre la Tierra y el Contenido */
+        overflow: hidden;
+    }
+
+    .satellite {
+        position: absolute;
+        background: #fff;
+        border-radius: 50%;
+        filter: drop-shadow(0 0 8px #fff);
+    }
+
+    /* Estela de alta velocidad */
+    .satellite::after {
+        content: "";
+        position: absolute;
+        top: 50%; right: 0;
+        width: 150px; height: 1px;
+        background: linear-gradient(to left, rgba(212, 175, 55, 0.7), transparent);
+        transform: translateY(-50%);
+    }
+
+    /* Satélite 1: Órbita Rápida (Dorado) */
+    .sat-1 {
+        width: 3px; height: 3px;
+        top: 30%; left: -10%;
+        animation: orbit1 25s linear infinite;
+        filter: drop-shadow(0 0 8px var(--gold));
+    }
+
+    /* Satélite 2: Órbita Lenta (Blanco) */
+    .sat-2 {
+        width: 2px; height: 2px;
+        top: 60%; left: -10%;
+        animation: orbit2 40s linear infinite;
+    }
+
+    /* Satélite 3: Diagonal (Tecnológico) */
+    .sat-3 {
+        width: 2px; height: 2px;
+        top: 10%; left: -10%;
+        animation: orbit3 35s linear infinite;
+        opacity: 0.5;
+    }
+
+    @keyframes orbit1 {
+        0% { transform: translateX(0) translateY(0); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { transform: translateX(120vw) translateY(15vh); opacity: 0; }
+    }
+
+    @keyframes orbit2 {
+        0% { transform: translateX(0); opacity: 0; }
+        5% { opacity: 0.8; }
+        95% { opacity: 0.8; }
+        100% { transform: translateX(120vw); opacity: 0; }
+    }
+
+    @keyframes orbit3 {
+        0% { transform: translateX(0) translateY(0); opacity: 0; }
+        20% { opacity: 0.6; }
+        100% { transform: translateX(120vw) translateY(40vh); opacity: 0; }
+    }
+    
+    /* Estilos internos para el Catálogo */
+    .catalog-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .service-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: 0.3s ease;
+    }
+
+    .service-item:hover {
+        background: rgba(212, 175, 55, 0.05);
+        border-color: var(--gold);
+        transform: scale(1.02);
+    }
+
+    .service-info h4 {
+        margin: 0 0 5px 0;
+        color: var(--gold);
+        font-size: 1.1rem;
+    }
+
+    .service-info p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
+
+    .service-price {
+        text-align: right;
+    }
+
+    .price-value {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: #fff;
+    }
+
+    .price-tag {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        color: var(--gold);
+        letter-spacing: 1px;
+    }
+
+    .badge-premium {
+        background: var(--gold);
+        color: #000;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.65rem;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+    * PEGA AQUÍ LOS ESTILOS DEL PASO 1 */
+    .opportunity-card {
+        background: rgba(255, 255, 255, 0.02);
+        border-left: 4px solid var(--gold);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 15px;
+        transition: 0.3s;
+    }
+    .opportunity-card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateX(10px);
+    }
+    .opportunity-card h4 {
+        color: #fff;
+        margin: 0 0 10px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.1rem;
+    }
+    .opportunity-card p {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+        margin: 0;
+    }
+    .future-badge {
+        font-size: 0.7rem;
+        background: #0088ff;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-weight: bold;
+    }
+
+    /* Estilos para el Inventario de Servicios */
+    .inventory-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 10px;
+    }
+
+    .status-active {
+        color: #2ecc71;
+        font-size: 0.7rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .status-active::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background: #2ecc71;
+        border-radius: 50%;
+        display: inline-block;
+        animation: pulseStatus 1.5s infinite;
+    }
+
+    @keyframes pulseStatus {
+        0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+    }
+ 
+    /* Estilos para el Formulario de Pedidos */
+    .form-header-hint {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+        padding-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .input-icon-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .input-icon-wrapper i {
+        position: absolute;
+        left: 15px;
+        color: var(--gold);
+        opacity: 0.7;
+    }
+
+    .form input, .form select, .form textarea {
+        padding-left: 40px !important; /* Espacio para el icono */
+    }
+
+    .order-footer-note {
+        font-size: 0.75rem;
+        color: var(--gold);
+        text-align: center;
+        margin-top: 15px;
+        opacity: 0.8;
+    }
+
+    /* Contenedor Compacto de Planes */
+.pricing-grid {
+    display: flex;
+    justify-content: center;
+    gap: 12px; /* Espacio reducido entre tarjetas */
+    width: 100%;
+    margin-top: 10px;
+    flex-wrap: nowrap; /* Obliga a que estén de lado */
+    overflow-x: auto; /* Si la pantalla es muy pequeña, permite deslizar */
+}
+
+.pricing-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    border-radius: 12px;
+    padding: 15px; /* Padding reducido */
+    flex: 1; /* Todas miden lo mismo */
+    min-width: 200px; /* Para que no se aplasten demasiado */
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+.pricing-card.featured {
+    border-color: var(--gold);
+    background: rgba(255, 215, 0, 0.07);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+.pricing-card h4 {
+    color: var(--gold);
+    font-size: 1rem; /* Fuente más pequeña */
+    margin: 5px 0;
+}
+
+.price-value {
+    font-size: 1.5rem; /* Precio más compacto */
+    font-weight: bold;
+    color: #fff;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+    flex-grow: 1;
+}
+
+.features-list li {
+    font-size: 0.75rem; /* Texto pequeño para que no salte de línea */
+    color: #ddd;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-plan {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.pricing-card.featured .btn-plan {
+    background: var(--gold);
+    color: #000;
+}
+
+/* Ajuste para pantallas móviles */
+@media (max-width: 600px) {
+    .pricing-grid {
+        flex-wrap: wrap; /* En celular sí se ponen una debajo de otra */
+    }
+    .pricing-card {
+        max-width: 100%;
+    }
+}
+    
+    #orderForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Esto da espacio entre los campos */
+    padding: 10px;
+}
+
+#orderForm .form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+#orderForm label {
+    color: var(--gold);
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#orderForm input {
+    padding: 12px;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: white;
+    font-family: inherit;
+}
+
+#orderForm input[readonly] {
+    border-color: var(--gold);
+    color: var(--gold);
+    opacity: 0.8;
+}
+
+  </style>
+</head>
+
+<body>
+
+  <div class="space-overlay">
+    <div class="satellite sat-1"></div>
+    <div class="satellite sat-2"></div>
+    <div class="satellite sat-3"></div>
+  </div>
+  <div class="navbar">
+    <div class="container">
+      <div class="brand"><span class="star">✦</span> AURENSTAR</div>
+      <div class="status-badge">● SISTEMA ONLINE</div>
+    </div>
+  </div>
+
+  <div class="hero">
+      <div class="welcome-container">
+          <h1 id="dynamicGreeting" class="hero-title">Iniciando...</h1>
+          
+          <div class="wisdom-capsule">
+              <span id="dailyWisdom">"Cargando..."</span>
+          </div>
+
+          <div class="magic-input-wrapper">
+              <input type="text" id="aiConsultant" class="magic-input" placeholder="Escribe aquí tu deseo o idea...">
+              <div id="searchFeedback" class="search-feedback">✔ Tu visión ha sido captada...</div>
+          </div>
+      </div>
+  </div>
+
+  <div class="main">
+    <div class="grid">
+      <div class="card" onclick="UI.showPrecios()">
+        <i class="fa-solid fa-tags gold-icon"></i>
+        <h5>Catálogo & Tarifas</h5>
+        <p>Tarifas de inversión para soluciones globales.</p>
+      </div>
+      
+      <div class="card" onclick="UI.showPromos()">
+        <i class="fa-solid fa-bolt gold-icon"></i>
+        <h5>Ofertas Exclusivas</h5>
+        <p>Oportunidades limitadas de alta rentabilidad.</p>
+      </div>
+      
+      <div class="card" onclick="UI.showProductos()">
+        <i class="fa-solid fa-chart-line gold-icon"></i>
+        <h5>Tendencias & Novedades</h5>
+        <p>El futuro de la tecnología AURENSTAR hoy.</p>
+      </div>
+      
+      <div class="card" onclick="UI.openOrderModal()">
+        <i class="fa-solid fa-rocket gold-icon"></i>
+        <h5>Gestión de Pedidos</h5>
+        <p>Iniciar protocolo de adquisición y despliegue.</p>
+      </div>
+      
+      <div class="card" onclick="UI.openPaymentModal()">
+        <i class="fa-solid fa-shield-halved gold-icon"></i>
+        <h5>Pasarela de Pagos</h5>
+        <p>Transacciones seguras con cifrado bancario.</p>
+      </div>
+      
+      <div class="card" onclick="UI.showFAQ()">
+        <i class="fa-solid fa-user-tie gold-icon"></i>
+        <h5>Asesoría Directa</h5>
+        <p>Enlace humano con nuestro equipo de ingeniería.</p>
+      </div>
+    </div>
+
+  <div id="listBackdrop" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div id="listTitle" class="modal-title">Información</div>
+        <button class="btn-close" onclick="Modal('list').hide()">✕</button>
+      </div>
+      <div id="listBody" class="modal-body"></div>
+    </div>
+  </div>
+
+  <div id="orderBackdrop" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div id="orderTitle" class="modal-title">SOLICITUD DE PEDIDO</div>
+        <button class="btn-close" onclick="Modal('order').hide()">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="orderForm">
+    <div class="form-group">
+        <label>SERVICIO SELECCIONADO</label>
+        <input type="text" name="item" readonly>
+    </div>
+    <div class="form-group">
+        <label>TU NOMBRE COMPLETO</label>
+        <input type="text" name="nombre_cliente" placeholder="Nombre y Apellido" required>
+    </div>
+    <div class="form-group">
+        <label>TU WHATSAPP / CELULAR</label>
+        <input type="text" name="telefono_cliente" placeholder="Ej: 70012345" required>
+    </div>
+    <button type="submit" class="btn-primary" style="margin-top:10px">
+        TRANSMITIR ORDEN
+    </button>
+</form>
+      </div>
+    </div>
+  </div>
+
+  <div id="listBackdrop" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div id="listTitle" class="modal-title">Información</div>
+        <button class="btn-close" onclick="Modal('list').hide()">✕</button>
+      </div>
+      <div id="listBody" class="modal-body"></div>
+    </div>
+  </div>
+
+  <div id="orderBackdrop" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div id="orderTitle" class="modal-title">SOLICITUD DE DESPLIEGUE</div>
+        <button class="btn-close" onclick="Modal('order').hide()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="form-header-hint">Iniciando protocolo de solicitud técnica. Defina los parámetros.</p>
+        <form id="orderForm" class="form">
+          <div class="form-group">
+            <label>Capacidad o Servicio Requerido</label>
+            <div class="input-icon-wrapper">
+                <i class="fa-solid fa-layer-group"></i>
+                <input type="text" name="item" placeholder="Ej: AURENSTAR PRIME 1.0" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Nivel de Prioridad</label>
+            <div class="input-icon-wrapper">
+                <i class="fa-solid fa-gauge-high"></i>
+                <select name="priority" style="width:100%; height:45px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#fff; padding-left:40px;">
+                    <option value="Standard">Estándar (24h)</option>
+                    <option value="High">Alta Prioridad (Empresarial)</option>
+                    <option value="Critical">Crítica (Soporte Inmediato)</option>
+                </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Correo Electrónico de Enlace</label>
+            <div class="input-icon-wrapper">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" name="email" placeholder="enlace@empresa.com" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-paper-plane"></i> TRANSMITIR ORDEN
+          </button>
+          <p class="order-footer-note">El Motor Central validará la disponibilidad técnica tras el envío.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="paymentBackdrop" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div id="paymentTitle" class="modal-title">GENERAR LINK DE TRANSACCIÓN</div>
+        <button class="btn-close" onclick="Modal('payment').hide()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="form-header-hint">Sistema de cobro cifrado P2P (Peer-to-Peer) habilitado.</p>
+        <form id="paymentForm" class="form">
+          <div class="form-group">
+            <label>Monto de Inversión (Bs.)</label>
+            <div class="input-icon-wrapper">
+                <i class="fa-solid fa-coins"></i>
+                <input type="number" name="amount" min="1" placeholder="0.00" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Concepto de Operación</label>
+            <div class="input-icon-wrapper">
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+                <input type="text" name="description" placeholder="Ej: Activación Servidor Nexus" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success">
+            <i class="fa-solid fa-lock"></i> GENERAR ENLACE SEGURO
+          </button>
+        </form>
+
+        <div id="paymentResult" style="display:none; margin-top:20px; padding:15px; border:1px dashed var(--gold); border-radius:10px; text-align:center; background:rgba(46, 204, 113, 0.05);">
+          <p style="color:var(--text-muted); margin-bottom:10px; font-size:0.8rem;">TOKEN DE PAGO GENERADO:</p>
+          <a id="paymentLink" href="#" target="_blank" style="color:var(--primary); font-weight:bold; word-break:break-all; text-decoration:underline;"></a>
+          <p style="font-size:0.7rem; color:gray; margin-top:10px;">Este enlace expira en 24 horas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================
+       BLOQUE JS: LÓGICA DEL SISTEMA AURENSTAR
+       ========================================== */
+    var BACKEND_URL = "http://127.0.0.1:5000";
+    var EMPRESA_ID  = "aurenstar";
+
+    async function postChat(message, payload) {
+      if (!payload) payload = {};
+      try {
+        var res = await fetch(BACKEND_URL + '/chat', {
+          method: 'POST',
+          headers: { 'Content-Type':'application/json' },
+          body: JSON.stringify({ message: message, empresaid: EMPRESA_ID, payload: payload })
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return await res.json();
+      } catch (err) {
+        console.error(err);
+        showError("Error de conexión con el Servidor Central.");
+        return null;
+      }
+    }
+    
+    // Función para registrar la intención del cliente
+    async function registerUserIntent(text) {
+        if (text.length < 5) return; 
+        const response = await postChat('ACTION:REGISTER_INTENT', { 
+            userInput: text,
+            context: "Sugerencia personalizada P01" 
+        });
+
+        if (response) {
+            const input = document.getElementById('aiConsultant');
+            const feedback = document.getElementById('searchFeedback');
+            if(input && feedback) {
+                input.classList.add('search-sent');
+                feedback.classList.add('show');
+                setTimeout(() => {
+                    input.classList.remove('search-sent');
+                    feedback.classList.remove('show');
+                    input.value = '';
+                }, 4000);
+            }
+        }
+    }
+
+    var aiInput = document.getElementById('aiConsultant');
+    if(aiInput){
+        aiInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                registerUserIntent(this.value);
+            }
+        });
+    }
+
+    /* UTILITIES */
+    function Modal(name) {
+      var map = { list: 'listBackdrop', order: 'orderBackdrop', payment: 'paymentBackdrop' };
+      var el = document.getElementById(map[name]);
+      return {
+        show: function(){ if(el){ el.classList.add('show'); el.setAttribute('aria-hidden','false'); } },
+        hide: function(){ if(el){ el.classList.remove('show'); el.setAttribute('aria-hidden','true'); } }
+      };
+    }
+
+    function addBackdropClick(id){
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('click', function(e){ if(e.target.id === id) el.classList.remove('show'); });
+    }
+
+    function esc(x){
+      if (x === null || x === undefined) return '';
+      return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+    function setListModal(title, html) {
+      var t = document.getElementById('listTitle');
+      var b = document.getElementById('listBody');
+      if (!t || !b) return;
+      t.textContent = title;
+      b.innerHTML = html;
+      Modal('list').show();
+    }
+
+    function showError(message) {
+      setListModal("Alerta del Sistema", '<div class="list"><div class="list-item" style="color:#ff6b6b; border-color:#ff6b6b">' + esc(message) + '</div></div>');
+    }
+
+    /* UI HANDLERS */
+    var UI = {
+      
+      showPrecios: function() {
+        const pricingContent = `
+            <div class="pricing-grid">
+                <div class="pricing-card featured">
+                    <div class="badge-top">Recomendado</div>
+                    <h4>PRIME 1.0</h4>
+                    <p style="font-size:0.8rem; color:gray;">Vitrina Inteligente Inmersiva</p>
+                    <div class="price-box">
+                        <span class="price-value">300 Bs.</span>
+                        <span class="price-period">/mes</span>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-check"></i> Atención al Cliente IA</li>
+                        <li><i class="fa-solid fa-check"></i> Catálogo Interactivo</li>
+                        <li><i class="fa-solid fa-check"></i> Diseño de Autor</li>
+                        <li><i class="fa-solid fa-check"></i> Soporte Estándar</li>
+                    </ul>
+                    <button class="btn-plan" onclick="UI.openOrderModal('AURENSTAR PRIME 1.0')">Elegir Prime</button>
+                </div>
+
+                <div class="pricing-card">
+                    <h4>CORE 1.0</h4>
+                    <p style="font-size:0.8rem; color:gray;">Asistente Empresarial</p>
+                    <div class="price-box">
+                        <span class="price-value">400 Bs.</span>
+                        <span class="price-period">/mes</span>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-check"></i> Todo lo de Prime</li>
+                        <li><i class="fa-solid fa-check"></i> Gestión de Inventarios</li>
+                        <li><i class="fa-solid fa-check"></i> Reportes de Venta</li>
+                        <li><i class="fa-solid fa-check"></i> Prioridad Alta</li>
+                    </ul>
+                    <button class="btn-plan" onclick="UI.openOrderModal('AURENSTAR CORE 1.0')">Elegir Core</button>
+                </div>
+
+                <div class="pricing-card">
+                    <h4>NEXUS 1.0</h4>
+                    <p style="font-size:0.8rem; color:gray;">Control Total Digital</p>
+                    <div class="price-box">
+                        <span class="price-value">400 Bs.</span>
+                        <span class="price-period">/mes</span>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-check"></i> Ecosistema Completo</li>
+                        <li><i class="fa-solid fa-check"></i> Integración Global</li>
+                        <li><i class="fa-solid fa-check"></i> Seguridad Cifrada</li>
+                        <li><i class="fa-solid fa-check"></i> Soporte 24/7 Crítico</li>
+                    </ul>
+                    <button class="btn-plan" onclick="UI.openOrderModal('AURENSTAR NEXUS 1.0')">Elegir Nexus</button>
+                </div>
+            </div>
+            <p style="margin-top:20px; font-size:0.75rem; color:gray; text-align:center;">
+                * Tarifas base para despliegue inmediato. Precios sujetos a requerimientos técnicos.
+            </p>
+        `;
+        setListModal('PLANES DE INVERSIÓN AURENSTAR', pricingContent);
+      },
+      
+      showProductos: async function() {
+        const trendsContent = `
+            <div class="catalog-container">
+                <div class="opportunity-card" style="border-left: 4px solid #2ecc71;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h4 style="margin:0;">Fase Actual: Ecosistema Autónomo</h4>
+                        <span class="badge-premium" style="background:#2ecc71">ACTIVO</span>
+                    </div>
+                    <p>Despliegue de interfaces con <strong>Ingeniería de Autor</strong>. Sistemas que no dependen de plataformas de terceros.</p>
+                </div>
+                <div class="opportunity-card" style="border-left: 4px solid var(--gold);">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h4 style="margin:0;">Próximo Hito: P.02 Holográfico</h4>
+                        <span class="future-badge">DESPLEGANDO</span>
+                    </div>
+                    <p>Arquitectura preparada para visualización en entornos de realidad mixta.</p>
+                </div>
+            </div>
+        `;
+        setListModal('TENDENCIAS & NOVEDADES AURENSTAR', trendsContent);
+      },
+
+      showPromos: function() { 
+        const content = `<div class="catalog-container"><div class="opportunity-card"><h4>Ingeniería de Autor Bolivia</h4><p>Soluciones creadas desde el código raíz, sin plantillas.</p></div></div>`;
+        setListModal('OPORTUNIDADES AURENSTAR', content);
+      },
+
+      showFAQ: async function() {
+        var r = await postChat('ACTION:FAQ'); if (!r) return;
+        var faqs = (r && r.data && r.data.items) ? r.data.items : [];
+        var html = faqs.length ? (function(){
+              var h = '<div class="list">';
+              for (var i=0;i<faqs.length;i++){
+                h += '<div class="list-item" style="flex-direction:column; align-items:flex-start; gap:8px"><strong>P: '+esc(faqs[i].pregunta)+'</strong><div style="color:#ccc; border-left:2px solid var(--border); padding-left:10px">R: '+esc(faqs[i].respuesta)+'</div></div>';
+              } return h + '</div>';
+            })() : '<p>Base vacía.</p>';
+        setListModal('PREGUNTAS FRECUENTES', html);
+      },
+
+      openOrderModal: function(planName) {
+        var of = document.getElementById('orderForm'); 
+        if (!of) return;
+        of.reset(); 
+        if(planName) {
+            of.querySelector('input[name="item"]').value = planName;
+        }
+        Modal('order').show();
+      }
+    };
+
+    function attachFormHandlers(){
+      var orderForm = document.getElementById('orderForm');
+      if (orderForm) {
+        orderForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          var form = new FormData(e.target);
+          
+          var order = { 
+            item: form.get('item'), 
+            nombre: form.get('nombre_cliente'), 
+            telefono: form.get('telefono_cliente') 
+          };
+
+          Modal('order').hide();
+          
+          // --- CONFIGURACIÓN DE WHATSAPP REAL ---
+          var telefonoDueño = "59170000000"; // <--- CAMBIA ESTO POR TU NÚMERO REAL
+          var texto = `🚀 *NUEVA SOLICITUD AURENSTAR*%0A%0A` +
+                      `*Cliente:* ${order.nombre}%0A` +
+                      `*WhatsApp:* ${order.telefono}%0A` +
+                      `*Servicio:* ${order.item}%0A%0A` +
+                      `_Enviado desde el Terminal de Gestión P.01_`;
+
+          var urlWpp = `https://wa.me/${telefonoDueño}?text=${texto}`;
+          window.open(urlWpp, '_blank');
+
+          setListModal('ORDEN TRANSMITIDA', 
+            `<div style="text-align:center; padding: 20px;">
+                <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: #2ecc71; margin-bottom: 15px;"></i>
+                <p>Se ha generado el protocolo de contacto con ingeniería vía WhatsApp.</p>
+            </div>`
+          );
+        });
+      }
+
+      var paymentForm = document.getElementById('paymentForm');
+      if (paymentForm) {
+        paymentForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          var form = new FormData(e.target);
+          var payment = { amount: Number(form.get('amount')), description: form.get('description') };
+          var btn = e.target.querySelector('button');
+          btn.innerHTML = 'CIFRANDO...';
+          var r = await postChat('ACTION:PAGAR', payment);
+          if (r && r.data && r.data.payment_link) {
+            var res = document.getElementById('paymentResult');
+            var a = document.getElementById('paymentLink');
+            a.textContent = r.data.payment_link; a.href = r.data.payment_link;
+            res.style.display = 'block';
+          }
+          btn.innerHTML = 'GENERAR LINK DE PAGO';
+        });
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', function(){
+      addBackdropClick('listBackdrop');
+      addBackdropClick('orderBackdrop');
+      addBackdropClick('paymentBackdrop');
+      attachFormHandlers();
+      
+      const wisdoms = ["Tu servicio es la publicidad más poderosa.", "Bienvenido al estándar de oro digital."];
+      const wisdomEl = document.getElementById('dailyWisdom');
+      if(wisdomEl) wisdomEl.innerText = `"${wisdoms[Math.floor(Math.random() * wisdoms.length)]}"`;
+      
+      const hour = new Date().getHours();
+      const title = document.getElementById('dynamicGreeting');
+      if(title) {
+          let greet = hour < 12 ? "Hola Buenos Días" : hour < 19 ? "Hola Buenas Tardes" : "Hola Buenas Noches";
+          title.innerHTML = `${greet} <br><span class='gold-subtitle'>Bienvenido a AURENSTAR</span>`;
+      }
+    });
+</script>
+</body>
+</html>
