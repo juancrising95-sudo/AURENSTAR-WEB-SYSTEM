@@ -698,6 +698,69 @@ body::after {
     opacity: 0.8;
 }
 
+/* =========================================
+       PARCHE DE ESTABILIDAD MÓVIL AURENSTAR
+       ========================================= */
+    
+    html, body {
+        max-width: 100vw;
+        overflow-x: hidden; /* Bloquea el movimiento lateral de la Tierra */
+        position: relative;
+    }
+
+    @media (max-width: 600px) {
+        /* 1. Ajuste de la Tierra para móviles */
+        body::after {
+            animation: none; /* Opcional: Desactiva el zoom en móvil para máxima fluidez */
+            background-attachment: scroll;
+            width: 100%;
+        }
+
+        /* 2. Ajuste Crítico de Tarjetas (Catálogo) */
+        .pricing-grid {
+            flex-direction: column !important; /* Fuerza el orden vertical */
+            flex-wrap: wrap !important;
+            align-items: center !important;
+            gap: 20px !important;
+            overflow-x: hidden !important; /* Elimina el scroll lateral interno */
+        }
+
+        .pricing-card {
+            width: 100% !important; /* Ocupa todo el ancho disponible */
+            max-width: 320px !important; /* Pero no se estira demasiado */
+            min-width: unset !important; /* Rompe la restricción anterior */
+            margin: 0 auto;
+        }
+
+        /* 3. Título del Héroe */
+        .hero-title {
+            font-size: 2.2rem; /* Reduce el tamaño para que no se corte */
+        }
+        
+        /* 4. Input Mágico */
+        .magic-input {
+            font-size: 1rem;
+            padding: 15px 20px;
+        }
+    }
+
+    /* Asegura que el catálogo no se salga del modal en celular */
+.modal-body {
+    max-height: 80vh; /* Evita que el modal sea más alto que la pantalla */
+    overflow-y: auto;  /* Permite scroll interno si hay muchos planes */
+    -webkit-overflow-scrolling: touch;
+    padding: 15px !important;
+}
+
+/* Ajuste fino para las tarjetas dentro del modal */
+.modal .pricing-grid {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+    
   </style>
 </head>
 
@@ -904,7 +967,7 @@ body::after {
     /* ==========================================
        BLOQUE JS: LÓGICA DEL SISTEMA AURENSTAR
        ========================================== */
-    var BACKEND_URL = "http://127.0.0.1:5000";
+    var BACKEND_URL = "https://api-aurenstar.onrender.com";
     var EMPRESA_ID  = "aurenstar";
 
     async function postChat(message, payload) {
@@ -1118,7 +1181,7 @@ body::after {
           Modal('order').hide();
           
           // --- CONFIGURACIÓN DE WHATSAPP REAL ---
-          var telefonoDueño = "59170000000"; // <--- CAMBIA ESTO POR TU NÚMERO REAL
+          var telefonoDueño = "59175265734"; // <--- CAMBIA ESTO POR TU NÚMERO REAL
           var texto = `🚀 *NUEVA SOLICITUD AURENSTAR*%0A%0A` +
                       `*Cliente:* ${order.nombre}%0A` +
                       `*WhatsApp:* ${order.telefono}%0A` +
@@ -1176,4 +1239,5 @@ body::after {
     });
 </script>
 </body>
+
 </html>
