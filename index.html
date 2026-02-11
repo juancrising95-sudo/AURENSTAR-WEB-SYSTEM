@@ -841,8 +841,8 @@ body::after {
   </div>
   <div class="navbar">
     <div class="container">
-      <div class="brand"><span class="star">✦</span> AURENSTAR</div>
-      <div class="status-badge">● SISTEMA ONLINE</div>
+      <div class="brand"><span class="stars">✦</span> AURENSTAR</div>
+      <div class="status-badge">● SISTEMA ENTERPRISE ONLINE</div>
     </div>
   </div>
 
@@ -1125,63 +1125,54 @@ body::after {
     var UI = {
       
       showPrecios: function() {
-        const pricingContent = `
-            <div class="pricing-grid">
-                <div class="pricing-card featured">
-                    <div class="badge-top">Recomendado</div>
-                    <h4>PRIME 1.0</h4>
-                    <p style="font-size:0.8rem; color:gray;">Vitrina Inteligente Inmersiva</p>
-                    <div class="price-box">
-                        <span class="price-value">300 Bs.</span>
-                        <span class="price-period">/mes</span>
-                    </div>
-                    <ul class="features-list">
-                        <li><i class="fa-solid fa-check"></i> Atención al Cliente IA</li>
-                        <li><i class="fa-solid fa-check"></i> Catálogo Interactivo</li>
-                        <li><i class="fa-solid fa-check"></i> Diseño de Autor</li>
-                        <li><i class="fa-solid fa-check"></i> Soporte Estándar</li>
-                    </ul>
-                    <button class="btn-plan" onclick="UI.openOrderModal('AURENSTAR PRIME 1.0')">Elegir Prime</button>
+    const pricingContent = `
+        <div class="pricing-grid">
+            <div class="pricing-card featured" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=500'); background-size: cover;">
+                <div class="badge-top">Recomendado</div>
+                <h4>PRIME 1.0</h4>
+                <p style="font-size:0.8rem; color:#ddd;">Vitrina Inteligente Inmersiva</p>
+                <div class="price-box">
+                    <span class="price-value">150 Bs.</span>
+                    <span class="price-period">/mes</span>
                 </div>
-
-                <div class="pricing-card">
-                    <h4>CORE 1.0</h4>
-                    <p style="font-size:0.8rem; color:gray;">Asistente Empresarial</p>
-                    <div class="price-box">
-                        <span class="price-value">400 Bs.</span>
-                        <span class="price-period">/mes</span>
-                    </div>
-                    <ul class="features-list">
-                        <li><i class="fa-solid fa-check"></i> Todo lo de Prime</li>
-                        <li><i class="fa-solid fa-check"></i> Gestión de Inventarios</li>
-                        <li><i class="fa-solid fa-check"></i> Reportes de Venta</li>
-                        <li><i class="fa-solid fa-check"></i> Prioridad Alta</li>
-                    </ul>
-                    <button class="btn-plan" onclick="UI.openOrderModal('AURENSTAR CORE 1.0')">Elegir Core</button>
-                </div>
-
-                <div class="pricing-card">
-                    <h4>NEXUS 1.0</h4>
-                    <p style="font-size:0.8rem; color:gray;">Control Total Digital</p>
-                    <div class="price-box">
-                        <span class="price-value">400 Bs.</span>
-                        <span class="price-period">/mes</span>
-                    </div>
-                    <ul class="features-list">
-                        <li><i class="fa-solid fa-check"></i> Ecosistema Completo</li>
-                        <li><i class="fa-solid fa-check"></i> Integración Global</li>
-                        <li><i class="fa-solid fa-check"></i> Seguridad Cifrada</li>
-                        <li><i class="fa-solid fa-check"></i> Soporte 24/7 Crítico</li>
-                    </ul>
-                    <button class="btn-plan" onclick="UI.openOrderModal('AURENSTAR NEXUS 1.0')">Elegir Nexus</button>
-                </div>
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-check"></i> Atención al Cliente IA</li>
+                    <li><i class="fa-solid fa-check"></i> Catálogo Interactivo</li>
+                </ul>
+                <button class="btn-plan" onclick="UI.openOrderModal('PRIME 1.0')">Elegir Prime</button>
             </div>
-            <p style="margin-top:20px; font-size:0.75rem; color:gray; text-align:center;">
-                * Tarifas base para despliegue inmediato. Precios sujetos a requerimientos técnicos.
-            </p>
-        `;
-        setListModal('PLANES DE INVERSIÓN AURENSTAR', pricingContent);
-      },
+
+            <div class="pricing-card" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=500'); background-size: cover;">
+                <h4>CORE 1.0</h4>
+                <p style="font-size:0.8rem; color:#ddd;">Asistente Empresarial</p>
+                <div class="price-box">
+                    <span class="price-value">200 Bs.</span>
+                    <span class="price-period">/mes</span>
+                </div>
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-check"></i> Gestión de Inventarios</li>
+                    <li><i class="fa-solid fa-check"></i> Reportes de Venta</li>
+                </ul>
+                <button class="btn-plan" onclick="UI.openOrderModal('CORE 1.0')">Elegir Core</button>
+            </div>
+
+            <div class="pricing-card" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=500'); background-size: cover;">
+                <h4>NEXUS 1.0</h4>
+                <p style="font-size:0.8rem; color:#ddd;">Control Total Digital</p>
+                <div class="price-box">
+                    <span class="price-value">200 Bs.</span>
+                    <span class="price-period">/mes</span>
+                </div>
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-check"></i> Seguridad Cifrada</li>
+                    <li><i class="fa-solid fa-check"></i> Soporte 24/7 Crítico</li>
+                </ul>
+                <button class="btn-plan" onclick="UI.openOrderModal('NEXUS 1.0')">Elegir Nexus</button>
+            </div>
+        </div>
+    `;
+    setListModal('PLANES DE INVERSIÓN AURENSTAR', pricingContent);
+},
       
       showProductos: async function() {
         const trendsContent = `
@@ -1327,4 +1318,5 @@ body::after {
 </body>
 
 </html>
+
 
