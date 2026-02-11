@@ -223,7 +223,13 @@ body::after {
        4. GRID & TARJETAS (GLASSMORPHISM)
        ========================================= */
     .main { max-width: 1080px; margin: 0 auto; padding: 0 16px 80px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .grid { 
+    display: grid; 
+    /* En laptop fuerza 3 columnas, en móvil se ajusta solo */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 30px; /* Más espacio para que respiren */
+    padding: 20px 0;
+}
     
     ..card { 
     background: rgba(255, 255, 255, 0.05) !important; 
@@ -262,11 +268,16 @@ body::after {
     .modal-backdrop.show { display: flex; animation: fadeIn 0.2s ease; }
     
     .modal { 
-        width: min(700px, 95vw); background: var(--bg-modal); 
-        border: 1px solid var(--border); border-radius: 20px; 
-        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7); overflow: hidden; 
-        transform: scale(0.95); transition: 0.3s;
-    }
+    /* Cambiamos el ancho fijo por uno responsivo inteligente */
+    width: min(1000px, 95vw); 
+    background: var(--bg-modal); 
+    border: 1px solid var(--border); 
+    border-radius: 24px; 
+    box-shadow: 0 0 50px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.1); 
+    overflow: hidden; 
+    transform: scale(0.95); 
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
     .modal-backdrop.show .modal { transform: scale(1); }
 
     .modal-header { 
@@ -580,26 +591,51 @@ body::after {
 
     /* Contenedor Compacto de Planes */
 .pricing-grid {
-    display: flex;
-    justify-content: center;
-    gap: 12px; /* Espacio reducido entre tarjetas */
-    width: 100%;
-    margin-top: 10px;
-    flex-wrap: nowrap; /* Obliga a que estén de lado */
-    overflow-x: auto; /* Si la pantalla es muy pequeña, permite deslizar */
+    display: grid;
+    /* En laptop 2 columnas, en móvil 1 */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 25px;
+    padding: 10px;
 }
 
 .pricing-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 215, 0, 0.1);
-    border-radius: 12px;
-    padding: 15px; /* Padding reducido */
-    flex: 1; /* Todas miden lo mismo */
-    min-width: 200px; /* Para que no se aplasten demasiado */
-    max-width: 300px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+    transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
-    transition: 0.3s;
+}
+
+/* EFECTO PRIME: La tarjeta que debe vender más */
+.pricing-card.featured {
+    border: 2px solid var(--gold);
+    background: rgba(212, 175, 55, 0.05);
+    transform: scale(1.05); /* Ligeramente más grande */
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+}
+
+.pricing-card.featured::before {
+    content: "MÁS RENTABLE";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: #000;
+    padding: 4px 12px;
+    font-size: 0.7rem;
+    font-weight: 900;
+    border-radius: 50px;
+    letter-spacing: 1px;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    background: rgba(255, 255, 255, 0.06);
 }
 
 .pricing-card.featured {
@@ -760,6 +796,38 @@ body::after {
     flex-direction: column;
     gap: 15px;
 }
+
+.card {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 35px 25px !important;
+    text-align: center;
+    border-radius: 22px !important;
+}
+
+/* Efecto de escaneo láser al pasar el mouse */
+.card::before {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card h5 {
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin-top: 15px;
+}    
     
   </style>
 </head>
@@ -1138,20 +1206,38 @@ body::after {
       },
 
       showPromos: function() { 
-        const content = `<div class="catalog-container"><div class="opportunity-card"><h4>Ingeniería de Autor Bolivia</h4><p>Soluciones creadas desde el código raíz, sin plantillas.</p></div></div>`;
-        setListModal('OPORTUNIDADES AURENSTAR', content);
+        const content = `
+            <div class="catalog-container">
+                <div class="opportunity-card" style="background: linear-gradient(135deg, rgba(212,175,55,0.1), transparent); border: 1px solid var(--gold);">
+                    <div style="display:flex; justify-content:space-between;">
+                        <h4 style="color:var(--gold);">BONO DE LANZAMIENTO P.01</h4>
+                        <span class="badge-premium" style="background:red; color:white;">-20% OFF</span>
+                    </div>
+                    <p style="margin:10px 0;">Despliegue de tu terminal AURENSTAR con hosting de alta velocidad incluido por 1 año.</p>
+                    <small style="color:var(--gold);">Válido para las próximas 48 horas.</small>
+                    <button class="btn-success" onclick="UI.openOrderModal('PROMO LANZAMIENTO P.01')" style="margin-top:10px; padding:8px;">APLICAR AHORA</button>
+                </div>
+            </div>`;
+        setListModal('OPORTUNIDADES DE INVERSIÓN', content);
       },
 
-      showFAQ: async function() {
-        var r = await postChat('ACTION:FAQ'); if (!r) return;
-        var faqs = (r && r.data && r.data.items) ? r.data.items : [];
-        var html = faqs.length ? (function(){
-              var h = '<div class="list">';
-              for (var i=0;i<faqs.length;i++){
-                h += '<div class="list-item" style="flex-direction:column; align-items:flex-start; gap:8px"><strong>P: '+esc(faqs[i].pregunta)+'</strong><div style="color:#ccc; border-left:2px solid var(--border); padding-left:10px">R: '+esc(faqs[i].respuesta)+'</div></div>';
-              } return h + '</div>';
-            })() : '<p>Base vacía.</p>';
-        setListModal('PREGUNTAS FRECUENTES', html);
+      showFAQ: function() {
+        const faqContent = `
+            <div class="list">
+                <div class="list-item" style="flex-direction:column; align-items:flex-start; border-left: 4px solid var(--gold);">
+                    <strong>¿Qué es Ingeniería de Autor?</strong>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin:5px 0;">Es software creado desde cero, sin plantillas, diseñado para la identidad única de AURENSTAR.</p>
+                </div>
+                <div class="list-item" style="flex-direction:column; align-items:flex-start; border-left: 4px solid var(--gold);">
+                    <strong>¿El sistema es escalable?</strong>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin:5px 0;">Totalmente. El P.01 es solo el núcleo de un ecosistema que puede integrar pagos y logística.</p>
+                </div>
+                <button class="btn-primary" onclick="window.open('https://wa.me/59175265734?text=SOLICITO%20ASESORIA%20ELITE%20AURENSTAR', '_blank')" style="margin-top:15px;">
+                    <i class="fa-solid fa-headset"></i> HABLAR CON UN INGENIERO
+                </button>
+            </div>
+        `;
+        setListModal('CENTRO DE ASISTENCIA AURENSTAR', faqContent);
       },
 
       openOrderModal: function(planName) {
@@ -1241,3 +1327,4 @@ body::after {
 </body>
 
 </html>
+
