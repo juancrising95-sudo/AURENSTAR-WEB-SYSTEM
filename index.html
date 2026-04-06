@@ -11,19 +11,15 @@
        1. CONFIGURACIÓN BASE Y VARIABLES
        ========================================= */
     :root {
-      /* Paleta AURENSTAR - High Definition */
-      --bg: #050608;          /* Negro profundo */
-      --bg-card: rgba(20, 21, 26, 0.6); 
-      --bg-modal: #1c1d24;    
-      --border: rgba(255, 255, 255, 0.08); 
-      --border-hover: rgba(212, 175, 55, 0.5); /* Dorado */
-      
-      --text: #ffffff;        
-      --text-muted: #9ca3af;  
-      
-      /* Acentos de Marca */
-      --gold: #d4af37;        
-      --primary: #58a6ff;     
+      --bg: #050608;
+      --bg-card: rgba(20, 21, 26, 0.6);
+      --bg-modal: #1c1d24;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(212, 175, 55, 0.5);
+      --text: #ffffff;
+      --text-muted: #9ca3af;
+      --gold: #d4af37;
+      --primary: #58a6ff;
     }
 
     * { box-sizing: border-box; }
@@ -31,804 +27,471 @@
     /* =========================================
        2. AMBIENTE VISUAL (FONDO IMPONENTE)
        ========================================= */
-    body { 
-    margin: 0; 
-    color: var(--text); 
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-    background: #050608; /* Color de respaldo */
-    position: relative;
-}
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: #050608;
+      position: relative;
+    }
 
-/* Nueva capa para el fondo animado */
-body::after {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -2;
-    background: 
-        linear-gradient(rgba(5, 6, 8, 0.7), rgba(5, 6, 8, 0.8)), 
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -2;
+      background:
+        linear-gradient(rgba(5, 6, 8, 0.7), rgba(5, 6, 8, 0.8)),
         url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    animation: earthOrbit 40s linear infinite alternate; /* Movimiento lento */
-}
+      background-size: cover;
+      background-position: center;
+      animation: earthOrbit 40s linear infinite alternate;
+    }
 
-@keyframes earthOrbit {
-    0% { transform: scale(1.0); background-position: center; }
-    100% { transform: scale(1.05); background-position: 55% 45%; }
-}
+    @keyframes earthOrbit {
+      0%   { transform: scale(1.0); background-position: center; }
+      100% { transform: scale(1.05); background-position: 55% 45%; }
+    }
 
-    /* Malla sutil para toque técnico */
     body::before {
-    content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    /* Efecto de estrellas/partículas pequeñas */
-    background-image: 
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image:
         radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
         radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px);
-    background-size: 550px 550px, 350px 350px;
-    background-position: 0 0, 40px 60px;
-    opacity: 0.2; 
-    z-index: -1; 
-    pointer-events: none;
-    animation: stardustMove 100s linear infinite;
-}
+      background-size: 550px 550px, 350px 350px;
+      background-position: 0 0, 40px 60px;
+      opacity: 0.2;
+      z-index: -1;
+      pointer-events: none;
+      animation: stardustMove 100s linear infinite;
+    }
 
-@keyframes stardustMove {
-    from { background-position: 0 0, 40px 60px; }
-    to { background-position: 550px 1100px, 400px 800px; }
-}
+    @keyframes stardustMove {
+      from { background-position: 0 0, 40px 60px; }
+      to   { background-position: 550px 1100px, 400px 800px; }
+    }
 
     /* =========================================
        3. NAVEGACIÓN
        ========================================= */
-    .navbar { 
-        background: rgba(5, 6, 8, 0.7); 
-        border-bottom: 1px solid var(--border); 
-        position: sticky; top: 0; z-index: 1000; 
-        backdrop-filter: blur(15px);
+    .navbar {
+      background: rgba(5, 6, 8, 0.7);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 1000;
+      backdrop-filter: blur(15px);
     }
-    .navbar .container { 
-        max-width: 1080px; margin: 0 auto; padding: 14px 16px; 
-        display: flex; align-items: center; justify-content: space-between; 
+    .navbar .container {
+      max-width: 1080px; margin: 0 auto; padding: 14px 16px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .brand { 
-        font-weight: 700; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; 
-        color: #fff; letter-spacing: 1px; text-transform: uppercase;
+    .brand {
+      font-weight: 700; font-size: 1.2rem;
+      display: flex; align-items: center; gap: 10px;
+      color: #fff; letter-spacing: 1px; text-transform: uppercase;
     }
     .brand .star { color: var(--gold); animation: pulseStar 3s infinite; }
     @keyframes pulseStar { 50% { text-shadow: 0 0 15px var(--gold); } }
 
     .status-badge {
-        font-size: 0.75rem; color: var(--gold); border: 1px solid rgba(212, 175, 55, 0.3);
-        padding: 4px 10px; border-radius: 20px; background: rgba(212, 175, 55, 0.05);
+      font-size: 0.75rem; color: var(--gold);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 4px 10px; border-radius: 20px;
+      background: rgba(212, 175, 55, 0.05);
     }
 
     /* =========================================
-       3.5. HÉROE & BIENVENIDA (CENTRO DE MANDO)
+       3.5. HÉROE & BIENVENIDA
        ========================================= */
-    .hero { 
-        padding: 80px 16px 60px; 
-        display: flex;
-        justify-content: center;
-        position: relative;
+    .hero {
+      padding: 80px 16px 60px;
+      display: flex; justify-content: center; position: relative;
     }
 
     .welcome-container {
-        position: relative;
-        z-index: 1;
-        max-width: 800px;
-        width: 100%;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* ESTO CENTRA TODO VERTICALMENTE */
+      position: relative; z-index: 1;
+      max-width: 800px; width: 100%;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center;
     }
-    
-    /* El Resplandor Dorado detrás del título */
+
     .welcome-container::before {
-        content: "";
-        position: absolute;
-        top: 50%; left: 50%;
-        transform: translate(-50%, -50%); /* Centrado perfecto */
-        width: 500px; height: 300px;
-        background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
-        filter: blur(80px);
-        z-index: -1;
-        pointer-events: none;
-        animation: pulseGlow 6s infinite alternate;
+      content: "";
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 300px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
+      filter: blur(80px);
+      z-index: -1; pointer-events: none;
+      animation: pulseGlow 6s infinite alternate;
     }
 
     @keyframes pulseGlow {
-        0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.9); }
-        100% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+      0%   { opacity: 0.6; transform: translate(-50%, -50%) scale(0.9); }
+      100% { opacity: 1;   transform: translate(-50%, -50%) scale(1.1); }
     }
 
     .hero-title {
-        font-size: 3.2rem; /* Más grande e imponente */
-        font-weight: 800;
-        margin: 0 0 15px;
-        background: linear-gradient(180deg, #ffffff 20%, var(--gold) 100%); 
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        letter-spacing: -1.5px;
-        filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+      font-size: 3.2rem; font-weight: 800; margin: 0 0 15px;
+      background: linear-gradient(180deg, #ffffff 20%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: -1.5px;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
     }
-    
+
     .gold-subtitle {
-        display: block;
-        font-size: 0.5em;
-        color: var(--gold) !important;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        margin-top: 10px;
-        background: none !important;
-        -webkit-text-fill-color: var(--gold) !important;
-        text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); /* Un toque de resplandor */
-     }    
+      display: block; font-size: 0.5em;
+      color: var(--gold) !important; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 3px; margin-top: 10px;
+      background: none !important;
+      -webkit-text-fill-color: var(--gold) !important;
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    }
 
     .wisdom-capsule {
-        font-size: 1.1rem;
-        color: var(--text-muted);
-        font-style: italic;
-        margin-bottom: 40px;
-        opacity: 0.9;
-        letter-spacing: 0.5px;
+      font-size: 1.1rem; color: var(--text-muted);
+      font-style: italic; margin-bottom: 40px; opacity: 0.9; letter-spacing: 0.5px;
     }
 
-    /* INPUT MÁGICO */
-    .magic-input-wrapper {
-        position: relative;
-        width: 100%;
-        max-width: 600px;
-    }
+    .magic-input-wrapper { position: relative; width: 100%; max-width: 600px; }
+
     .magic-input {
-        width: 100%;
-        padding: 20px 30px;
-        border-radius: 50px;
-        border: 1px solid rgba(255,255,255,0.1);
-        background: rgba(10, 11, 15, 0.6); /* Oscuro y translúcido */
-        color: white;
-        font-size: 1.15rem;
-        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-        text-align: center;
-        backdrop-filter: blur(10px);
+      width: 100%; padding: 20px 30px; border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(10, 11, 15, 0.6);
+      color: white; font-size: 1.15rem;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      text-align: center; backdrop-filter: blur(10px);
     }
     .magic-input::placeholder { color: rgba(255,255,255,0.3); letter-spacing: 1px; }
-    
     .magic-input:focus {
-        border-color: var(--gold);
-        background: rgba(0,0,0,0.8);
-        box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
-        outline: none;
-        transform: scale(1.02);
+      border-color: var(--gold); background: rgba(0,0,0,0.8);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+      outline: none; transform: scale(1.02);
     }
 
-    /* Feedback visual */
-    .search-sent {
-        border-color: #2ecc71 !important;
-        background: rgba(46, 204, 113, 0.1) !important;
-    }
+    .search-sent { border-color: #2ecc71 !important; background: rgba(46,204,113,0.1) !important; }
     .search-feedback {
-        font-size: 0.9rem; color: #2ecc71;
-        margin-top: 15px; opacity: 0; transition: 0.3s;
-        font-weight: 600; letter-spacing: 0.5px;
+      font-size: 0.9rem; color: #2ecc71; margin-top: 15px;
+      opacity: 0; transition: 0.3s; font-weight: 600; letter-spacing: 0.5px;
     }
     .search-feedback.show { opacity: 1; transform: translateY(-5px); }
 
     /* =========================================
-       4. GRID & TARJETAS (GLASSMORPHISM)
+       4. GRID & TARJETAS
        ========================================= */
     .main { max-width: 1080px; margin: 0 auto; padding: 0 16px 80px; }
-    .grid { 
-    display: grid; 
-    /* En laptop fuerza 3 columnas, en móvil se ajusta solo */
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-    gap: 30px; /* Más espacio para que respiren */
-    padding: 20px 0;
-}
-    
-    ..card { 
-    background: rgba(255, 255, 255, 0.05) !important; 
-    backdrop-filter: blur(15px) saturate(150%); /* Esto hace que el fondo se vea borroso detrás de la tarjeta */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    /* ... resto de tu código ... */
-}
 
-    .card:hover { 
-        background: rgba(212, 175, 55, 0.04);
-        border-color: var(--gold); 
-        transform: translateY(-8px); 
-        box-shadow: 0 15px 40px -10px rgba(0,0,0,0.8);
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px; padding: 20px 0;
     }
-    
-    .card .icon { font-size: 32px; margin-bottom: 16px; transition: 0.3s; display: inline-block; }
-    .card:hover .icon { transform: scale(1.2) rotate(5deg); filter: drop-shadow(0 0 10px currentColor); }
-    
-    .card h5 { margin: 0 0 8px; font-size: 1.2rem; color: #fff; font-weight: 600; }
-    .card p { margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
-    
+
+    /* ✅ CORREGIDO: era "..card" — bug del doble punto eliminado */
+    .card {
+      position: relative; overflow: hidden;
+      background: rgba(255, 255, 255, 0.03) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      padding: 35px 25px !important;
+      text-align: center; border-radius: 22px !important;
+      cursor: pointer; transition: all 0.3s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute; top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+      opacity: 0; transition: 0.5s;
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card:hover {
+      background: rgba(212,175,55,0.04) !important;
+      border-color: var(--gold) !important;
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px -10px rgba(0,0,0,0.8);
+    }
+
     .card::after {
-        content: "➜"; position: absolute; bottom: 20px; right: 20px;
-        color: var(--gold); opacity: 0; transform: translateX(-10px); transition: 0.3s;
+      content: "➜"; position: absolute; bottom: 20px; right: 20px;
+      color: var(--gold); opacity: 0; transform: translateX(-10px); transition: 0.3s;
     }
     .card:hover::after { opacity: 1; transform: translateX(0); }
 
+    .card h5 {
+      margin: 15px 0 8px; font-size: 1rem; color: #fff;
+      font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .card p { margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+
     /* =========================================
-       5. MODALES (UI)
+       5. MODALES
        ========================================= */
-    .modal-backdrop { 
-        position: fixed; inset: 0; background: rgba(0,0,0,0.85); 
-        display: none; align-items: center; justify-content: center; 
-        padding: 16px; z-index: 9999; backdrop-filter: blur(8px); 
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+      display: none; align-items: center; justify-content: center;
+      padding: 16px; z-index: 9999; backdrop-filter: blur(8px);
     }
     .modal-backdrop.show { display: flex; animation: fadeIn 0.2s ease; }
-    
-    .modal { 
-    /* Cambiamos el ancho fijo por uno responsivo inteligente */
-    width: min(1000px, 95vw); 
-    background: var(--bg-modal); 
-    border: 1px solid var(--border); 
-    border-radius: 24px; 
-    box-shadow: 0 0 50px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.1); 
-    overflow: hidden; 
-    transform: scale(0.95); 
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+
+    .modal {
+      width: min(1000px, 95vw); background: var(--bg-modal);
+      border: 1px solid var(--border); border-radius: 24px;
+      box-shadow: 0 0 50px rgba(0,0,0,0.8), 0 0 20px rgba(212,175,55,0.1);
+      overflow: hidden; transform: scale(0.95);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
     .modal-backdrop.show .modal { transform: scale(1); }
 
-    .modal-header { 
-        background: rgba(255,255,255,0.03); padding: 20px 24px; 
-        border-bottom: 1px solid var(--border); 
-        display: flex; align-items: center; justify-content: space-between; 
+    .modal-header {
+      background: rgba(255,255,255,0.03); padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
     }
     .modal-title { font-size: 1.1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; }
-    .modal-body { padding: 30px 24px; color: var(--text); }
-    
-    .btn-close { 
-        border: 0; background: transparent; color: var(--text-muted); 
-        font-size: 1.5rem; cursor: pointer; transition: 0.2s; 
+
+    .modal-body {
+      padding: 15px !important; max-height: 80vh;
+      overflow-y: auto; -webkit-overflow-scrolling: touch; color: var(--text);
+    }
+
+    .btn-close {
+      border: 0; background: transparent; color: var(--text-muted);
+      font-size: 1.5rem; cursor: pointer; transition: 0.2s;
     }
     .btn-close:hover { color: #fff; transform: rotate(90deg); }
 
-    /* Listas y Formularios */
     .list { display: grid; gap: 12px; }
-    .list-item { 
-        display: flex; align-items: center; justify-content: space-between; 
-        border: 1px solid var(--border); border-radius: 12px; padding: 16px; 
-        background: rgba(0,0,0,0.2); color: var(--text) !important; transition: 0.2s;
+    .list-item {
+      display: flex; align-items: center; justify-content: space-between;
+      border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+      background: rgba(0,0,0,0.2); color: var(--text) !important; transition: 0.2s;
     }
     .list-item:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.02); }
 
     .form { display: grid; gap: 20px; }
     .form label { font-size: 0.9rem; font-weight: 600; color: var(--gold); margin-bottom: 8px; display: block; }
-    .form input { 
-        padding: 14px; border-radius: 10px; border: 1px solid var(--border); 
-        background: rgba(0,0,0,0.3); color: #fff; width: 100%; font-family: inherit;
+    .form input {
+      padding: 14px; border-radius: 10px; border: 1px solid var(--border);
+      background: rgba(0,0,0,0.3); color: #fff; width: 100%; font-family: inherit;
     }
     .form input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 15px rgba(88,166,255,0.1); }
-    
-    .btn { 
-        display: inline-flex; align-items: center; justify-content: center; 
-        gap: 10px; padding: 14px 24px; border-radius: 12px; border: 0; 
-        cursor: pointer; font-weight: 700; transition: 0.3s; width: 100%; margin-top: 10px;
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 14px 24px; border-radius: 12px; border: 0;
+      cursor: pointer; font-weight: 700; transition: 0.3s; width: 100%; margin-top: 10px;
     }
     .btn-primary { background: linear-gradient(135deg, var(--primary), #2b6cb0); color: white; }
-    .btn-success { background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; }
+    .btn-success  { background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; }
     .btn:hover { filter: brightness(1.2); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     /* =========================================
-       6. ESTILOS NUEVOS: ICONOS DORADOS
+       6. ICONOS DORADOS
        ========================================= */
     .gold-icon {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
-        display: inline-block;
-        
-        /* Degradado Oro Metálico */
-        background: linear-gradient(135deg, #D4AF37 0%, #F5E0A3 50%, #B8860B 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        
-        /* Resplandor elegante */
-        filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
-        transition: transform 0.3s ease;
+      font-size: 2.5rem; margin-bottom: 15px; display: inline-block;
+      background: linear-gradient(135deg, #D4AF37 0%, #F5E0A3 50%, #B8860B 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 8px rgba(212,175,55,0.4));
+      transition: transform 0.3s ease;
+    }
+    .card:hover .gold-icon {
+      transform: scale(1.15) translateY(-5px);
+      filter: drop-shadow(0 0 15px rgba(212,175,55,0.7));
     }
 
-    /* Efecto al pasar el mouse sobre la tarjeta */
-    .card:hover .gold-icon {
-        transform: scale(1.15) translateY(-5px);
-        filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.7));
-    }
-   
     /* =========================================
-       7. ANIMACIÓN DE SATÉLITES REALISTAS
+       7. SATÉLITES ANIMADOS
        ========================================= */
     .space-overlay {
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        pointer-events: none;
-        z-index: -1; /* Entre la Tierra y el Contenido */
-        overflow: hidden;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; overflow: hidden;
     }
-
     .satellite {
-        position: absolute;
-        background: #fff;
-        border-radius: 50%;
-        filter: drop-shadow(0 0 8px #fff);
+      position: absolute; background: #fff;
+      border-radius: 50%; filter: drop-shadow(0 0 8px #fff);
     }
-
-    /* Estela de alta velocidad */
     .satellite::after {
-        content: "";
-        position: absolute;
-        top: 50%; right: 0;
-        width: 150px; height: 1px;
-        background: linear-gradient(to left, rgba(212, 175, 55, 0.7), transparent);
-        transform: translateY(-50%);
+      content: ""; position: absolute; top: 50%; right: 0;
+      width: 150px; height: 1px;
+      background: linear-gradient(to left, rgba(212,175,55,0.7), transparent);
+      transform: translateY(-50%);
     }
-
-    /* Satélite 1: Órbita Rápida (Dorado) */
-    .sat-1 {
-        width: 3px; height: 3px;
-        top: 30%; left: -10%;
-        animation: orbit1 25s linear infinite;
-        filter: drop-shadow(0 0 8px var(--gold));
-    }
-
-    /* Satélite 2: Órbita Lenta (Blanco) */
-    .sat-2 {
-        width: 2px; height: 2px;
-        top: 60%; left: -10%;
-        animation: orbit2 40s linear infinite;
-    }
-
-    /* Satélite 3: Diagonal (Tecnológico) */
-    .sat-3 {
-        width: 2px; height: 2px;
-        top: 10%; left: -10%;
-        animation: orbit3 35s linear infinite;
-        opacity: 0.5;
-    }
+    .sat-1 { width: 3px; height: 3px; top: 30%; left: -10%; animation: orbit1 25s linear infinite; filter: drop-shadow(0 0 8px var(--gold)); }
+    .sat-2 { width: 2px; height: 2px; top: 60%; left: -10%; animation: orbit2 40s linear infinite; }
+    .sat-3 { width: 2px; height: 2px; top: 10%; left: -10%; animation: orbit3 35s linear infinite; opacity: 0.5; }
 
     @keyframes orbit1 {
-        0% { transform: translateX(0) translateY(0); opacity: 0; }
-        10% { opacity: 1; }
-        90% { opacity: 1; }
-        100% { transform: translateX(120vw) translateY(15vh); opacity: 0; }
+      0%   { transform: translateX(0) translateY(0); opacity: 0; }
+      10%  { opacity: 1; } 90%  { opacity: 1; }
+      100% { transform: translateX(120vw) translateY(15vh); opacity: 0; }
     }
-
     @keyframes orbit2 {
-        0% { transform: translateX(0); opacity: 0; }
-        5% { opacity: 0.8; }
-        95% { opacity: 0.8; }
-        100% { transform: translateX(120vw); opacity: 0; }
+      0%   { transform: translateX(0); opacity: 0; }
+      5%   { opacity: 0.8; } 95%  { opacity: 0.8; }
+      100% { transform: translateX(120vw); opacity: 0; }
+    }
+    @keyframes orbit3 {
+      0%   { transform: translateX(0) translateY(0); opacity: 0; }
+      20%  { opacity: 0.6; }
+      100% { transform: translateX(120vw) translateY(40vh); opacity: 0; }
     }
 
-    @keyframes orbit3 {
-        0% { transform: translateX(0) translateY(0); opacity: 0; }
-        20% { opacity: 0.6; }
-        100% { transform: translateX(120vw) translateY(40vh); opacity: 0; }
-    }
-    
-    /* Estilos internos para el Catálogo */
-    .catalog-container {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
+    /* =========================================
+       8. COMPONENTES DE CATÁLOGO Y MODALES
+       ========================================= */
+    .catalog-container { display: grid; grid-template-columns: 1fr; gap: 15px; }
 
     .service-item {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(212, 175, 55, 0.2);
-        border-radius: 12px;
-        padding: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: 0.3s ease;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 12px; padding: 20px;
+      display: flex; justify-content: space-between; align-items: center; transition: 0.3s ease;
     }
-
-    .service-item:hover {
-        background: rgba(212, 175, 55, 0.05);
-        border-color: var(--gold);
-        transform: scale(1.02);
-    }
-
-    .service-info h4 {
-        margin: 0 0 5px 0;
-        color: var(--gold);
-        font-size: 1.1rem;
-    }
-
-    .service-info p {
-        margin: 0;
-        font-size: 0.85rem;
-        color: var(--text-muted);
-    }
-
-    .service-price {
-        text-align: right;
-    }
-
-    .price-value {
-        display: block;
-        font-size: 1.2rem;
-        font-weight: 800;
-        color: #fff;
-    }
-
-    .price-tag {
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        color: var(--gold);
-        letter-spacing: 1px;
-    }
+    .service-item:hover { background: rgba(212,175,55,0.05); border-color: var(--gold); transform: scale(1.02); }
+    .service-info h4 { margin: 0 0 5px; color: var(--gold); font-size: 1.1rem; }
+    .service-info p  { margin: 0; font-size: 0.85rem; color: var(--text-muted); }
+    .service-price   { text-align: right; }
+    .price-value     { display: block; font-size: 1.5rem; font-weight: 800; color: #fff; }
+    .price-tag       { font-size: 0.7rem; text-transform: uppercase; color: var(--gold); letter-spacing: 1px; }
 
     .badge-premium {
-        background: var(--gold);
-        color: #000;
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-size: 0.65rem;
-        font-weight: bold;
-        margin-left: 10px;
+      background: var(--gold); color: #000;
+      padding: 2px 8px; border-radius: 4px;
+      font-size: 0.65rem; font-weight: bold; margin-left: 10px;
     }
 
-    * PEGA AQUÍ LOS ESTILOS DEL PASO 1 */
     .opportunity-card {
-        background: rgba(255, 255, 255, 0.02);
-        border-left: 4px solid var(--gold);
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 15px;
-        transition: 0.3s;
+      background: rgba(255,255,255,0.02); border-left: 4px solid var(--gold);
+      border-radius: 8px; padding: 20px; margin-bottom: 15px; transition: 0.3s;
     }
-    .opportunity-card:hover {
-        background: rgba(255, 255, 255, 0.05);
-        transform: translateX(10px);
-    }
+    .opportunity-card:hover { background: rgba(255,255,255,0.05); transform: translateX(10px); }
     .opportunity-card h4 {
-        color: #fff;
-        margin: 0 0 10px 0;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 1.1rem;
+      color: #fff; margin: 0 0 10px;
+      display: flex; align-items: center; gap: 10px; font-size: 1.1rem;
     }
-    .opportunity-card p {
-        font-size: 0.9rem;
-        color: var(--text-muted);
-        line-height: 1.5;
-        margin: 0;
-    }
+    .opportunity-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
     .future-badge {
-        font-size: 0.7rem;
-        background: #0088ff;
-        color: white;
-        padding: 2px 8px;
-        border-radius: 20px;
-        font-weight: bold;
+      font-size: 0.7rem; background: #0088ff; color: white;
+      padding: 2px 8px; border-radius: 20px; font-weight: bold;
     }
 
-    /* Estilos para el Inventario de Servicios */
     .inventory-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-        margin-top: 10px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px; margin-top: 10px;
     }
 
     .status-active {
-        color: #2ecc71;
-        font-size: 0.7rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        display: flex;
-        align-items: center;
-        gap: 5px;
+      color: #2ecc71; font-size: 0.7rem; font-weight: bold;
+      text-transform: uppercase; display: flex; align-items: center; gap: 5px;
     }
-
     .status-active::before {
-        content: "";
-        width: 8px;
-        height: 8px;
-        background: #2ecc71;
-        border-radius: 50%;
-        display: inline-block;
-        animation: pulseStatus 1.5s infinite;
+      content: ""; width: 8px; height: 8px;
+      background: #2ecc71; border-radius: 50%; display: inline-block;
+      animation: pulseStatus 1.5s infinite;
     }
-
     @keyframes pulseStatus {
-        0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
-        70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
-    }
- 
-    /* Estilos para el Formulario de Pedidos */
-    .form-header-hint {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        margin-bottom: 20px;
-        border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
-        padding-bottom: 10px;
+      0%   { box-shadow: 0 0 0 0 rgba(46,204,113,0.7); }
+      70%  { box-shadow: 0 0 0 10px rgba(46,204,113,0); }
+      100% { box-shadow: 0 0 0 0 rgba(46,204,113,0); }
     }
 
-    .form-group {
-        margin-bottom: 15px;
-    }
-
-    .input-icon-wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
-    }
-
-    .input-icon-wrapper i {
-        position: absolute;
-        left: 15px;
-        color: var(--gold);
-        opacity: 0.7;
-    }
-
-    .form input, .form select, .form textarea {
-        padding-left: 40px !important; /* Espacio para el icono */
-    }
-
-    .order-footer-note {
-        font-size: 0.75rem;
-        color: var(--gold);
-        text-align: center;
-        margin-top: 15px;
-        opacity: 0.8;
-    }
-
-    /* Contenedor Compacto de Planes */
-.pricing-grid {
-    display: grid;
-    /* En laptop 2 columnas, en móvil 1 */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 25px;
-    padding: 10px;
-}
-
-.pricing-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 30px;
-    position: relative;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-/* EFECTO PRIME: La tarjeta que debe vender más */
-.pricing-card.featured {
-    border: 2px solid var(--gold);
-    background: rgba(212, 175, 55, 0.05);
-    transform: scale(1.05); /* Ligeramente más grande */
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
-}
-
-.pricing-card.featured::before {
-    content: "MÁS RENTABLE";
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--gold);
-    color: #000;
-    padding: 4px 12px;
-    font-size: 0.7rem;
-    font-weight: 900;
-    border-radius: 50px;
-    letter-spacing: 1px;
-}
-
-.pricing-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--gold);
-    background: rgba(255, 255, 255, 0.06);
-}
-
-.pricing-card.featured {
-    border-color: var(--gold);
-    background: rgba(255, 215, 0, 0.07);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
-}
-
-.pricing-card h4 {
-    color: var(--gold);
-    font-size: 1rem; /* Fuente más pequeña */
-    margin: 5px 0;
-}
-
-.price-value {
-    font-size: 1.5rem; /* Precio más compacto */
-    font-weight: bold;
-    color: #fff;
-}
-
-.features-list {
-    list-style: none;
-    padding: 0;
-    margin: 15px 0;
-    flex-grow: 1;
-}
-
-.features-list li {
-    font-size: 0.75rem; /* Texto pequeño para que no salte de línea */
-    color: #ddd;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.btn-plan {
-    width: 100%;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid var(--gold);
-    background: transparent;
-    color: var(--gold);
-    cursor: pointer;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-.pricing-card.featured .btn-plan {
-    background: var(--gold);
-    color: #000;
-}
-
-/* Ajuste para pantallas móviles */
-@media (max-width: 600px) {
-    .pricing-grid {
-        flex-wrap: wrap; /* En celular sí se ponen una debajo de otra */
-    }
-    .pricing-card {
-        max-width: 100%;
-    }
-}
-    
-    #orderForm {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Esto da espacio entre los campos */
-    padding: 10px;
-}
-
-#orderForm .form-group {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
-
-#orderForm label {
-    color: var(--gold);
-    font-size: 0.85rem;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-#orderForm input {
-    padding: 12px;
-    background: #111;
-    border: 1px solid #333;
-    border-radius: 8px;
-    color: white;
-    font-family: inherit;
-}
-
-#orderForm input[readonly] {
-    border-color: var(--gold);
-    color: var(--gold);
-    opacity: 0.8;
-}
-
-/* =========================================
-       PARCHE DE ESTABILIDAD MÓVIL AURENSTAR
+    /* =========================================
+       9. PRECIOS
        ========================================= */
-    
-    html, body {
-        max-width: 100vw;
-        overflow-x: hidden; /* Bloquea el movimiento lateral de la Tierra */
-        position: relative;
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px; padding: 10px;
     }
+    .modal .pricing-grid {
+      width: 100%; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 15px;
+    }
+
+    .pricing-card {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 20px; padding: 30px;
+      position: relative; transition: all 0.3s ease; display: flex; flex-direction: column;
+    }
+    .pricing-card.featured {
+      border: 2px solid var(--gold); background: rgba(212,175,55,0.05);
+      transform: scale(1.05); box-shadow: 0 10px 30px rgba(212,175,55,0.15);
+    }
+    .pricing-card.featured::before {
+      content: "MÁS RENTABLE";
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: #000;
+      padding: 4px 12px; font-size: 0.7rem; font-weight: 900;
+      border-radius: 50px; letter-spacing: 1px;
+    }
+    .pricing-card:hover { transform: translateY(-10px); border-color: var(--gold); background: rgba(255,255,255,0.06); }
+    .pricing-card.featured:hover { transform: scale(1.05) translateY(-5px); }
+    .pricing-card h4 { color: var(--gold); font-size: 1rem; margin: 5px 0; }
+
+    .features-list { list-style: none; padding: 0; margin: 15px 0; flex-grow: 1; }
+    .features-list li {
+      font-size: 0.75rem; color: #ddd; margin-bottom: 8px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .btn-plan {
+      width: 100%; padding: 10px; border-radius: 6px;
+      border: 1px solid var(--gold); background: transparent;
+      color: var(--gold); cursor: pointer; font-size: 0.8rem; font-weight: bold;
+    }
+    .pricing-card.featured .btn-plan { background: var(--gold); color: #000; }
+
+    /* =========================================
+       10. FORMULARIOS
+       ========================================= */
+    .form-header-hint {
+      font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;
+      border-bottom: 1px dashed rgba(212,175,55,0.3); padding-bottom: 10px;
+    }
+    .form-group { margin-bottom: 15px; }
+    .input-icon-wrapper { position: relative; display: flex; align-items: center; }
+    .input-icon-wrapper i { position: absolute; left: 15px; color: var(--gold); opacity: 0.7; }
+    .form input, .form select, .form textarea { padding-left: 40px !important; }
+    .order-footer-note { font-size: 0.75rem; color: var(--gold); text-align: center; margin-top: 15px; opacity: 0.8; }
+
+    #orderForm { display: flex; flex-direction: column; gap: 15px; padding: 10px; }
+    #orderForm .form-group { display: flex; flex-direction: column; text-align: left; }
+    #orderForm label { color: var(--gold); font-size: 0.85rem; margin-bottom: 5px; font-weight: bold; }
+    #orderForm input {
+      padding: 12px; background: #111; border: 1px solid #333;
+      border-radius: 8px; color: white; font-family: inherit;
+    }
+    #orderForm input[readonly] { border-color: var(--gold); color: var(--gold); opacity: 0.8; }
+
+    /* =========================================
+       11. PARCHE ESTABILIDAD MÓVIL
+       ========================================= */
+    html, body { max-width: 100vw; overflow-x: hidden; position: relative; }
 
     @media (max-width: 600px) {
-        /* 1. Ajuste de la Tierra para móviles */
-        body::after {
-            animation: none; /* Opcional: Desactiva el zoom en móvil para máxima fluidez */
-            background-attachment: scroll;
-            width: 100%;
-        }
-
-        /* 2. Ajuste Crítico de Tarjetas (Catálogo) */
-        .pricing-grid {
-            flex-direction: column !important; /* Fuerza el orden vertical */
-            flex-wrap: wrap !important;
-            align-items: center !important;
-            gap: 20px !important;
-            overflow-x: hidden !important; /* Elimina el scroll lateral interno */
-        }
-
-        .pricing-card {
-            width: 100% !important; /* Ocupa todo el ancho disponible */
-            max-width: 320px !important; /* Pero no se estira demasiado */
-            min-width: unset !important; /* Rompe la restricción anterior */
-            margin: 0 auto;
-        }
-
-        /* 3. Título del Héroe */
-        .hero-title {
-            font-size: 2.2rem; /* Reduce el tamaño para que no se corte */
-        }
-        
-        /* 4. Input Mágico */
-        .magic-input {
-            font-size: 1rem;
-            padding: 15px 20px;
-        }
+      body::after { animation: none; background-attachment: scroll; width: 100%; }
+      .hero-title  { font-size: 2.2rem; }
+      .magic-input { font-size: 1rem; padding: 15px 20px; }
+      .pricing-grid {
+        flex-direction: column !important; flex-wrap: wrap !important;
+        align-items: center !important; gap: 20px !important; overflow-x: hidden !important;
+      }
+      .pricing-card {
+        width: 100% !important; max-width: 320px !important;
+        min-width: unset !important; margin: 0 auto;
+      }
     }
 
-    /* Asegura que el catálogo no se salga del modal en celular */
-.modal-body {
-    max-height: 80vh; /* Evita que el modal sea más alto que la pantalla */
-    overflow-y: auto;  /* Permite scroll interno si hay muchos planes */
-    -webkit-overflow-scrolling: touch;
-    padding: 15px !important;
-}
-
-/* Ajuste fino para las tarjetas dentro del modal */
-.modal .pricing-grid {
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.card {
-    position: relative;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    padding: 35px 25px !important;
-    text-align: center;
-    border-radius: 22px !important;
-}
-
-/* Efecto de escaneo láser al pasar el mouse */
-.card::before {
-    content: "";
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
-    opacity: 0;
-    transition: 0.5s;
-}
-
-.card:hover::before {
-    opacity: 1;
-}
-
-.card h5 {
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-size: 1rem;
-    margin-top: 15px;
-}    
-    
   </style>
 </head>
 
@@ -839,26 +502,25 @@ body::after {
     <div class="satellite sat-2"></div>
     <div class="satellite sat-3"></div>
   </div>
+
   <div class="navbar">
     <div class="container">
-      <div class="brand"><span class="stars">✦</span> AURENSTAR</div>
+      <div class="brand"><span class="star">✦</span> AURENSTAR</div>
       <div class="status-badge">● SISTEMA ENTERPRISE ONLINE</div>
     </div>
   </div>
 
   <div class="hero">
-      <div class="welcome-container">
-          <h1 id="dynamicGreeting" class="hero-title">Iniciando...</h1>
-          
-          <div class="wisdom-capsule">
-              <span id="dailyWisdom">"Cargando..."</span>
-          </div>
-
-          <div class="magic-input-wrapper">
-              <input type="text" id="aiConsultant" class="magic-input" placeholder="Escribe aquí tu deseo o idea...">
-              <div id="searchFeedback" class="search-feedback">✔ Tu visión ha sido captada...</div>
-          </div>
+    <div class="welcome-container">
+      <h1 id="dynamicGreeting" class="hero-title">Iniciando...</h1>
+      <div class="wisdom-capsule">
+        <span id="dailyWisdom">"Cargando..."</span>
       </div>
+      <div class="magic-input-wrapper">
+        <input type="text" id="aiConsultant" class="magic-input" placeholder="Escribe aquí tu deseo o idea...">
+        <div id="searchFeedback" class="search-feedback">✔ Tu visión ha sido captada...</div>
+      </div>
+    </div>
   </div>
 
   <div class="main">
@@ -868,38 +530,37 @@ body::after {
         <h5>Catálogo & Tarifas</h5>
         <p>Tarifas de inversión para soluciones globales.</p>
       </div>
-      
       <div class="card" onclick="UI.showPromos()">
         <i class="fa-solid fa-bolt gold-icon"></i>
         <h5>Ofertas Exclusivas</h5>
         <p>Oportunidades limitadas de alta rentabilidad.</p>
       </div>
-      
       <div class="card" onclick="UI.showProductos()">
         <i class="fa-solid fa-chart-line gold-icon"></i>
         <h5>Tendencias & Novedades</h5>
         <p>El futuro de la tecnología AURENSTAR hoy.</p>
       </div>
-      
       <div class="card" onclick="UI.openOrderModal()">
         <i class="fa-solid fa-rocket gold-icon"></i>
         <h5>Gestión de Pedidos</h5>
         <p>Iniciar protocolo de adquisición y despliegue.</p>
       </div>
-      
       <div class="card" onclick="UI.openPaymentModal()">
         <i class="fa-solid fa-shield-halved gold-icon"></i>
         <h5>Pasarela de Pagos</h5>
         <p>Transacciones seguras con cifrado bancario.</p>
       </div>
-      
       <div class="card" onclick="UI.showFAQ()">
         <i class="fa-solid fa-user-tie gold-icon"></i>
         <h5>Asesoría Directa</h5>
         <p>Enlace humano con nuestro equipo de ingeniería.</p>
       </div>
     </div>
+  </div>
 
+  <!-- ===== MODALES — SIN DUPLICADOS ===== -->
+
+  <!-- Modal genérico (lista/contenido) -->
   <div id="listBackdrop" class="modal-backdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true">
       <div class="modal-header">
@@ -910,6 +571,7 @@ body::after {
     </div>
   </div>
 
+  <!-- Modal pedido -->
   <div id="orderBackdrop" class="modal-backdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true">
       <div class="modal-header">
@@ -918,82 +580,27 @@ body::after {
       </div>
       <div class="modal-body">
         <form id="orderForm">
-    <div class="form-group">
-        <label>SERVICIO SELECCIONADO</label>
-        <input type="text" name="item" readonly>
-    </div>
-    <div class="form-group">
-        <label>TU NOMBRE COMPLETO</label>
-        <input type="text" name="nombre_cliente" placeholder="Nombre y Apellido" required>
-    </div>
-    <div class="form-group">
-        <label>TU WHATSAPP / CELULAR</label>
-        <input type="text" name="telefono_cliente" placeholder="Ej: 70012345" required>
-    </div>
-    <button type="submit" class="btn-primary" style="margin-top:10px">
-        TRANSMITIR ORDEN
-    </button>
-</form>
-      </div>
-    </div>
-  </div>
-
-  <div id="listBackdrop" class="modal-backdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true">
-      <div class="modal-header">
-        <div id="listTitle" class="modal-title">Información</div>
-        <button class="btn-close" onclick="Modal('list').hide()">✕</button>
-      </div>
-      <div id="listBody" class="modal-body"></div>
-    </div>
-  </div>
-
-  <div id="orderBackdrop" class="modal-backdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true">
-      <div class="modal-header">
-        <div id="orderTitle" class="modal-title">SOLICITUD DE DESPLIEGUE</div>
-        <button class="btn-close" onclick="Modal('order').hide()">✕</button>
-      </div>
-      <div class="modal-body">
-        <p class="form-header-hint">Iniciando protocolo de solicitud técnica. Defina los parámetros.</p>
-        <form id="orderForm" class="form">
           <div class="form-group">
-            <label>Capacidad o Servicio Requerido</label>
-            <div class="input-icon-wrapper">
-                <i class="fa-solid fa-layer-group"></i>
-                <input type="text" name="item" placeholder="Ej: AURENSTAR PRIME 1.0" required>
-            </div>
+            <label>SERVICIO SELECCIONADO</label>
+            <input type="text" name="item" readonly>
           </div>
-          
           <div class="form-group">
-            <label>Nivel de Prioridad</label>
-            <div class="input-icon-wrapper">
-                <i class="fa-solid fa-gauge-high"></i>
-                <select name="priority" style="width:100%; height:45px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#fff; padding-left:40px;">
-                    <option value="Standard">Estándar (24h)</option>
-                    <option value="High">Alta Prioridad (Empresarial)</option>
-                    <option value="Critical">Crítica (Soporte Inmediato)</option>
-                </select>
-            </div>
+            <label>TU NOMBRE COMPLETO</label>
+            <input type="text" name="nombre_cliente" placeholder="Nombre y Apellido" required>
           </div>
-
           <div class="form-group">
-            <label>Correo Electrónico de Enlace</label>
-            <div class="input-icon-wrapper">
-                <i class="fa-solid fa-envelope"></i>
-                <input type="email" name="email" placeholder="enlace@empresa.com" required>
-            </div>
+            <label>TU WHATSAPP / CELULAR</label>
+            <input type="text" name="telefono_cliente" placeholder="Ej: 70012345" required>
           </div>
-
-          <button type="submit" class="btn btn-primary">
-            <i class="fa-solid fa-paper-plane"></i> TRANSMITIR ORDEN
+          <button type="submit" class="btn btn-primary" style="margin-top:10px;">
+            TRANSMITIR ORDEN
           </button>
-          <p class="order-footer-note">El Motor Central validará la disponibilidad técnica tras el envío.</p>
         </form>
       </div>
     </div>
   </div>
 
+  <!-- Modal pago -->
   <div id="paymentBackdrop" class="modal-backdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true">
       <div class="modal-header">
@@ -1006,23 +613,22 @@ body::after {
           <div class="form-group">
             <label>Monto de Inversión (Bs.)</label>
             <div class="input-icon-wrapper">
-                <i class="fa-solid fa-coins"></i>
-                <input type="number" name="amount" min="1" placeholder="0.00" required>
+              <i class="fa-solid fa-coins"></i>
+              <input type="number" name="amount" min="1" placeholder="0.00" required>
             </div>
           </div>
           <div class="form-group">
             <label>Concepto de Operación</label>
             <div class="input-icon-wrapper">
-                <i class="fa-solid fa-file-invoice-dollar"></i>
-                <input type="text" name="description" placeholder="Ej: Activación Servidor Nexus" required>
+              <i class="fa-solid fa-file-invoice-dollar"></i>
+              <input type="text" name="description" placeholder="Ej: Activación Servidor Nexus" required>
             </div>
           </div>
           <button type="submit" class="btn btn-success">
             <i class="fa-solid fa-lock"></i> GENERAR ENLACE SEGURO
           </button>
         </form>
-
-        <div id="paymentResult" style="display:none; margin-top:20px; padding:15px; border:1px dashed var(--gold); border-radius:10px; text-align:center; background:rgba(46, 204, 113, 0.05);">
+        <div id="paymentResult" style="display:none; margin-top:20px; padding:15px; border:1px dashed var(--gold); border-radius:10px; text-align:center; background:rgba(46,204,113,0.05);">
           <p style="color:var(--text-muted); margin-bottom:10px; font-size:0.8rem;">TOKEN DE PAGO GENERADO:</p>
           <a id="paymentLink" href="#" target="_blank" style="color:var(--primary); font-weight:bold; word-break:break-all; text-decoration:underline;"></a>
           <p style="font-size:0.7rem; color:gray; margin-top:10px;">Este enlace expira en 24 horas.</p>
@@ -1033,8 +639,11 @@ body::after {
 
   <script>
     /* ==========================================
-       BLOQUE JS: LÓGICA DEL SISTEMA AURENSTAR
+       VERSIÓN RENDER — AURENSTAR P.01
+       BACKEND apunta al servicio desplegado
        ========================================== */
+
+    // ✅ URL DE PRODUCCIÓN EN RENDER
     var BACKEND_URL = "https://api-aurenstar.onrender.com";
     var EMPRESA_ID  = "aurenstar";
 
@@ -1043,7 +652,7 @@ body::after {
       try {
         var res = await fetch(BACKEND_URL + '/chat', {
           method: 'POST',
-          headers: { 'Content-Type':'application/json' },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: message, empresaid: EMPRESA_ID, payload: payload })
         });
         if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -1054,58 +663,54 @@ body::after {
         return null;
       }
     }
-    
-    // Función para registrar la intención del cliente
-    async function registerUserIntent(text) {
-        if (text.length < 5) return; 
-        const response = await postChat('ACTION:REGISTER_INTENT', { 
-            userInput: text,
-            context: "Sugerencia personalizada P01" 
-        });
 
-        if (response) {
-            const input = document.getElementById('aiConsultant');
-            const feedback = document.getElementById('searchFeedback');
-            if(input && feedback) {
-                input.classList.add('search-sent');
-                feedback.classList.add('show');
-                setTimeout(() => {
-                    input.classList.remove('search-sent');
-                    feedback.classList.remove('show');
-                    input.value = '';
-                }, 4000);
-            }
+    async function registerUserIntent(text) {
+      if (text.length < 5) return;
+      const response = await postChat('ACTION:REGISTER_INTENT', {
+        userInput: text, context: "Sugerencia personalizada P01"
+      });
+      if (response) {
+        const input    = document.getElementById('aiConsultant');
+        const feedback = document.getElementById('searchFeedback');
+        if (input && feedback) {
+          input.classList.add('search-sent');
+          feedback.classList.add('show');
+          setTimeout(() => {
+            input.classList.remove('search-sent');
+            feedback.classList.remove('show');
+            input.value = '';
+          }, 4000);
         }
+      }
     }
 
     var aiInput = document.getElementById('aiConsultant');
-    if(aiInput){
-        aiInput.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                registerUserIntent(this.value);
-            }
-        });
+    if (aiInput) {
+      aiInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') registerUserIntent(this.value);
+      });
     }
 
-    /* UTILITIES */
     function Modal(name) {
       var map = { list: 'listBackdrop', order: 'orderBackdrop', payment: 'paymentBackdrop' };
-      var el = document.getElementById(map[name]);
+      var el  = document.getElementById(map[name]);
       return {
-        show: function(){ if(el){ el.classList.add('show'); el.setAttribute('aria-hidden','false'); } },
-        hide: function(){ if(el){ el.classList.remove('show'); el.setAttribute('aria-hidden','true'); } }
+        show: function() { if (el) { el.classList.add('show'); el.setAttribute('aria-hidden','false'); } },
+        hide: function() { if (el) { el.classList.remove('show'); el.setAttribute('aria-hidden','true'); } }
       };
     }
 
-    function addBackdropClick(id){
+    function addBackdropClick(id) {
       var el = document.getElementById(id);
       if (!el) return;
-      el.addEventListener('click', function(e){ if(e.target.id === id) el.classList.remove('show'); });
+      el.addEventListener('click', function(e) { if (e.target.id === id) el.classList.remove('show'); });
     }
 
-    function esc(x){
+    function esc(x) {
       if (x === null || x === undefined) return '';
-      return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+      return String(x)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
     }
 
     function setListModal(title, html) {
@@ -1113,165 +718,162 @@ body::after {
       var b = document.getElementById('listBody');
       if (!t || !b) return;
       t.textContent = title;
-      b.innerHTML = html;
+      b.innerHTML   = html;
       Modal('list').show();
     }
 
     function showError(message) {
-      setListModal("Alerta del Sistema", '<div class="list"><div class="list-item" style="color:#ff6b6b; border-color:#ff6b6b">' + esc(message) + '</div></div>');
+      setListModal("Alerta del Sistema",
+        '<div class="list"><div class="list-item" style="color:#ff6b6b;border-color:#ff6b6b">' + esc(message) + '</div></div>'
+      );
     }
 
-    /* UI HANDLERS */
     var UI = {
-      
+
       showPrecios: function() {
-    const pricingContent = `
-        <div class="pricing-grid">
-            <div class="pricing-card featured" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=500'); background-size: cover;">
-                <div class="badge-top">Recomendado</div>
-                <h4>PRIME 1.0</h4>
-                <p style="font-size:0.8rem; color:#ddd;">Vitrina Inteligente Inmersiva</p>
-                <div class="price-box">
-                    <span class="price-value">150 Bs.</span>
-                    <span class="price-period">/mes</span>
-                </div>
-                <ul class="features-list">
-                    <li><i class="fa-solid fa-check"></i> Atención al Cliente IA</li>
-                    <li><i class="fa-solid fa-check"></i> Catálogo Interactivo</li>
-                </ul>
-                <button class="btn-plan" onclick="UI.openOrderModal('PRIME 1.0')">Elegir Prime</button>
+        const html = `
+          <div class="pricing-grid">
+            <div class="pricing-card featured"
+              style="background-image:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=500');background-size:cover;">
+              <h4>PRIME 1.0</h4>
+              <p style="font-size:0.8rem;color:#ddd;">Vitrina Inteligente Inmersiva</p>
+              <div><span class="price-value">150 Bs.</span><span style="font-size:0.8rem;color:var(--text-muted);">/mes</span></div>
+              <ul class="features-list">
+                <li><i class="fa-solid fa-check"></i> Atención al Cliente IA</li>
+                <li><i class="fa-solid fa-check"></i> Catálogo Interactivo</li>
+                <li><i class="fa-solid fa-check"></i> Diseño de Autor</li>
+                <li><i class="fa-solid fa-check"></i> Soporte Estándar</li>
+              </ul>
+              <button class="btn-plan" onclick="UI.openOrderModal('PRIME 1.0')">Elegir Prime</button>
             </div>
-
-            <div class="pricing-card" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=500'); background-size: cover;">
-                <h4>CORE 1.0</h4>
-                <p style="font-size:0.8rem; color:#ddd;">Asistente Empresarial</p>
-                <div class="price-box">
-                    <span class="price-value">200 Bs.</span>
-                    <span class="price-period">/mes</span>
-                </div>
-                <ul class="features-list">
-                    <li><i class="fa-solid fa-check"></i> Gestión de Inventarios</li>
-                    <li><i class="fa-solid fa-check"></i> Reportes de Venta</li>
-                </ul>
-                <button class="btn-plan" onclick="UI.openOrderModal('CORE 1.0')">Elegir Core</button>
+            <div class="pricing-card"
+              style="background-image:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=500');background-size:cover;">
+              <h4>CORE 1.0</h4>
+              <p style="font-size:0.8rem;color:#ddd;">Asistente Empresarial</p>
+              <div><span class="price-value">200 Bs.</span><span style="font-size:0.8rem;color:var(--text-muted);">/mes</span></div>
+              <ul class="features-list">
+                <li><i class="fa-solid fa-check"></i> Todo lo de Prime</li>
+                <li><i class="fa-solid fa-check"></i> Gestión de Inventarios</li>
+                <li><i class="fa-solid fa-check"></i> Reportes de Venta</li>
+                <li><i class="fa-solid fa-check"></i> Prioridad Alta</li>
+              </ul>
+              <button class="btn-plan" onclick="UI.openOrderModal('CORE 1.0')">Elegir Core</button>
             </div>
-
-            <div class="pricing-card" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=500'); background-size: cover;">
-                <h4>NEXUS 1.0</h4>
-                <p style="font-size:0.8rem; color:#ddd;">Control Total Digital</p>
-                <div class="price-box">
-                    <span class="price-value">200 Bs.</span>
-                    <span class="price-period">/mes</span>
-                </div>
-                <ul class="features-list">
-                    <li><i class="fa-solid fa-check"></i> Seguridad Cifrada</li>
-                    <li><i class="fa-solid fa-check"></i> Soporte 24/7 Crítico</li>
-                </ul>
-                <button class="btn-plan" onclick="UI.openOrderModal('NEXUS 1.0')">Elegir Nexus</button>
+            <div class="pricing-card"
+              style="background-image:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=500');background-size:cover;">
+              <h4>NEXUS 1.0</h4>
+              <p style="font-size:0.8rem;color:#ddd;">Control Total Digital</p>
+              <div><span class="price-value">250 Bs.</span><span style="font-size:0.8rem;color:var(--text-muted);">/mes</span></div>
+              <ul class="features-list">
+                <li><i class="fa-solid fa-check"></i> Ecosistema Completo</li>
+                <li><i class="fa-solid fa-check"></i> Integración Global</li>
+                <li><i class="fa-solid fa-check"></i> Seguridad Cifrada</li>
+                <li><i class="fa-solid fa-check"></i> Soporte 24/7 Crítico</li>
+              </ul>
+              <button class="btn-plan" onclick="UI.openOrderModal('NEXUS 1.0')">Elegir Nexus</button>
             </div>
-        </div>
-    `;
-    setListModal('PLANES DE INVERSIÓN AURENSTAR', pricingContent);
-},
-      
-      showProductos: async function() {
-        const trendsContent = `
-            <div class="catalog-container">
-                <div class="opportunity-card" style="border-left: 4px solid #2ecc71;">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <h4 style="margin:0;">Fase Actual: Ecosistema Autónomo</h4>
-                        <span class="badge-premium" style="background:#2ecc71">ACTIVO</span>
-                    </div>
-                    <p>Despliegue de interfaces con <strong>Ingeniería de Autor</strong>. Sistemas que no dependen de plataformas de terceros.</p>
-                </div>
-                <div class="opportunity-card" style="border-left: 4px solid var(--gold);">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <h4 style="margin:0;">Próximo Hito: P.02 Holográfico</h4>
-                        <span class="future-badge">DESPLEGANDO</span>
-                    </div>
-                    <p>Arquitectura preparada para visualización en entornos de realidad mixta.</p>
-                </div>
-            </div>
-        `;
-        setListModal('TENDENCIAS & NOVEDADES AURENSTAR', trendsContent);
+          </div>
+          <p style="margin-top:20px;font-size:0.75rem;color:gray;text-align:center;">
+            * Tarifas base para despliegue inmediato. Precios sujetos a requerimientos técnicos.
+          </p>`;
+        setListModal('PLANES DE INVERSIÓN AURENSTAR', html);
       },
 
-      showPromos: function() { 
-        const content = `
-            <div class="catalog-container">
-                <div class="opportunity-card" style="background: linear-gradient(135deg, rgba(212,175,55,0.1), transparent); border: 1px solid var(--gold);">
-                    <div style="display:flex; justify-content:space-between;">
-                        <h4 style="color:var(--gold);">BONO DE LANZAMIENTO P.01</h4>
-                        <span class="badge-premium" style="background:red; color:white;">-20% OFF</span>
-                    </div>
-                    <p style="margin:10px 0;">Despliegue de tu terminal AURENSTAR con hosting de alta velocidad incluido por 1 año.</p>
-                    <small style="color:var(--gold);">Válido para las próximas 48 horas.</small>
-                    <button class="btn-success" onclick="UI.openOrderModal('PROMO LANZAMIENTO P.01')" style="margin-top:10px; padding:8px;">APLICAR AHORA</button>
-                </div>
-            </div>`;
-        setListModal('OPORTUNIDADES DE INVERSIÓN', content);
+      showProductos: function() {
+        const html = `
+          <div class="catalog-container">
+            <div class="opportunity-card" style="border-left:4px solid #2ecc71;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <h4 style="margin:0;">Fase Actual: Ecosistema Autónomo</h4>
+                <span class="badge-premium" style="background:#2ecc71">ACTIVO</span>
+              </div>
+              <p>Despliegue de interfaces con <strong>Ingeniería de Autor</strong>. Sistemas que no dependen de plataformas de terceros.</p>
+            </div>
+            <div class="opportunity-card" style="border-left:4px solid var(--gold);">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <h4 style="margin:0;">Próximo Hito: P.02 Holográfico</h4>
+                <span class="future-badge">DESPLEGANDO</span>
+              </div>
+              <p>Arquitectura preparada para visualización en entornos de realidad mixta.</p>
+            </div>
+          </div>`;
+        setListModal('TENDENCIAS & NOVEDADES AURENSTAR', html);
+      },
+
+      showPromos: function() {
+        const html = `
+          <div class="catalog-container">
+            <div class="opportunity-card" style="background:linear-gradient(135deg,rgba(212,175,55,0.1),transparent);border:1px solid var(--gold);">
+              <div style="display:flex;justify-content:space-between;">
+                <h4 style="color:var(--gold);">BONO DE LANZAMIENTO P.01</h4>
+                <span class="badge-premium" style="background:red;color:white;">-20% OFF</span>
+              </div>
+              <p style="margin:10px 0;">Despliegue de tu terminal AURENSTAR con hosting de alta velocidad incluido por 1 año.</p>
+              <small style="color:var(--gold);">Válido para las próximas 48 horas.</small>
+              <button class="btn btn-success" onclick="UI.openOrderModal('PROMO LANZAMIENTO P.01')" style="margin-top:10px;">APLICAR AHORA</button>
+            </div>
+          </div>`;
+        setListModal('OPORTUNIDADES DE INVERSIÓN', html);
       },
 
       showFAQ: function() {
-        const faqContent = `
-            <div class="list">
-                <div class="list-item" style="flex-direction:column; align-items:flex-start; border-left: 4px solid var(--gold);">
-                    <strong>¿Qué es Ingeniería de Autor?</strong>
-                    <p style="font-size:0.85rem; color:var(--text-muted); margin:5px 0;">Es software creado desde cero, sin plantillas, diseñado para la identidad única de AURENSTAR.</p>
-                </div>
-                <div class="list-item" style="flex-direction:column; align-items:flex-start; border-left: 4px solid var(--gold);">
-                    <strong>¿El sistema es escalable?</strong>
-                    <p style="font-size:0.85rem; color:var(--text-muted); margin:5px 0;">Totalmente. El P.01 es solo el núcleo de un ecosistema que puede integrar pagos y logística.</p>
-                </div>
-                <button class="btn-primary" onclick="window.open('https://wa.me/59175265734?text=SOLICITO%20ASESORIA%20ELITE%20AURENSTAR', '_blank')" style="margin-top:15px;">
-                    <i class="fa-solid fa-headset"></i> HABLAR CON UN INGENIERO
-                </button>
+        const html = `
+          <div class="list">
+            <div class="list-item" style="flex-direction:column;align-items:flex-start;border-left:4px solid var(--gold);">
+              <strong>¿Qué es Ingeniería de Autor?</strong>
+              <p style="font-size:0.85rem;color:var(--text-muted);margin:5px 0;">Es software creado desde cero, sin plantillas, diseñado para la identidad única de AURENSTAR.</p>
             </div>
-        `;
-        setListModal('CENTRO DE ASISTENCIA AURENSTAR', faqContent);
+            <div class="list-item" style="flex-direction:column;align-items:flex-start;border-left:4px solid var(--gold);">
+              <strong>¿El sistema es escalable?</strong>
+              <p style="font-size:0.85rem;color:var(--text-muted);margin:5px 0;">Totalmente. El P.01 es solo el núcleo de un ecosistema que puede integrar pagos y logística.</p>
+            </div>
+            <button class="btn btn-primary" onclick="window.open('https://wa.me/59175265734?text=SOLICITO%20ASESORIA%20ELITE%20AURENSTAR','_blank')" style="margin-top:15px;">
+              <i class="fa-solid fa-headset"></i> HABLAR CON UN INGENIERO
+            </button>
+          </div>`;
+        setListModal('CENTRO DE ASISTENCIA AURENSTAR', html);
       },
 
       openOrderModal: function(planName) {
-        var of = document.getElementById('orderForm'); 
+        var of = document.getElementById('orderForm');
         if (!of) return;
-        of.reset(); 
-        if(planName) {
-            of.querySelector('input[name="item"]').value = planName;
-        }
+        of.reset();
+        if (planName) of.querySelector('input[name="item"]').value = planName;
         Modal('order').show();
+      },
+
+      /* ✅ CORREGIDO: función que faltaba en la versión original */
+      openPaymentModal: function() {
+        Modal('payment').show();
       }
     };
 
-    function attachFormHandlers(){
+    function attachFormHandlers() {
       var orderForm = document.getElementById('orderForm');
       if (orderForm) {
         orderForm.addEventListener('submit', async function(e) {
           e.preventDefault();
           var form = new FormData(e.target);
-          
-          var order = { 
-            item: form.get('item'), 
-            nombre: form.get('nombre_cliente'), 
-            telefono: form.get('telefono_cliente') 
+          var order = {
+            item:     form.get('item'),
+            nombre:   form.get('nombre_cliente'),
+            telefono: form.get('telefono_cliente')
           };
-
           Modal('order').hide();
-          
-          // --- CONFIGURACIÓN DE WHATSAPP REAL ---
-          var telefonoDueño = "59175265734"; // <--- CAMBIA ESTO POR TU NÚMERO REAL
+
+          var tel   = "59175265734";
           var texto = `🚀 *NUEVA SOLICITUD AURENSTAR*%0A%0A` +
                       `*Cliente:* ${order.nombre}%0A` +
                       `*WhatsApp:* ${order.telefono}%0A` +
                       `*Servicio:* ${order.item}%0A%0A` +
                       `_Enviado desde el Terminal de Gestión P.01_`;
 
-          var urlWpp = `https://wa.me/${telefonoDueño}?text=${texto}`;
-          window.open(urlWpp, '_blank');
+          window.open(`https://wa.me/${tel}?text=${texto}`, '_blank');
 
-          setListModal('ORDEN TRANSMITIDA', 
-            `<div style="text-align:center; padding: 20px;">
-                <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: #2ecc71; margin-bottom: 15px;"></i>
-                <p>Se ha generado el protocolo de contacto con ingeniería vía WhatsApp.</p>
+          setListModal('ORDEN TRANSMITIDA',
+            `<div style="text-align:center;padding:20px;">
+              <i class="fa-solid fa-circle-check" style="font-size:3rem;color:#2ecc71;margin-bottom:15px;"></i>
+              <p>Se ha generado el protocolo de contacto con ingeniería vía WhatsApp.</p>
             </div>`
           );
         });
@@ -1281,42 +883,41 @@ body::after {
       if (paymentForm) {
         paymentForm.addEventListener('submit', async function(e) {
           e.preventDefault();
-          var form = new FormData(e.target);
+          var form    = new FormData(e.target);
           var payment = { amount: Number(form.get('amount')), description: form.get('description') };
-          var btn = e.target.querySelector('button');
+          var btn     = e.target.querySelector('button');
           btn.innerHTML = 'CIFRANDO...';
           var r = await postChat('ACTION:PAGAR', payment);
           if (r && r.data && r.data.payment_link) {
             var res = document.getElementById('paymentResult');
-            var a = document.getElementById('paymentLink');
-            a.textContent = r.data.payment_link; a.href = r.data.payment_link;
+            var a   = document.getElementById('paymentLink');
+            a.textContent = r.data.payment_link;
+            a.href        = r.data.payment_link;
             res.style.display = 'block';
           }
-          btn.innerHTML = 'GENERAR LINK DE PAGO';
+          btn.innerHTML = '<i class="fa-solid fa-lock"></i> GENERAR ENLACE SEGURO';
         });
       }
     }
 
-    window.addEventListener('DOMContentLoaded', function(){
+    window.addEventListener('DOMContentLoaded', function() {
       addBackdropClick('listBackdrop');
       addBackdropClick('orderBackdrop');
       addBackdropClick('paymentBackdrop');
       attachFormHandlers();
-      
-      const wisdoms = ["Tu servicio es la publicidad más poderosa.", "Bienvenido al estándar de oro digital."];
+
+      const wisdoms  = ["Tu servicio es la publicidad más poderosa.", "Bienvenido al estándar de oro digital."];
       const wisdomEl = document.getElementById('dailyWisdom');
-      if(wisdomEl) wisdomEl.innerText = `"${wisdoms[Math.floor(Math.random() * wisdoms.length)]}"`;
-      
-      const hour = new Date().getHours();
+      if (wisdomEl) wisdomEl.innerText = `"${wisdoms[Math.floor(Math.random() * wisdoms.length)]}"`;
+
+      const hour  = new Date().getHours();
       const title = document.getElementById('dynamicGreeting');
-      if(title) {
-          let greet = hour < 12 ? "Hola Buenos Días" : hour < 19 ? "Hola Buenas Tardes" : "Hola Buenas Noches";
-          title.innerHTML = `${greet} <br><span class='gold-subtitle'>Bienvenido a AURENSTAR</span>`;
+      if (title) {
+        let greet = hour < 12 ? "Hola Buenos Días" : hour < 19 ? "Hola Buenas Tardes" : "Hola Buenas Noches";
+        title.innerHTML = `${greet}<br><span class="gold-subtitle">Bienvenido a AURENSTAR</span>`;
       }
     });
-</script>
+  </script>
+
 </body>
-
 </html>
-
-
