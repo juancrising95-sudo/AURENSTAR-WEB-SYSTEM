@@ -1,642 +1,678 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>AURENSTAR | Centro de Operaciones</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    /* ── BASE ── */
-    :root{
-      --bg:#050608;--bg-modal:#0c0d13;
-      --border:rgba(255,255,255,0.07);
-      --text:#e8eaf0;--muted:rgba(255,255,255,0.32);
-      --gold:#d4af37;--gold-l:#f0d060;--gold-d:#8b6914;
-      --green:#22c55e;--purple:#a855f7;
-      --primary:#58a6ff;--card-radius:22px;
-    }
-    *{box-sizing:border-box;margin:0;padding:0;}
-    body{
-      color:var(--text);
-      font-family:'Inter','Segoe UI',system-ui,sans-serif;
-      min-height:100vh;overflow-x:hidden;
-      background:var(--bg);position:relative;
-    }
-    body::after{
-      content:"";position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;
-      background:linear-gradient(rgba(5,6,8,.72),rgba(5,6,8,.82)),
-        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
-      background-size:cover;background-position:center;
-      animation:earthOrbit 40s linear infinite alternate;
-    }
-    @keyframes earthOrbit{0%{transform:scale(1);background-position:center}100%{transform:scale(1.05);background-position:55% 45%}}
-    body::before{
-      content:"";position:fixed;top:0;left:0;width:100%;height:100%;
-      background-image:
-        radial-gradient(white,rgba(255,255,255,.2) 2px,transparent 40px),
-        radial-gradient(white,rgba(255,255,255,.15) 1px,transparent 30px);
-      background-size:550px 550px,350px 350px;background-position:0 0,40px 60px;
-      opacity:.15;z-index:-1;pointer-events:none;
-      animation:stardustMove 100s linear infinite;
-    }
-    @keyframes stardustMove{from{background-position:0 0,40px 60px}to{background-position:550px 1100px,400px 800px}}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURENSTAR — Catálogos, IA y Control Laboral para tu negocio</title>
+<meta name="description" content="Tres sistemas listos para tu negocio: catálogo digital, asistente de IA 24/7 y control laboral. Implementación en días. Bolivia.">
+<meta name="theme-color" content="#050407">
+<link rel="icon" href="assets/aurenstar-planet.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050407;--bg-soft:#0b0812;
+  --ink:#EDEAE2;--muted:rgba(237,234,226,.46);--muted-2:rgba(237,234,226,.72);
+  --line:rgba(255,255,255,.08);
+  --gold:#D4AF37;--gold-l:#F5D78E;--gold-d:#8a6a1c;--gold-dim:rgba(212,175,55,.18);
+  --ember:#FF5A36;--ember-dim:rgba(255,90,54,.14);
+  --green:#2BD97C;--green-d:#15803d;
+  --violet:#A476FF;--violet-d:#6d28d9;
+  --wa:#25D366;
+  --radius-lg:24px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
+}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+button{font:inherit;}
+::selection{background:var(--gold);color:#1a1306;}
+:focus-visible{outline:2px solid var(--gold-l);outline-offset:3px;border-radius:4px;}
 
-    /* ── NAVBAR ── */
-    .navbar{background:rgba(5,6,8,.7);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1000;backdrop-filter:blur(15px);}
-    .navbar .container{max-width:1080px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;}
-    .brand{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.25rem;display:flex;align-items:center;gap:10px;color:#fff;letter-spacing:2px;text-transform:uppercase;}
-    .brand .star{color:var(--gold);animation:pulseStar 3s infinite;}
-    @keyframes pulseStar{50%{text-shadow:0 0 18px var(--gold)}}
-    .status-badge{font-size:.72rem;color:var(--gold);border:1px solid rgba(212,175,55,.3);padding:4px 12px;border-radius:20px;background:rgba(212,175,55,.05);letter-spacing:.5px;}
+/* ═══════════════════════════════════════════
+   FONDO VIVO — stage, nebulosas, estrellas,
+   constelación, líneas de datos, embers
+═══════════════════════════════════════════ */
+.stage{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  background:radial-gradient(ellipse 80% 50% at 50% -5%,rgba(212,175,55,.12),transparent 60%),var(--bg);}
 
-    /* ── HERO ── */
-    .hero{padding:80px 16px 60px;display:flex;justify-content:center;}
-    .welcome-container{position:relative;z-index:1;max-width:800px;width:100%;text-align:center;display:flex;flex-direction:column;align-items:center;}
-    .welcome-container::before{
-      content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-      width:500px;height:300px;background:radial-gradient(circle,rgba(212,175,55,.12) 0%,transparent 70%);
-      filter:blur(80px);z-index:-1;pointer-events:none;animation:pulseGlow 6s infinite alternate;
-    }
-    @keyframes pulseGlow{0%{opacity:.6;transform:translate(-50%,-50%) scale(.9)}100%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}
-    .hero-title{font-family:'Rajdhani',sans-serif;font-size:3.4rem;font-weight:700;margin:0 0 15px;background:linear-gradient(180deg,#fff 20%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px;filter:drop-shadow(0 0 10px rgba(0,0,0,.5));}
-    .gold-subtitle{display:block;font-size:.45em;font-family:'Inter',sans-serif;color:var(--gold)!important;font-weight:600;text-transform:uppercase;letter-spacing:4px;margin-top:8px;background:none!important;-webkit-text-fill-color:var(--gold)!important;}
-    .wisdom-capsule{font-size:1rem;color:var(--muted);font-style:italic;margin-bottom:40px;opacity:.9;}
-    .magic-input-wrapper{position:relative;width:100%;max-width:600px;}
-    .magic-input{width:100%;padding:18px 30px;border-radius:50px;border:1px solid rgba(255,255,255,.1);background:rgba(10,11,15,.6);color:#fff;font-size:1.05rem;transition:all .4s;box-shadow:0 10px 40px rgba(0,0,0,.6);text-align:center;backdrop-filter:blur(10px);font-family:'Inter',sans-serif;}
-    .magic-input::placeholder{color:rgba(255,255,255,.3);letter-spacing:1px;}
-    .magic-input:focus{border-color:var(--gold);background:rgba(0,0,0,.8);box-shadow:0 0 30px rgba(212,175,55,.15);outline:none;transform:scale(1.02);}
-    .search-sent{border-color:#2ecc71!important;background:rgba(46,204,113,.1)!important;}
-    .search-feedback{font-size:.9rem;color:#2ecc71;margin-top:15px;opacity:0;transition:.3s;font-weight:600;}
-    .search-feedback.show{opacity:1;transform:translateY(-5px);}
+/* Dos capas de estrellas blancas */
+.stars,.stars-2{position:absolute;inset:-10%;
+  background-image:
+    radial-gradient(1.5px 1.5px at 20px 30px,#fff,transparent),
+    radial-gradient(1.5px 1.5px at 140px 90px,#fff,transparent),
+    radial-gradient(1px   1px   at 250px 40px,rgba(255,255,255,.8),transparent),
+    radial-gradient(1.5px 1.5px at 330px 160px,#fff,transparent),
+    radial-gradient(1px   1px   at 60px  200px,rgba(255,255,255,.7),transparent),
+    radial-gradient(1.5px 1.5px at 400px 250px,#fff,transparent),
+    radial-gradient(1px   1px   at 500px 100px,rgba(255,255,255,.6),transparent),
+    radial-gradient(1.5px 1.5px at 80px  310px,#fff,transparent);
+  background-repeat:repeat;background-size:520px 380px;opacity:.55;animation:drift 160s linear infinite;}
+.stars-2{background-size:320px 280px;opacity:.28;animation-duration:95s;animation-direction:reverse;}
+@keyframes drift{from{transform:translate3d(0,0,0);}to{transform:translate3d(-520px,-380px,0);}}
 
-    /* ── MAIN GRID ── */
-    .main{max-width:1080px;margin:0 auto;padding:0 16px 80px;}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;padding:20px 0;}
-    .card{position:relative;overflow:hidden;background:rgba(255,255,255,.03)!important;border:1px solid rgba(255,255,255,.08)!important;padding:35px 25px!important;text-align:center;border-radius:22px!important;cursor:pointer;transition:all .3s ease;}
-    .card::before{content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(212,175,55,.1) 0%,transparent 70%);opacity:0;transition:.5s;}
-    .card:hover::before{opacity:1;}
-    .card:hover{background:rgba(212,175,55,.04)!important;border-color:var(--gold)!important;transform:translateY(-8px);box-shadow:0 15px 40px -10px rgba(0,0,0,.8);}
-    .card::after{content:"➜";position:absolute;bottom:20px;right:20px;color:var(--gold);opacity:0;transform:translateX(-10px);transition:.3s;}
-    .card:hover::after{opacity:1;transform:translateX(0);}
-    .card h5{margin:15px 0 8px;font-size:1rem;color:#fff;font-weight:600;letter-spacing:1px;text-transform:uppercase;}
-    .card p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.5;}
-    .gold-icon{font-size:2.5rem;margin-bottom:15px;display:inline-block;background:linear-gradient(135deg,#D4AF37 0%,#F5E0A3 50%,#B8860B 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 8px rgba(212,175,55,.4));transition:transform .3s ease;}
-    .card:hover .gold-icon{transform:scale(1.15) translateY(-5px);filter:drop-shadow(0 0 15px rgba(212,175,55,.7));}
+/* Estrellas doradas que titilan */
+.stars-gold{position:absolute;inset:-10%;
+  background-image:
+    radial-gradient(2px 2px at 80px  120px,rgba(245,215,142,.95),transparent),
+    radial-gradient(2px 2px at 260px 300px,rgba(245,215,142,.85),transparent),
+    radial-gradient(2px 2px at 420px 80px, rgba(255,255,255,.9),transparent),
+    radial-gradient(2px 2px at 180px 420px,rgba(255,255,255,.9),transparent),
+    radial-gradient(2px 2px at 360px 470px,rgba(245,215,142,.8),transparent),
+    radial-gradient(2px 2px at 510px 200px,rgba(245,215,142,.7),transparent);
+  background-repeat:repeat;background-size:540px 500px;animation:twinkle 4s ease-in-out infinite;}
+@keyframes twinkle{0%,100%{opacity:.18;}50%{opacity:.85;}}
 
-    /* ── SATELLITES ── */
-    .space-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
-    .satellite{position:absolute;background:#fff;border-radius:50%;filter:drop-shadow(0 0 8px #fff);}
-    .satellite::after{content:"";position:absolute;top:50%;right:0;width:150px;height:1px;background:linear-gradient(to left,rgba(212,175,55,.7),transparent);transform:translateY(-50%);}
-    .sat-1{width:3px;height:3px;top:30%;left:-10%;animation:orbit1 25s linear infinite;filter:drop-shadow(0 0 8px var(--gold));}
-    .sat-2{width:2px;height:2px;top:60%;left:-10%;animation:orbit2 40s linear infinite;}
-    .sat-3{width:2px;height:2px;top:10%;left:-10%;animation:orbit3 35s linear infinite;opacity:.5;}
-    @keyframes orbit1{0%{transform:translateX(0) translateY(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateX(120vw) translateY(15vh);opacity:0}}
-    @keyframes orbit2{0%{transform:translateX(0);opacity:0}5%{opacity:.8}95%{opacity:.8}100%{transform:translateX(120vw);opacity:0}}
-    @keyframes orbit3{0%{transform:translateX(0) translateY(0);opacity:0}20%{opacity:.6}100%{transform:translateX(120vw) translateY(40vh);opacity:0}}
+/* Nebulosas de color de marca */
+.nebula{position:absolute;border-radius:50%;filter:blur(72px);}
+.neb-a{width:65vw;height:65vw;max-width:660px;max-height:660px;top:-15%;left:-18%;
+  background:radial-gradient(circle,rgba(212,175,55,.18),transparent 70%);
+  animation:nebDrift 55s ease-in-out infinite alternate;}
+.neb-b{width:55vw;height:55vw;max-width:560px;max-height:560px;top:35%;right:-20%;
+  background:radial-gradient(circle,rgba(255,90,54,.15),transparent 70%);
+  animation:nebDrift 66s ease-in-out infinite alternate-reverse;}
+.neb-c{width:50vw;height:50vw;max-width:520px;max-height:520px;top:80%;left:-10%;
+  background:radial-gradient(circle,rgba(164,118,255,.13),transparent 70%);
+  animation:nebDrift 78s ease-in-out infinite alternate;}
+@keyframes nebDrift{0%{transform:translate(0,0);}100%{transform:translate(3%,2%);}}
 
-    /* ── MODALS ── */
-    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:16px;z-index:9999;backdrop-filter:blur(10px);}
-    .modal-backdrop.show{display:flex;animation:fadeIn .2s ease;}
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-    .modal{width:min(860px,96vw);background:var(--bg-modal);border:1px solid rgba(255,255,255,.08);border-radius:24px;box-shadow:0 0 80px rgba(0,0,0,.9),0 0 30px rgba(212,175,55,.06);overflow:hidden;transform:scale(.95);transition:all .4s cubic-bezier(.175,.885,.32,1.275);}
-    .modal-backdrop.show .modal{transform:scale(1);}
-    .modal-header{background:rgba(255,255,255,.02);padding:18px 24px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;}
-    .modal-title{font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;}
-    .modal-body{padding:22px!important;max-height:82vh;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-    .btn-close{border:0;background:transparent;color:var(--muted);font-size:1.4rem;cursor:pointer;transition:.2s;}
-    .btn-close:hover{color:#fff;transform:rotate(90deg);}
-    .list{display:grid;gap:12px;}
-    .list-item{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border);border-radius:12px;padding:16px;background:rgba(0,0,0,.2);color:var(--text)!important;transition:.2s;}
-    .list-item:hover{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.02);}
-    .form{display:grid;gap:20px;}
-    .form label{font-size:.9rem;font-weight:600;color:var(--gold);margin-bottom:8px;display:block;}
-    .form input{padding:14px;border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.3);color:#fff;width:100%;font-family:inherit;}
-    .form input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 15px rgba(88,166,255,.1);}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;border-radius:12px;border:0;cursor:pointer;font-weight:700;transition:.3s;width:100%;margin-top:10px;}
-    .btn-primary{background:linear-gradient(135deg,var(--primary),#2b6cb0);color:#fff;}
-    .btn-success{background:linear-gradient(135deg,#2ecc71,#27ae60);color:#fff;}
-    .btn:hover{filter:brightness(1.2);transform:translateY(-2px);box-shadow:0 5px 15px rgba(0,0,0,.3);}
-    .catalog-container{display:grid;grid-template-columns:1fr;gap:15px;}
-    .badge-premium{background:var(--gold);color:#000;padding:2px 8px;border-radius:4px;font-size:.65rem;font-weight:bold;margin-left:10px;}
-    .opportunity-card{background:rgba(255,255,255,.02);border-left:4px solid var(--gold);border-radius:8px;padding:20px;margin-bottom:15px;transition:.3s;}
-    .opportunity-card:hover{background:rgba(255,255,255,.05);transform:translateX(10px);}
-    .opportunity-card h4{color:#fff;margin:0 0 10px;display:flex;align-items:center;gap:10px;font-size:1.1rem;}
-    .opportunity-card p{font-size:.9rem;color:var(--muted);line-height:1.5;margin:0;}
-    .future-badge{font-size:.7rem;background:#0088ff;color:#fff;padding:2px 8px;border-radius:20px;font-weight:bold;}
-    .form-header-hint{font-size:.8rem;color:var(--muted);margin-bottom:20px;border-bottom:1px dashed rgba(212,175,55,.3);padding-bottom:10px;}
-    .form-group{margin-bottom:15px;}
-    .input-icon-wrapper{position:relative;display:flex;align-items:center;}
-    .input-icon-wrapper i{position:absolute;left:15px;color:var(--gold);opacity:.7;}
-    .form input,.form select,.form textarea{padding-left:40px!important;}
-    #orderForm{display:flex;flex-direction:column;gap:15px;padding:10px;}
-    #orderForm .form-group{display:flex;flex-direction:column;text-align:left;}
-    #orderForm label{color:var(--gold);font-size:.85rem;margin-bottom:5px;font-weight:bold;}
-    #orderForm input{padding:12px;background:#111;border:1px solid #333;border-radius:8px;color:#fff;font-family:inherit;}
-    #orderForm input[readonly]{border-color:var(--gold);color:var(--gold);opacity:.8;}
+/* Constelación SVG fija con nodos que pulsan */
+.constellation{position:absolute;inset:0;width:100%;height:100%;opacity:.22;}
+.constellation circle{animation:nodePulse 4s ease-in-out infinite;}
+.constellation circle:nth-child(2){animation-delay:.8s;}
+.constellation circle:nth-child(3){animation-delay:1.6s;}
+.constellation circle:nth-child(4){animation-delay:2.4s;}
+.constellation circle:nth-child(5){animation-delay:3.2s;}
+@keyframes nodePulse{0%,100%{opacity:.2;}50%{opacity:1;}}
 
-    /* ══════════════════════════════════════════
-       PLANS — ANIMADOS, PREMIUM, DEFINITIVOS
-    ══════════════════════════════════════════ */
-    .plans-masthead{text-align:center;margin-bottom:28px;}
-    .plans-masthead .eyebrow{font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:10px;}
-    .plans-masthead .eyebrow::before,.plans-masthead .eyebrow::after{content:"";flex:1;max-width:50px;height:1px;}
-    .plans-masthead .eyebrow::before{background:linear-gradient(90deg,transparent,var(--gold));}
-    .plans-masthead .eyebrow::after{background:linear-gradient(90deg,var(--gold),transparent);}
-    .plans-masthead h2{font-family:'Rajdhani',sans-serif;font-size:1.7rem;font-weight:700;color:#fff;letter-spacing:2px;text-transform:uppercase;}
-    .plans-masthead p{font-size:.75rem;color:var(--muted);margin-top:6px;letter-spacing:.5px;}
+/* Líneas de datos (data streams) que fluyen verticalmente */
+.data-lines{position:absolute;inset:0;width:100%;height:100%;opacity:.07;}
+.dl{position:absolute;top:0;width:1px;bottom:0;background:linear-gradient(180deg,transparent 0%,var(--gold) 50%,transparent 100%);
+  background-size:100% 180px;animation:dataFlow 8s linear infinite;}
+.dl:nth-child(1){left:12%;animation-duration:7s;}
+.dl:nth-child(2){left:29%;animation-duration:11s;animation-delay:-3s;opacity:.5;}
+.dl:nth-child(3){left:51%;animation-duration:9s;animation-delay:-6s;}
+.dl:nth-child(4){left:68%;animation-duration:13s;animation-delay:-1s;opacity:.6;}
+.dl:nth-child(5){left:84%;animation-duration:8s;animation-delay:-8s;}
+@keyframes dataFlow{0%{background-position:0 -180px;}100%{background-position:0 100vh;}}
 
-    /* Card base */
-    .pc{position:relative;border-radius:var(--card-radius);overflow:hidden;margin-bottom:14px;transition:transform .32s ease,box-shadow .32s ease;}
-    .pc:hover{transform:translateY(-5px);}
-    .pc::before{content:"";position:absolute;inset:0;border-radius:var(--card-radius);border:1px solid rgba(255,255,255,.07);z-index:0;transition:border-color .4s;}
+/* Ascuas / embers orbitando el hero */
+.ember{position:absolute;top:22%;left:50%;opacity:0;}
+.ember i{display:block;width:5px;height:5px;border-radius:50%;background:var(--ember);box-shadow:0 0 10px 3px var(--ember);}
+.e1{animation:orbitA 20s linear infinite;}
+.e2{animation:orbitB 28s linear infinite;animation-delay:-7s;}
+.e3{animation:orbitC 36s linear infinite;animation-delay:-4s;}
+.e4{animation:orbitA 44s linear infinite;animation-delay:-14s;opacity:0;}
+.e4 i{background:var(--gold);box-shadow:0 0 8px 2px var(--gold);}
+@keyframes orbitA{0%{transform:rotate(0deg)   translateX(200px) rotate(0deg);  opacity:0;}8%{opacity:.9;}92%{opacity:.9;}100%{transform:rotate(360deg)  translateX(200px) rotate(-360deg);opacity:0;}}
+@keyframes orbitB{0%{transform:rotate(0deg)   translateX(270px) rotate(0deg);  opacity:0;}8%{opacity:.55;}92%{opacity:.55;}100%{transform:rotate(-360deg) translateX(270px) rotate(360deg); opacity:0;}}
+@keyframes orbitC{0%{transform:rotate(0deg)   translateX(148px) rotate(0deg);  opacity:0;}8%{opacity:.7;} 92%{opacity:.7;} 100%{transform:rotate(360deg)  translateX(148px) rotate(-360deg);opacity:0;}}
 
-    /* Animation canvas */
-    .pc-canvas{position:absolute;inset:0;z-index:1;border-radius:var(--card-radius);overflow:hidden;pointer-events:none;}
+/* ═══════════════ HEADER ═══════════════ */
+.bar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;height:58px;background:rgba(5,4,7,.65);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);}
 
-    /* GREEN P.01 */
-    .pc-g{background:linear-gradient(135deg,#070e0b 0%,#050c08 100%);}
-    .pc-g::before{border-color:rgba(34,197,94,.18);}
-    .pc-g:hover::before{border-color:rgba(34,197,94,.5);}
-    .pc-g:hover{box-shadow:0 22px 65px rgba(0,0,0,.7),0 0 40px rgba(34,197,94,.07);}
-    /* Scan line */
-    .pc-g .pc-canvas::after{content:"";position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(34,197,94,.7),rgba(134,239,172,.9),rgba(34,197,94,.7),transparent);animation:scanLine 5s linear infinite;top:-2px;filter:blur(.5px);}
-    /* Particles */
-    .pc-g .pc-canvas::before{content:"";position:absolute;top:0;left:0;width:6px;height:6px;border-radius:50%;background:transparent;box-shadow:30px 50px 0 1px rgba(34,197,94,.5),90px 25px 0 1px rgba(34,197,94,.35),160px 65px 0 1px rgba(34,197,94,.45),230px 35px 0 1px rgba(34,197,94,.3),310px 55px 0 1px rgba(34,197,94,.5),390px 20px 0 1px rgba(34,197,94,.35),470px 70px 0 1px rgba(34,197,94,.4),550px 40px 0 1px rgba(34,197,94,.3),620px 15px 0 1px rgba(34,197,94,.45),700px 60px 0 1px rgba(34,197,94,.35);animation:floatPart 9s ease-in-out infinite;}
+.bar-brand{display:flex;align-items:center;gap:10px;}
+.bar-id{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.08rem;letter-spacing:3.5px;
+  background-image:linear-gradient(100deg,var(--gold-d),var(--gold),var(--gold-l),#fff8e0,var(--gold-l),var(--gold),var(--gold-d));
+  background-size:240% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shine 6s linear infinite;}
+.bar-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);
+  animation:pulseDot 2s ease-in-out infinite;}
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
 
-    /* GOLD P.02 */
-    .pc-gold-c{background:linear-gradient(135deg,#100c02 0%,#0d0a01 100%);}
-    .pc-gold-c::before{border-color:rgba(212,175,55,.28);}
-    .pc-gold-c:hover::before{border-color:rgba(212,175,55,.65);}
-    .pc-gold-c:hover{box-shadow:0 22px 65px rgba(0,0,0,.75),0 0 50px rgba(212,175,55,.1);}
-    /* Rotating ring */
-    .pc-gold-c .pc-canvas::before{content:"";position:absolute;right:-55px;top:50%;transform:translateY(-50%);width:210px;height:210px;border-radius:50%;border:1px solid rgba(212,175,55,.15);box-shadow:0 0 0 18px rgba(212,175,55,.04),0 0 0 36px rgba(212,175,55,.02);animation:spinRing 18s linear infinite;}
-    /* Ambient gold glow */
-    .pc-gold-c .pc-canvas::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 55% 70% at 88% 50%,rgba(212,175,55,.09) 0%,transparent 70%);animation:breatheAmbient 5s ease-in-out infinite alternate;}
+.bar-wa-wrap{display:flex;align-items:center;gap:9px;}
+.bar-wa-label{font-size:.72rem;font-weight:600;letter-spacing:.5px;color:var(--muted-2);}
+.bar-wa{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:var(--wa);color:#06210f;transition:transform .2s,box-shadow .2s;}
+.bar-wa:hover{transform:scale(1.1);box-shadow:0 0 20px rgba(37,211,102,.5);}
 
-    /* PURPLE P.03 */
-    .pc-p{background:linear-gradient(135deg,#0b0616 0%,#080411 100%);}
-    .pc-p::before{border-color:rgba(168,85,247,.18);}
-    .pc-p:hover::before{border-color:rgba(168,85,247,.5);}
-    .pc-p:hover{box-shadow:0 22px 65px rgba(0,0,0,.7),0 0 40px rgba(168,85,247,.07);}
-    /* Grid pulse */
-    .pc-p .pc-canvas::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(168,85,247,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,.06) 1px,transparent 1px);background-size:30px 30px;animation:gridPulse 6s ease-in-out infinite;}
-    /* Scan purple */
-    .pc-p .pc-canvas::after{content:"";position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(168,85,247,.9),rgba(216,180,254,.7),rgba(168,85,247,.9),transparent);animation:scanLine 3.5s linear infinite;top:-2px;filter:blur(1px);}
+/* ═══════════════ HERO ═══════════════ */
+.hero{min-height:93vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:70px 20px 56px;gap:20px;}
 
-    /* ── KEYFRAMES ── */
-    @keyframes floatPart{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-20px);opacity:.9}}
-    @keyframes scanLine{0%{top:-4px;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:calc(100% + 4px);opacity:0}}
-    @keyframes spinRing{from{transform:translateY(-50%) rotate(0deg)}to{transform:translateY(-50%) rotate(360deg)}}
-    @keyframes breatheAmbient{0%{opacity:.6;transform:scale(1)}100%{opacity:1;transform:scale(1.05)}}
-    @keyframes gridPulse{0%,100%{opacity:.4}50%{opacity:1}}
-    @keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.65)}}
-    @keyframes shimmerBadge{0%{background-position:200% center}100%{background-position:-200% center}}
-    @keyframes shimmerBar{0%{background-position:200% center}100%{background-position:-200% center}}
+/* Welcome badge — bienvenida cálida */
+.welcome-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;
+  border-radius:50px;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.28);
+  font-size:.74rem;font-weight:600;letter-spacing:.5px;color:var(--gold-l);
+  animation:rise .8s cubic-bezier(.16,1,.3,1) both;}
+.welcome-badge .wb-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 8px var(--gold);animation:pulseDot 1.8s ease-in-out infinite;}
+.welcome-badge span{animation:none;}
 
-    /* Top accent bar */
-    .pc-topbar{position:absolute;top:0;left:0;right:0;height:2px;z-index:5;border-radius:var(--card-radius) var(--card-radius) 0 0;}
-    .pc-g      .pc-topbar{background:linear-gradient(90deg,transparent 0%,#22c55e 35%,#86efac 60%,#22c55e 80%,transparent 100%);}
-    .pc-gold-c .pc-topbar{background:linear-gradient(90deg,transparent,var(--gold-d),var(--gold),var(--gold-l),var(--gold),var(--gold-d),transparent);background-size:200% auto;animation:shimmerBar 2.5s linear infinite;}
-    .pc-p      .pc-topbar{background:linear-gradient(90deg,transparent 0%,#a855f7 35%,#d8b4fe 60%,#a855f7 80%,transparent 100%);}
+/* Planeta */
+.mark{position:relative;width:min(390px,84vw);aspect-ratio:1000/642;perspective:1100px;
+  animation:rise 1.1s cubic-bezier(.16,1,.3,1) .1s both;}
+.mark-glow{position:absolute;inset:-20%;border-radius:50%;
+  background:radial-gradient(ellipse 56% 54% at 50% 50%,rgba(212,175,55,.42) 0%,rgba(255,90,54,.14) 46%,transparent 74%);
+  filter:blur(24px);animation:breathe 5s ease-in-out infinite alternate;}
+@keyframes breathe{0%{opacity:.6;transform:scale(.93);}100%{opacity:1;transform:scale(1.08);}}
+@keyframes rise{from{opacity:0;transform:translateY(16px) scale(.96);}to{opacity:1;transform:translateY(0) scale(1);}}
+.mark-tilt{position:relative;width:100%;height:100%;transform-style:preserve-3d;will-change:transform;}
+.mark-tilt img{width:100%;height:100%;object-fit:cover;
+  -webkit-mask-image:radial-gradient(ellipse 64% 70% at 50% 50%,#000 46%,transparent 80%);
+  mask-image:radial-gradient(ellipse 64% 70% at 50% 50%,#000 46%,transparent 80%);
+  filter:drop-shadow(0 22px 48px rgba(0,0,0,.6));}
 
-    /* Inner shell */
-    .pc-shell{position:relative;z-index:3;display:grid;grid-template-columns:105px 1fr 178px;min-height:175px;}
+/* Wordmark animado */
+.wordmark{display:flex;flex-direction:column;align-items:center;gap:6px;animation:rise .9s cubic-bezier(.16,1,.3,1) .25s both;}
+.wm-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.75rem;letter-spacing:8px;}
+.wm-tag{font-size:.63rem;letter-spacing:1.5px;color:rgba(237,234,226,.42);text-transform:uppercase;}
 
-    /* Left */
-    .pc-left{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px 12px;border-right:1px solid rgba(255,255,255,.05);}
-    .pc-icon{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;position:relative;}
-    .pc-icon i{font-size:1.4rem;position:relative;z-index:1;}
-    .pc-icon::before{content:"";position:absolute;inset:0;border-radius:14px;border:1px solid;opacity:.4;}
-    .pc-icon::after{content:"";position:absolute;inset:0;border-radius:14px;filter:blur(14px);opacity:0;transition:opacity .4s;}
-    .pc:hover .pc-icon::after{opacity:.65;}
-    .pc-g      .pc-icon{background:rgba(34,197,94,.08);}   .pc-g      .pc-icon::before{border-color:#22c55e;} .pc-g      .pc-icon::after{background:#22c55e;} .pc-g      .pc-icon i{color:#4ade80;}
-    .pc-gold-c .pc-icon{background:rgba(212,175,55,.1);}  .pc-gold-c .pc-icon::before{border-color:var(--gold);} .pc-gold-c .pc-icon::after{background:var(--gold);} .pc-gold-c .pc-icon i{color:var(--gold-l);}
-    .pc-p      .pc-icon{background:rgba(168,85,247,.08);} .pc-p      .pc-icon::before{border-color:#a855f7;} .pc-p      .pc-icon::after{background:#a855f7;} .pc-p      .pc-icon i{color:#c084fc;}
-    .pc-dot{display:flex;align-items:center;gap:5px;font-size:.55rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;}
-    .pc-dot::before{content:"";width:6px;height:6px;border-radius:50%;animation:pulseDot 1.8s ease-in-out infinite;}
-    .pc-g      .pc-dot{color:#4ade80;} .pc-g      .pc-dot::before{background:#22c55e;box-shadow:0 0 6px #22c55e;}
-    .pc-gold-c .pc-dot{color:var(--gold);} .pc-gold-c .pc-dot::before{background:var(--gold);box-shadow:0 0 6px var(--gold);}
-    .pc-p      .pc-dot{color:#c084fc;} .pc-p      .pc-dot::before{background:#a855f7;box-shadow:0 0 6px #a855f7;}
+/* Título hero con efecto 3D stamp */
+.hero-headline{animation:rise .9s cubic-bezier(.16,1,.3,1) .35s both;max-width:760px;}
+.hero-headline h1{font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:clamp(2.1rem,6.5vw,3.3rem);line-height:1.1;letter-spacing:.3px;
+  text-shadow:0 4px 28px rgba(0,0,0,.6);}
+.hero-headline h1 em{font-style:normal;
+  background-image:linear-gradient(100deg,var(--gold-d),var(--gold),var(--gold-l),#fff8e0,var(--gold-l),var(--gold),var(--gold-d));
+  background-size:240% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;}
+.hero-sub{color:var(--muted-2);font-size:1rem;letter-spacing:.4px;
+  animation:rise .9s cubic-bezier(.16,1,.3,1) .45s both;}
 
-    /* Center */
-    .pc-center{padding:22px 22px 20px;display:flex;flex-direction:column;gap:10px;}
-    .pc-title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-    .pc-name{font-family:'Rajdhani',sans-serif;font-size:1.3rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;line-height:1;}
-    .pc-g      .pc-name{color:#4ade80;}
-    .pc-gold-c .pc-name{color:var(--gold-l);}
-    .pc-p      .pc-name{color:#c084fc;}
+/* Botones */
+.hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:4px;
+  animation:rise .9s cubic-bezier(.16,1,.3,1) .55s both;}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:50px;
+  font-weight:700;font-size:.92rem;border:0;cursor:pointer;transition:transform .2s,box-shadow .2s;}
+.btn-wa{background:linear-gradient(135deg,#1fb855,var(--wa));color:#06210f;box-shadow:0 8px 28px rgba(37,211,102,.28);}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(37,211,102,.45);}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:15px 22px;border-radius:50px;
+  color:var(--muted-2);border:1px solid var(--line);font-size:.88rem;font-weight:600;transition:.2s;}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-l);}
 
-    /* Badge — inline in title row, no absolute */
-    .pc-badge{display:inline-flex;align-items:center;gap:4px;font-family:'Rajdhani',sans-serif;font-size:.57rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:20px;color:#000;white-space:nowrap;background:linear-gradient(90deg,var(--gold-d),var(--gold),var(--gold-l),var(--gold),var(--gold-d));background-size:200% auto;animation:shimmerBadge 3s linear infinite;}
+/* shine compartido */
+.shine-text{
+  background-image:linear-gradient(100deg,var(--gold-d),var(--gold) 22%,var(--gold-l) 42%,#fff8e0 50%,var(--gold-l) 58%,var(--gold) 78%,var(--gold-d));
+  background-size:240% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  animation:shine 5s linear infinite;}
+@keyframes shine{0%{background-position:220% center;}100%{background-position:-20% center;}}
 
-    .pc-audience{display:inline-flex;align-items:center;gap:5px;font-size:.6rem;font-weight:600;letter-spacing:.4px;text-transform:uppercase;padding:3px 10px;border-radius:20px;white-space:nowrap;}
-    .pc-g      .pc-audience{background:rgba(34,197,94,.08);color:#4ade80;border:1px solid rgba(34,197,94,.2);}
-    .pc-gold-c .pc-audience{background:rgba(212,175,55,.08);color:var(--gold);border:1px solid rgba(212,175,55,.2);}
-    .pc-p      .pc-audience{background:rgba(168,85,247,.08);color:#c084fc;border:1px solid rgba(168,85,247,.2);}
+/* ═══════════════ CHANNELS ═══════════════ */
+main{position:relative;z-index:1;}
+.channels{max-width:980px;margin:0 auto;padding:40px 18px 10px;}
+.channels-head{text-align:center;margin-bottom:38px;}
 
-    .pc-tagline{font-size:.78rem;color:rgba(255,255,255,.4);font-style:italic;line-height:1.5;}
-    .pc-feats{display:flex;flex-wrap:wrap;gap:5px;}
-    .pf{display:inline-flex;align-items:center;gap:5px;font-size:.67rem;padding:4px 11px;border-radius:20px;transition:.2s;}
-    .pf i{font-size:.6rem;}
-    .pf-hi{background:rgba(255,255,255,.07);color:#e2e8f0;border:1px solid rgba(255,255,255,.12);font-weight:600;}
-    .pf-lo{background:rgba(255,255,255,.02);color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.05);}
-    .pc-g      .pf-hi i{color:#4ade80;}
-    .pc-gold-c .pf-hi i{color:var(--gold);}
-    .pc-p      .pf-hi i{color:#c084fc;}
+/* Título de sección con perspectiva 3D en hover */
+.section-title{font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:clamp(1.55rem,4vw,2.05rem);letter-spacing:.5px;margin-top:10px;
+  transition:text-shadow .3s,transform .3s;display:inline-block;}
+.section-title:hover{text-shadow:3px 3px 0 rgba(212,175,55,.22),-1px -1px 0 rgba(212,175,55,.1);transform:perspective(300px) rotateX(4deg);}
 
-    /* Right */
-    .pc-right{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px 18px;gap:14px;border-left:1px solid rgba(255,255,255,.05);text-align:center;}
-    .pc-price-blk{display:flex;flex-direction:column;gap:2px;width:100%;}
-    .pp-lbl{font-size:.52rem;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.28);font-weight:600;}
-    .pp-val{font-family:'Rajdhani',sans-serif;font-size:2.1rem;font-weight:700;color:#fff;line-height:1;}
-    .pp-val sup{font-size:.82rem;color:rgba(255,255,255,.42);vertical-align:super;margin-right:1px;}
-    .pp-sep{height:1px;background:rgba(255,255,255,.08);margin:6px 0;}
-    .pp-mo{font-family:'Rajdhani',sans-serif;font-size:1.15rem;font-weight:700;line-height:1;}
-    .pp-mo sub{font-size:.58rem;color:rgba(255,255,255,.28);font-family:'Inter',sans-serif;font-weight:400;}
-    .pc-g      .pp-mo{color:#4ade80;}
-    .pc-gold-c .pp-mo{color:var(--gold-l);}
-    .pc-p      .pp-mo{color:#c084fc;}
+.eyebrow{font-family:'Inter',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:4px;
+  text-transform:uppercase;color:var(--gold-l);display:flex;align-items:center;justify-content:center;gap:10px;}
+.eyebrow::before,.eyebrow::after{content:"";width:28px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.eyebrow::after{background:linear-gradient(90deg,var(--gold),transparent);}
 
-    .pc-cta{width:100%;padding:11px 12px;border-radius:12px;font-family:'Rajdhani',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .25s ease;}
-    .pc-g      .pc-cta{background:linear-gradient(135deg,#166534,#16a34a,#22c55e);color:#fff;box-shadow:0 4px 18px rgba(34,197,94,.28);}
-    .pc-g      .pc-cta:hover{box-shadow:0 6px 28px rgba(34,197,94,.55);transform:translateY(-2px);}
-    .pc-gold-c .pc-cta{background:linear-gradient(135deg,#92610a,#d4af37,#f0d060);color:#000;box-shadow:0 4px 18px rgba(212,175,55,.32);}
-    .pc-gold-c .pc-cta:hover{box-shadow:0 6px 28px rgba(212,175,55,.6);transform:translateY(-2px);}
-    .pc-p      .pc-cta{background:linear-gradient(135deg,#6b21a8,#9333ea,#c084fc);color:#fff;box-shadow:0 4px 18px rgba(168,85,247,.28);}
-    .pc-p      .pc-cta:hover{box-shadow:0 6px 28px rgba(168,85,247,.55);transform:translateY(-2px);}
-    .pc-note{font-size:.55rem;color:rgba(255,255,255,.2);line-height:1.5;}
+.channel{position:relative;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:22px;
+  background:rgba(255,255,255,.025);border:1px solid var(--line);
+  opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.channel.in{opacity:1;transform:translateY(0);}
+.channel:hover{border-color:rgba(255,255,255,.14);}
 
-    .plans-footer{text-align:center;padding:16px 0 4px;font-size:.7rem;color:rgba(255,255,255,.18);line-height:1.9;}
-    .plans-footer a{color:var(--gold);text-decoration:none;font-weight:700;}
-    .plans-footer a:hover{text-decoration:underline;}
+.ch-top{height:3px;width:100%;}
+.ch-green  .ch-top{background:linear-gradient(90deg,transparent,var(--green) 30%,#9CF7C4 55%,var(--green) 80%,transparent);}
+.ch-gold   .ch-top{background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold-l) 55%,var(--gold) 80%,transparent);}
+.ch-violet .ch-top{background:linear-gradient(90deg,transparent,var(--violet) 30%,#D9C7FF 55%,var(--violet) 80%,transparent);}
 
-    /* RESPONSIVE */
-    html,body{max-width:100vw;overflow-x:hidden;}
-    @media(max-width:660px){
-      body::after{animation:none;}
-      .hero-title{font-size:2.4rem;}
-      .magic-input{font-size:1rem;padding:15px 20px;}
-      .pc-shell{grid-template-columns:1fr;}
-      .pc-left{flex-direction:row;padding:14px 18px;border-right:none;border-bottom:1px solid rgba(255,255,255,.05);}
-      .pc-right{border-left:none;border-top:1px solid rgba(255,255,255,.05);padding:16px 18px;}
-    }
-  </style>
+.ch-grid{display:grid;grid-template-columns:128px 1fr 208px;}
+.ch-visual{display:flex;align-items:center;justify-content:center;padding:22px;border-right:1px solid var(--line);}
+.ch-body{padding:26px 24px;display:flex;flex-direction:column;gap:12px;}
+.ch-price{padding:24px 22px;border-left:1px solid var(--line);display:flex;flex-direction:column;
+  justify-content:center;gap:14px;text-align:center;}
+
+.ch-tag{font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;}
+.ch-green  .ch-tag{color:var(--green);}
+.ch-gold   .ch-tag{color:var(--gold-l);}
+.ch-violet .ch-tag{color:var(--violet);}
+
+/* Título de canal — efecto 3D stamp en hover */
+.ch-body h3{font-family:'Rajdhani',sans-serif;font-size:1.38rem;font-weight:700;letter-spacing:.3px;
+  transition:text-shadow .25s,transform .25s;display:inline-block;}
+.ch-green  .channel:hover .ch-body h3{text-shadow:2px 2px 0 rgba(43,217,124,.3);transform:perspective(300px) rotateX(3deg);}
+.ch-gold   .channel:hover .ch-body h3{text-shadow:2px 2px 0 rgba(212,175,55,.3);transform:perspective(300px) rotateX(3deg);}
+.ch-violet .channel:hover .ch-body h3{text-shadow:2px 2px 0 rgba(164,118,255,.3);transform:perspective(300px) rotateX(3deg);}
+
+.ch-list li{position:relative;padding-left:22px;color:var(--muted-2);font-size:.88rem;line-height:1.75;}
+.ch-list li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;}
+.ch-green  .ch-list li::before{background:var(--green); box-shadow:0 0 6px var(--green);}
+.ch-gold   .ch-list li::before{background:var(--gold);  box-shadow:0 0 6px var(--gold);}
+.ch-violet .ch-list li::before{background:var(--violet);box-shadow:0 0 6px var(--violet);}
+
+.price-row{display:flex;flex-direction:column;gap:1px;}
+.price-row span{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
+.price-row strong{font-family:'Rajdhani',sans-serif;font-size:1.5rem;font-weight:700;}
+.price-row strong small{font-size:.6rem;color:var(--muted);font-family:'Inter',sans-serif;font-weight:500;}
+.price-sep{height:1px;background:var(--line);}
+
+.ch-cta{width:100%;padding:12px;border-radius:12px;border:0;cursor:pointer;font-family:'Rajdhani',sans-serif;
+  font-weight:700;letter-spacing:1px;font-size:.85rem;text-transform:uppercase;transition:.25s;}
+.ch-green  .ch-cta{background:linear-gradient(135deg,#1c9c52,var(--green));color:#031a0b;box-shadow:0 6px 20px rgba(43,217,124,.25);}
+.ch-gold   .ch-cta{background:linear-gradient(135deg,var(--gold-d),var(--gold),var(--gold-l));color:#1a1306;box-shadow:0 6px 20px rgba(212,175,55,.3);}
+.ch-violet .ch-cta{background:linear-gradient(135deg,var(--violet-d),var(--violet));color:#fff;box-shadow:0 6px 20px rgba(164,118,255,.28);}
+.ch-cta:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.ch-live{display:block;text-align:center;font-size:.74rem;color:var(--muted);margin-top:2px;transition:.2s;}
+.ch-live:hover{color:var(--gold-l);}
+.ch-note{font-size:.62rem;color:var(--muted);text-align:center;}
+
+/* Mini-visuals CSS */
+.v-phone{width:74px;height:96px;border-radius:11px;border:1.5px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.03);padding:7px;display:grid;grid-template-columns:1fr 1fr;gap:5px;}
+.v-phone i{border-radius:4px;}
+.v-phone i:nth-child(1){background:rgba(43,217,124,.18);border:1px solid rgba(43,217,124,.35);}
+.v-phone i:nth-child(2){background:rgba(212,175,55,.18);border:1px solid rgba(212,175,55,.35);}
+.v-phone i:nth-child(3){background:rgba(164,118,255,.18);border:1px solid rgba(164,118,255,.35);}
+.v-phone i:nth-child(4){background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);}
+.v-hub{width:88px;height:88px;}
+.v-hub svg{width:100%;height:100%;}
+.v-hub circle.core{animation:pulseCore 2.4s ease-in-out infinite;}
+@keyframes pulseCore{0%,100%{opacity:.9;}50%{opacity:.45;}}
+.v-radar{width:80px;height:80px;position:relative;display:flex;align-items:center;justify-content:center;}
+.v-radar i{position:absolute;border-radius:50%;border:1px solid rgba(164,118,255,.4);animation:radarPulse 2.6s ease-out infinite;}
+.v-radar i:nth-child(2){animation-delay:.7s;}.v-radar i:nth-child(3){animation-delay:1.4s;}
+.v-radar b{width:8px;height:8px;border-radius:50%;background:var(--violet);box-shadow:0 0 10px var(--violet);}
+@keyframes radarPulse{0%{width:8px;height:8px;opacity:.9;}100%{width:78px;height:78px;opacity:0;}}
+
+/* ═══════════════ TRUST STRIP ═══════════════ */
+.trust{max-width:980px;margin:28px auto 0;padding:22px 18px;display:flex;flex-wrap:wrap;
+  justify-content:center;gap:26px 36px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.trust-item{display:flex;align-items:center;gap:9px;font-size:.78rem;color:var(--muted-2);font-weight:500;}
+.trust-icon{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;background:var(--gold-dim);border:1px solid rgba(212,175,55,.22);}
+
+/* ═══════════════ FINAL CTA ═══════════════ */
+.final{max-width:640px;margin:0 auto;padding:74px 20px;text-align:center;}
+.final h2{font-family:'Rajdhani',sans-serif;font-size:clamp(1.7rem,4.5vw,2.3rem);font-weight:700;
+  text-shadow:0 4px 24px rgba(0,0,0,.5);}
+.final h2 span{display:block;font-size:.65em;font-weight:600;letter-spacing:1px;
+  background:linear-gradient(90deg,var(--green),var(--gold-l));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.final p{color:var(--muted-2);margin-top:10px;font-size:.95rem;}
+.quick{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.quick input{flex:1;min-width:220px;padding:15px 18px;border-radius:50px;border:1px solid var(--line);
+  background:rgba(255,255,255,.03);color:var(--ink);font-family:inherit;font-size:.92rem;}
+.quick input:focus{outline:none;border-color:var(--gold);}
+.quick input::placeholder{color:var(--muted);}
+
+/* ═══════════════ FOOTER ═══════════════ */
+footer{position:relative;max-width:980px;margin:0 auto;padding:68px 20px 72px;
+  display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;overflow:hidden;}
+.foot-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:300px;height:180px;
+  background:radial-gradient(ellipse,rgba(212,175,55,.24),transparent 70%);filter:blur(28px);
+  animation:breathe 6s ease-in-out infinite alternate;pointer-events:none;}
+.foot-sep{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.foot-mark{width:140px;height:auto;
+  -webkit-mask-image:radial-gradient(ellipse 62% 66% at 50% 50%,#000 44%,transparent 80%);
+  mask-image:radial-gradient(ellipse 62% 66% at 50% 50%,#000 44%,transparent 80%);}
+.foot-word{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.foot-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.38rem;letter-spacing:7px;}
+.foot-tagbox{padding:7px 20px;border:1px solid rgba(212,175,55,.4);border-radius:6px;
+  background:rgba(212,175,55,.04);}
+.foot-tagbox span{font-size:.62rem;letter-spacing:1.2px;color:var(--gold-l);font-weight:600;}
+/* rights visibles — dorado tenue, no plomo */
+.rights{font-size:.68rem;color:rgba(212,175,55,.42);letter-spacing:.8px;margin-top:2px;}
+
+/* ═══════════════ MODAL ═══════════════ */
+.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.87);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;padding:18px;z-index:200;}
+.backdrop.show{display:flex;}
+.modal{width:min(420px,100%);background:var(--bg-soft);border:1px solid var(--line);border-radius:20px;
+  box-shadow:0 30px 80px rgba(0,0,0,.7);overflow:hidden;transform:scale(.96);opacity:0;animation:pop .25s ease forwards;}
+@keyframes pop{to{transform:scale(1);opacity:1;}}
+.modal-h{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--line);}
+.modal-h span{font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:1px;color:var(--gold-l);font-size:.95rem;text-transform:uppercase;}
+.modal-h button{background:none;border:0;color:var(--muted);font-size:1.3rem;cursor:pointer;}
+.modal-b{padding:22px 20px;display:flex;flex-direction:column;gap:14px;}
+.field label{display:block;font-size:.7rem;font-weight:700;letter-spacing:1px;color:var(--gold-l);margin-bottom:6px;text-transform:uppercase;}
+.field input{width:100%;padding:13px 14px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.3);color:var(--ink);font-family:inherit;}
+.field input:focus{outline:none;border-color:var(--gold);}
+.field input[readonly]{color:var(--gold-l);border-color:rgba(212,175,55,.3);}
+.submit{margin-top:4px;padding:14px;border-radius:12px;border:0;background:linear-gradient(135deg,#1fb855,var(--wa));
+  color:#06210f;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,140%);background:var(--gold);color:#1a1306;
+  padding:13px 22px;border-radius:50px;font-weight:700;font-size:.85rem;z-index:300;transition:transform .35s ease;
+  box-shadow:0 12px 30px rgba(0,0,0,.4);}
+.toast.show{transform:translate(-50%,0);}
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media(max-width:720px){
+  .ch-grid{grid-template-columns:1fr;}
+  .ch-visual{border-right:none;border-bottom:1px solid var(--line);padding:18px;}
+  .ch-price{border-left:none;border-top:1px solid var(--line);}
+  .bar-wa-label{display:none;}
+  .stage .neb-a,.stage .neb-b,.stage .neb-c{animation:none;}
+}
+</style>
 </head>
 <body>
 
-  <div class="space-overlay">
-    <div class="satellite sat-1"></div>
-    <div class="satellite sat-2"></div>
-    <div class="satellite sat-3"></div>
+<!-- ═══ FONDO VIVO ═══ -->
+<div class="stage" aria-hidden="true">
+  <div class="stars"></div>
+  <div class="stars stars-2"></div>
+  <div class="stars-gold"></div>
+  <div class="nebula neb-a"></div>
+  <div class="nebula neb-b"></div>
+  <div class="nebula neb-c"></div>
+  <!-- constelación SVG fija -->
+  <svg class="constellation" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+    <line x1="120" y1="180" x2="340" y2="90"  stroke="rgba(212,175,55,.4)" stroke-width=".7"/>
+    <line x1="340" y1="90"  x2="620" y2="210" stroke="rgba(212,175,55,.3)" stroke-width=".7"/>
+    <line x1="620" y1="210" x2="900" y2="130" stroke="rgba(212,175,55,.35)" stroke-width=".7"/>
+    <line x1="900" y1="130" x2="1180" y2="260" stroke="rgba(212,175,55,.25)" stroke-width=".7"/>
+    <line x1="340" y1="90"  x2="460"  y2="310" stroke="rgba(255,90,54,.3)" stroke-width=".6"/>
+    <line x1="620" y1="210" x2="560"  y2="440" stroke="rgba(164,118,255,.3)" stroke-width=".6"/>
+    <line x1="900" y1="130" x2="980"  y2="380" stroke="rgba(212,175,55,.25)" stroke-width=".6"/>
+    <line x1="1180" y1="260" x2="1320" y2="140" stroke="rgba(255,90,54,.2)" stroke-width=".6"/>
+    <circle cx="120"  cy="180" r="3" fill="rgba(212,175,55,.8)"/>
+    <circle cx="340"  cy="90"  r="4" fill="rgba(212,175,55,.9)"/>
+    <circle cx="620"  cy="210" r="3.5" fill="rgba(255,90,54,.8)"/>
+    <circle cx="900"  cy="130" r="4" fill="rgba(212,175,55,.9)"/>
+    <circle cx="1180" cy="260" r="3" fill="rgba(164,118,255,.8)"/>
+    <circle cx="460"  cy="310" r="2.5" fill="rgba(255,90,54,.7)"/>
+    <circle cx="560"  cy="440" r="2.5" fill="rgba(164,118,255,.7)"/>
+    <circle cx="980"  cy="380" r="2.5" fill="rgba(212,175,55,.6)"/>
+    <circle cx="1320" cy="140" r="2" fill="rgba(255,90,54,.5)"/>
+  </svg>
+  <!-- líneas de datos -->
+  <div class="data-lines" aria-hidden="true">
+    <div class="dl"></div><div class="dl"></div><div class="dl"></div>
+    <div class="dl"></div><div class="dl"></div>
+  </div>
+  <!-- embers orbitando -->
+  <div class="ember e1"><i></i></div>
+  <div class="ember e2"><i></i></div>
+  <div class="ember e3"><i></i></div>
+  <div class="ember e4"><i></i></div>
+</div>
+
+<!-- ═══ NAVBAR ═══ -->
+<header class="bar">
+  <div class="bar-brand">
+    <div class="bar-dot" aria-hidden="true"></div>
+    <span class="bar-id shine-text">AURENSTAR</span>
+  </div>
+  <div class="bar-wa-wrap">
+    <span class="bar-wa-label">¿Hablamos? →</span>
+    <a class="bar-wa" href="https://wa.me/59175265734?text=Hola%2C%20vi%20su%20tarjeta%20AURENSTAR%20y%20quiero%20saber%20m%C3%A1s"
+       aria-label="Escribir por WhatsApp" target="_blank" rel="noopener">
+      <svg width="19" height="19" viewBox="0 0 32 32" fill="currentColor"><path d="M16.04 3C9.37 3 3.96 8.34 3.96 14.93c0 2.13.57 4.13 1.57 5.86L3 29l8.4-2.46a13.1 13.1 0 0 0 4.64.85h.01c6.67 0 12.08-5.34 12.08-11.93C28.13 8.34 22.72 3 16.05 3Zm0 21.77h-.01a9.97 9.97 0 0 1-5.05-1.38l-.36-.21-3.74 1.1 1.12-3.59-.24-.37a9.7 9.7 0 0 1-1.53-5.39c0-5.4 4.45-9.79 9.92-9.79 5.46 0 9.91 4.39 9.91 9.79 0 5.4-4.45 9.84-9.92 9.84Zm5.46-7.37c-.3-.15-1.77-.86-2.04-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.46-.88-.78-1.47-1.74-1.65-2.04-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.03 1-1.03 2.45s1.06 2.84 1.21 3.04c.15.2 2.08 3.17 5.04 4.45.7.3 1.25.48 1.68.61.7.22 1.34.19 1.84.12.56-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
+    </a>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <!-- Bienvenida cálida -->
+  <div class="welcome-badge">
+    <span class="wb-dot" aria-hidden="true"></span>
+    <span id="welcomeMsg">Bienvenido — estamos en línea</span>
   </div>
 
-  <div class="navbar">
-    <div class="container">
-      <div class="brand"><span class="star">✦</span> AURENSTAR</div>
-      <div class="status-badge">● SISTEMA ENTERPRISE ONLINE</div>
+  <!-- Planeta 3D vivo -->
+  <div class="mark" id="markWrap">
+    <div class="mark-glow" aria-hidden="true"></div>
+    <div class="mark-tilt" id="markTilt">
+      <img src="assets/aurenstar-planet.webp" alt="AURENSTAR — Planeta dorado con anillo de energía" width="500" height="321" fetchpriority="high">
     </div>
   </div>
 
-  <div class="hero">
-    <div class="welcome-container">
-      <h1 id="dynamicGreeting" class="hero-title">Iniciando...</h1>
-      <div class="wisdom-capsule"><span id="dailyWisdom">"Cargando..."</span></div>
-      <div class="magic-input-wrapper">
-        <input type="text" id="aiConsultant" class="magic-input" placeholder="Escribe aquí tu deseo o idea...">
-        <div id="searchFeedback" class="search-feedback">✔ Tu visión ha sido captada...</div>
-      </div>
-    </div>
+  <!-- Wordmark con brillo metálico -->
+  <div class="wordmark">
+    <span class="wm-name shine-text">AURENSTAR</span>
+    <span class="wm-tag">Automatización - Inteligencia - Evolución</span>
   </div>
 
-  <div class="main">
-    <div class="grid">
-      <div class="card" onclick="UI.showPrecios()">
-        <i class="fa-solid fa-tags gold-icon"></i>
-        <h5>Catálogo & Tarifas</h5>
-        <p>Tarifas de inversión para soluciones globales.</p>
-      </div>
-      <div class="card" onclick="UI.showPromos()">
-        <i class="fa-solid fa-bolt gold-icon"></i>
-        <h5>Ofertas Exclusivas</h5>
-        <p>Oportunidades limitadas de alta rentabilidad.</p>
-      </div>
-      <div class="card" onclick="UI.showProductos()">
-        <i class="fa-solid fa-chart-line gold-icon"></i>
-        <h5>Tendencias & Novedades</h5>
-        <p>El futuro de la tecnología AURENSTAR hoy.</p>
-      </div>
-      <div class="card" onclick="UI.openOrderModal()">
-        <i class="fa-solid fa-rocket gold-icon"></i>
-        <h5>Gestión de Pedidos</h5>
-        <p>Iniciar protocolo de adquisición y despliegue.</p>
-      </div>
-      <div class="card" onclick="UI.openPaymentModal()">
-        <i class="fa-solid fa-shield-halved gold-icon"></i>
-        <h5>Pasarela de Pagos</h5>
-        <p>Transacciones seguras con cifrado bancario.</p>
-      </div>
-      <div class="card" onclick="UI.showFAQ()">
-        <i class="fa-solid fa-user-tie gold-icon"></i>
-        <h5>Asesoría Directa</h5>
-        <p>Enlace humano con nuestro equipo de ingeniería.</p>
-      </div>
-    </div>
+  <!-- Titular con vida -->
+  <div class="hero-headline">
+    <h1>Tu negocio merece tecnología<br><em>Única que impulse hacia el futuro.</em></h1>
+  </div>
+  <p class="hero-sub">Presencia digital · Inteligencia Artificial · Control total</p>
+
+  <div class="hero-actions">
+    <a class="btn btn-wa" href="https://wa.me/59175265734?text=Hola%2C%20vi%20la%20tarjeta%20AURENSTAR%20y%20quiero%20saber%20m%C3%A1s" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3C9.37 3 3.96 8.34 3.96 14.93c0 2.13.57 4.13 1.57 5.86L3 29l8.4-2.46a13.1 13.1 0 0 0 4.64.85h.01c6.67 0 12.08-5.34 12.08-11.93C28.13 8.34 22.72 3 16.05 3Zm0 21.77h-.01a9.97 9.97 0 0 1-5.05-1.38l-.36-.21-3.74 1.1 1.12-3.59-.24-.37a9.7 9.7 0 0 1-1.53-5.39c0-5.4 4.45-9.79 9.92-9.79 5.46 0 9.91 4.39 9.91 9.79 0 5.4-4.45 9.84-9.92 9.84Zm5.46-7.37c-.3-.15-1.77-.86-2.04-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.46-.88-.78-1.47-1.74-1.65-2.04-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.03 1-1.03 2.45s1.06 2.84 1.21 3.04c.15.2 2.08 3.17 5.04 4.45.7.3 1.25.48 1.68.61.7.22 1.34.19 1.84.12.56-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
+      Hablar por WhatsApp
+    </a>
+    <a class="btn-ghost" href="#canales">Ver los 3 sistemas ↓</a>
+  </div>
+</section>
+
+<!-- ═══ CANALES ═══ -->
+<section id="canales" class="channels">
+  <div class="channels-head">
+    <span class="eyebrow">Tres sistemas</span>
+    <h2 class="section-title">Un ecosistema completo para tu negocio</h2>
   </div>
 
-  <!-- Modal principal -->
-  <div id="listBackdrop" class="modal-backdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true">
-      <div class="modal-header">
-        <div id="listTitle" class="modal-title">Información</div>
-        <button class="btn-close" onclick="Modal('list').hide()">✕</button>
+  <!-- CANAL 01 -->
+  <article class="channel ch-green" data-reveal>
+    <div class="ch-top"></div>
+    <div class="ch-grid">
+      <div class="ch-visual"><div class="v-phone" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+      <div class="ch-body">
+        <span class="ch-tag">Sistema 01 · Ventas</span>
+        <h3>Tu negocio vende desde cualquier red</h3>
+        <ul class="ch-list">
+          <li>Catálogo profesional siempre disponible</li>
+          <li>Pedidos automáticos directo a WhatsApp</li>
+          <li>Compartible en cualquier red social</li>
+        </ul>
       </div>
-      <div id="listBody" class="modal-body"></div>
-    </div>
-  </div>
-
-  <!-- Modal pedido -->
-  <div id="orderBackdrop" class="modal-backdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true">
-      <div class="modal-header">
-        <div id="orderTitle" class="modal-title">SOLICITUD DE PEDIDO</div>
-        <button class="btn-close" onclick="Modal('order').hide()">✕</button>
-      </div>
-      <div class="modal-body">
-        <form id="orderForm">
-          <div class="form-group"><label>SERVICIO SELECCIONADO</label><input type="text" name="item" readonly></div>
-          <div class="form-group"><label>TU NOMBRE COMPLETO</label><input type="text" name="nombre_cliente" placeholder="Nombre y Apellido" required></div>
-          <div class="form-group"><label>TU WHATSAPP / CELULAR</label><input type="text" name="telefono_cliente" placeholder="Ej: 70012345" required></div>
-          <button type="submit" class="btn btn-primary" style="margin-top:10px;">TRANSMITIR ORDEN</button>
-        </form>
+      <div class="ch-price">
+        <div class="price-row"><span>Implementación</span><strong>Bs 400</strong></div>
+        <div class="price-sep"></div>
+        <div class="price-row"><span>Mantenimiento</span><strong>Bs 60<small> /mes</small></strong></div>
+        <button class="ch-cta" onclick="openOrder('Catálogo Digital P.01 — Bs.400 + Bs.60/mes')">Quiero este</button>
       </div>
     </div>
-  </div>
+  </article>
 
-  <!-- Modal pago -->
-  <div id="paymentBackdrop" class="modal-backdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true">
-      <div class="modal-header">
-        <div id="paymentTitle" class="modal-title">GENERAR LINK DE TRANSACCIÓN</div>
-        <button class="btn-close" onclick="Modal('payment').hide()">✕</button>
-      </div>
-      <div class="modal-body">
-        <p class="form-header-hint">Sistema de cobro cifrado P2P habilitado.</p>
-        <form id="paymentForm" class="form">
-          <div class="form-group"><label>Monto de Inversión (Bs.)</label><div class="input-icon-wrapper"><i class="fa-solid fa-coins"></i><input type="number" name="amount" min="1" placeholder="0.00" required></div></div>
-          <div class="form-group"><label>Concepto de Operación</label><div class="input-icon-wrapper"><i class="fa-solid fa-file-invoice-dollar"></i><input type="text" name="description" placeholder="Ej: Activación Servidor Nexus" required></div></div>
-          <button type="submit" class="btn btn-success"><i class="fa-solid fa-lock"></i> GENERAR ENLACE SEGURO</button>
-        </form>
-        <div id="paymentResult" style="display:none;margin-top:20px;padding:15px;border:1px dashed var(--gold);border-radius:10px;text-align:center;background:rgba(46,204,113,.05);">
-          <p style="color:var(--muted);margin-bottom:10px;font-size:.8rem;">TOKEN DE PAGO GENERADO:</p>
-          <a id="paymentLink" href="#" target="_blank" style="color:var(--primary);font-weight:bold;word-break:break-all;text-decoration:underline;"></a>
-          <p style="font-size:.7rem;color:gray;margin-top:10px;">Este enlace expira en 24 horas.</p>
+  <!-- CANAL 02 -->
+  <article class="channel ch-gold" data-reveal>
+    <div class="ch-top"></div>
+    <div class="ch-grid">
+      <div class="ch-visual">
+        <div class="v-hub" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <line x1="50" y1="50" x2="14" y2="22" stroke="rgba(212,175,55,.35)" stroke-width="1"/>
+            <line x1="50" y1="50" x2="86" y2="22" stroke="rgba(212,175,55,.35)" stroke-width="1"/>
+            <line x1="50" y1="50" x2="14" y2="78" stroke="rgba(212,175,55,.35)" stroke-width="1"/>
+            <line x1="50" y1="50" x2="86" y2="78" stroke="rgba(212,175,55,.35)" stroke-width="1"/>
+            <circle cx="14" cy="22" r="4" fill="#D4AF37"/>
+            <circle cx="86" cy="22" r="4" fill="#D4AF37"/>
+            <circle cx="14" cy="78" r="4" fill="#D4AF37"/>
+            <circle cx="86" cy="78" r="4" fill="#D4AF37"/>
+            <circle class="core" cx="50" cy="50" r="13" fill="rgba(212,175,55,.18)" stroke="#F5D78E" stroke-width="1.4"/>
+          </svg>
         </div>
       </div>
+      <div class="ch-body">
+        <span class="ch-tag">Sistema 02 · Inteligencia Artificial</span>
+        <h3>Deja que la IA trabaje por vos</h3>
+        <ul class="ch-list">
+          <li>Atención al cliente 24/7 por WhatsApp</li>
+          <li>Automatiza tareas y procesos repetitivos</li>
+          <li>Un solo motor, todo conectado</li>
+        </ul>
+      </div>
+      <div class="ch-price">
+        <div class="price-row"><span>Implementación</span><strong>Bs 1000</strong></div>
+        <div class="price-sep"></div>
+        <div class="price-row"><span>Soporte</span><strong>Bs 100<small> /mes</small></strong></div>
+        <button class="ch-cta" onclick="openOrder('IA & Automatización P.02 — Bs.1000 + Bs.100/mes')">Quiero este</button>
+        <a class="ch-live" href="#" id="p02LiveLink" target="_blank" rel="noopener">Probarlo en vivo →</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- CANAL 03 -->
+  <article class="channel ch-violet" data-reveal>
+    <div class="ch-top"></div>
+    <div class="ch-grid">
+      <div class="ch-visual"><div class="v-radar" aria-hidden="true"><i></i><i></i><i></i><b></b></div></div>
+      <div class="ch-body">
+        <span class="ch-tag">Sistema 03 · Control Laboral</span>
+        <h3>Control de tu negocio, siempre</h3>
+        <ul class="ch-list">
+          <li>Asistencia verificada por geolocalización</li>
+          <li>Auditoría de llegadas y salidas en tiempo real</li>
+          <li>Reportes automáticos por sucursal</li>
+        </ul>
+      </div>
+      <div class="ch-price">
+        <div class="price-row"><span>Creación</span><strong>Bs 800</strong></div>
+        <div class="price-sep"></div>
+        <div class="price-row"><span>Soporte</span><strong>Bs 100<small> /mes</small></strong></div>
+        <button class="ch-cta" onclick="openOrder('Control Laboral P.03 — Bs.800 + Bs.100/mes')">Quiero este</button>
+        <span class="ch-note">Precio por sucursal · escalable</span>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ═══ TRUST STRIP ═══ -->
+<div class="trust">
+  <div class="trust-item"><div class="trust-icon">🇧🇴</div> Hecho en Bolivia</div>
+  <div class="trust-item"><div class="trust-icon">✓</div> Soporte real</div>
+  <div class="trust-item"><div class="trust-icon">↻</div> Evolución continua</div>
+  <div class="trust-item"><div class="trust-icon">🔒</div> Datos seguros en la nube</div>
+</div>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section class="final">
+  <h2>¿Hablamos de tu negocio?<span>Respondemos hoy mismo.</span></h2>
+  <p>Contanos qué necesitás y te armamos una propuesta a medida.</p>
+  <form class="quick" id="quickForm">
+    <input type="text" id="quickMsg" placeholder="Ej: quiero un catálogo para mi tienda" required>
+    <button class="btn btn-wa" type="submit">Enviar</button>
+  </form>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="foot-glow" aria-hidden="true"></div>
+  <div class="foot-sep" aria-hidden="true"></div>
+  <img class="foot-mark" src="assets/aurenstar-planet.webp" alt="" width="260" height="167" loading="lazy">
+  <div class="foot-word">
+    <span class="foot-name shine-text">AURENSTAR</span>
+    <div class="foot-tagbox">
+      <span>Blindaje Global · Evolución Infinita · Interfaces Sin Límites</span>
     </div>
   </div>
+  <p class="rights">© 2026 AURENSTAR CORP · Bolivia · Creación 100% boliviana</p>
+</footer>
 
-  <script>
-    var BACKEND_URL="http://127.0.0.1:5000",EMPRESA_ID="aurenstar";
+<!-- ═══ MODAL ═══ -->
+<div class="backdrop" id="orderBackdrop">
+  <div class="modal">
+    <div class="modal-h">
+      <span>Solicitar sistema</span>
+      <button onclick="closeOrder()" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="modal-b">
+      <form id="orderForm">
+        <div class="field"><label>Sistema</label><input type="text" name="item" readonly></div>
+        <div class="field" style="margin-top:12px"><label>Tu nombre</label><input type="text" name="nombre" placeholder="Nombre y apellido" required></div>
+        <div class="field" style="margin-top:12px"><label>Tu WhatsApp</label><input type="text" name="telefono" placeholder="Ej: 70012345" required></div>
+        <button class="submit" type="submit">
+          <svg width="17" height="17" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3C9.37 3 3.96 8.34 3.96 14.93c0 2.13.57 4.13 1.57 5.86L3 29l8.4-2.46a13.1 13.1 0 0 0 4.64.85h.01c6.67 0 12.08-5.34 12.08-11.93C28.13 8.34 22.72 3 16.05 3Zm0 21.77h-.01a9.97 9.97 0 0 1-5.05-1.38l-.36-.21-3.74 1.1 1.12-3.59-.24-.37a9.7 9.7 0 0 1-1.53-5.39c0-5.4 4.45-9.79 9.92-9.79 5.46 0 9.91 4.39 9.91 9.79 0 5.4-4.45 9.84-9.92 9.84Zm5.46-7.37c-.3-.15-1.77-.86-2.04-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.46-.88-.78-1.47-1.74-1.65-2.04-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.03 1-1.03 2.45s1.06 2.84 1.21 3.04c.15.2 2.08 3.17 5.04 4.45.7.3 1.25.48 1.68.61.7.22 1.34.19 1.84.12.56-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
+          Enviar por WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
 
-    async function postChat(msg,payload){
-      if(!payload)payload={};
-      try{var r=await fetch(BACKEND_URL+'/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,empresaid:EMPRESA_ID,payload})});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json();}
-      catch(e){console.error(e);showError("Error de conexión con el Servidor Central.");return null;}
-    }
-    async function registerUserIntent(text){
-      if(text.length<5)return;
-      var r=await postChat('ACTION:REGISTER_INTENT',{userInput:text,context:"P01"});
-      if(r){var i=document.getElementById('aiConsultant'),f=document.getElementById('searchFeedback');if(i&&f){i.classList.add('search-sent');f.classList.add('show');setTimeout(()=>{i.classList.remove('search-sent');f.classList.remove('show');i.value='';},4000);}}
-    }
-    var aiInput=document.getElementById('aiConsultant');
-    if(aiInput)aiInput.addEventListener('keypress',function(e){if(e.key==='Enter')registerUserIntent(this.value);});
+<div class="toast" id="toast">✓ Abriendo WhatsApp…</div>
 
-    function Modal(name){
-      var map={list:'listBackdrop',order:'orderBackdrop',payment:'paymentBackdrop'};
-      var el=document.getElementById(map[name]);
-      return{show:function(){if(el){el.classList.add('show');el.setAttribute('aria-hidden','false');}},hide:function(){if(el){el.classList.remove('show');el.setAttribute('aria-hidden','true');}}};
-    }
-    function addBackdropClick(id){var el=document.getElementById(id);if(!el)return;el.addEventListener('click',function(e){if(e.target.id===id)el.classList.remove('show');});}
-    function esc(x){if(x===null||x===undefined)return'';return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
-    function setListModal(title,html){var t=document.getElementById('listTitle'),b=document.getElementById('listBody');if(!t||!b)return;t.textContent=title;b.innerHTML=html;Modal('list').show();}
-    function showError(msg){setListModal("Alerta del Sistema",'<div class="list"><div class="list-item" style="color:#ff6b6b;border-color:#ff6b6b">'+esc(msg)+'</div></div>');}
+<script>
+// ═══ CONFIG ═══
+const WHATS = "59175265734";
+// TODO: reemplazá por la URL real de P.02 desplegado en Render
+const P02_URL = "https://aurenstar-motor-central.onrender.com";
+document.getElementById('p02LiveLink').href = P02_URL;
 
-    var UI={
-      showPrecios:function(){
-        var html=`
-          <div class="plans-masthead">
-            <div class="eyebrow">Soluciones Digitales</div>
-            <h2>Elige tu nivel AURENSTAR</h2>
-            <p>100% boliviano &nbsp;·&nbsp; Implementación única + soporte mensual &nbsp;·&nbsp; Ingeniería de autor</p>
-          </div>
+// ═══ BIENVENIDA DINÁMICA por hora ═══
+(function(){
+  const h = new Date().getHours();
+  const greet = h < 12 ? "¡Buenos días! Estamos en línea" : h < 19 ? "¡Buenas tardes! Estamos en línea" : "¡Buenas noches! Estamos en línea";
+  const el = document.getElementById('welcomeMsg');
+  if(el) el.textContent = greet;
+})();
 
-          <!-- P.01 CATÁLOGO DIGITAL -->
-          <div class="pc pc-g">
-            <div class="pc-topbar"></div>
-            <div class="pc-canvas"></div>
-            <div class="pc-shell">
-              <div class="pc-left">
-                <div class="pc-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-                <span class="pc-dot">P · 01</span>
-              </div>
-              <div class="pc-center">
-                <div class="pc-title-row">
-                  <span class="pc-name">Catálogo Digital</span>
-                  <span class="pc-audience"><i class="fa-solid fa-store"></i>Tiendas · Salones · Restaurantes</span>
-                </div>
-                <p class="pc-tagline">"Tu negocio vende desde cualquier red, en cualquier lugar"</p>
-                <div class="pc-feats">
-                  <span class="pf pf-hi"><i class="fa-solid fa-images"></i>Catálogo con fotos y precios</span>
-                  <span class="pf pf-hi"><i class="fa-brands fa-whatsapp"></i>Pedidos automáticos WhatsApp</span>
-                  <span class="pf pf-hi"><i class="fa-solid fa-share-nodes"></i>Compartible en redes sociales</span>
-                  <span class="pf pf-lo"><i class="fa-solid fa-sliders"></i>Panel admin sin técnico</span>
-                  <span class="pf pf-lo"><i class="fa-solid fa-arrows-rotate"></i>Inventario en tiempo real</span>
-                  <span class="pf pf-lo"><i class="fa-solid fa-palette"></i>Diseño con tu marca</span>
-                </div>
-              </div>
-              <div class="pc-right">
-                <div class="pc-price-blk">
-                  <span class="pp-lbl">Implementación única</span>
-                  <span class="pp-val"><sup>Bs.</sup>400</span>
-                  <div class="pp-sep"></div>
-                  <span class="pp-lbl">Mantenimiento mensual</span>
-                  <span class="pp-mo">60<sub> Bs./mes</sub></span>
-                </div>
-                <button class="pc-cta" onclick="UI.openOrderModal('Catálogo Digital P.01 — Bs.400 + Bs.60/mes')">
-                  <i class="fa-solid fa-arrow-right"></i>Quiero este
-                </button>
-              </div>
-            </div>
-          </div>
+// ═══ PLANETA VIVO — tilt 3D con cursor + flotación idle ═══
+(function(){
+  const tilt = document.getElementById('markTilt');
+  const wrap = document.getElementById('markWrap');
+  if(!tilt||!wrap||window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  let tx=0,ty=0,cx=0,cy=0,t=0,active=false;
+  wrap.addEventListener('pointermove',e=>{
+    const r=wrap.getBoundingClientRect();
+    tx=(e.clientY-r.top)/r.height*.5-16;
+    ty=(e.clientX-r.left)/r.width*.5-18;
+    active=true;
+  });
+  wrap.addEventListener('pointerleave',()=>{active=false;});
+  (function loop(){
+    t+=.011;
+    if(!active){tx=Math.sin(t)*7;ty=Math.cos(t*.8)*10;}
+    cx+=(tx-cx)*.055;cy+=(ty-cy)*.055;
+    tilt.style.transform=`rotateX(${cx}deg) rotateY(${cy}deg)`;
+    requestAnimationFrame(loop);
+  })();
+})();
 
-          <!-- P.02 IA & AUTOMATIZACIÓN -->
-          <div class="pc pc-gold-c">
-            <div class="pc-topbar"></div>
-            <div class="pc-canvas"></div>
-            <div class="pc-shell">
-              <div class="pc-left">
-                <div class="pc-icon"><i class="fa-solid fa-brain"></i></div>
-                <span class="pc-dot">P · 02</span>
-              </div>
-              <div class="pc-center">
-                <div class="pc-title-row">
-                  <span class="pc-name">IA &amp; Automatización</span>
-                  <span class="pc-badge"><i class="fa-solid fa-star"></i>Más Potente</span>
-                  <span class="pc-audience"><i class="fa-solid fa-rocket"></i>Negocios que quieren escalar</span>
-                </div>
-                <p class="pc-tagline">"Deja que la IA trabaje por ti — tu negocio funciona 24/7"</p>
-                <div class="pc-feats">
-                  <span class="pf pf-hi"><i class="fa-solid fa-robot"></i>Atención IA 24/7 por WhatsApp</span>
-                  <span class="pf pf-hi"><i class="fa-solid fa-gears"></i>Procesos orquestados automáticamente</span>
-                  <span class="pf pf-hi"><i class="fa-solid fa-cart-shopping"></i>Tienda online con pagos automáticos</span>
-                  <span class="pf pf-lo"><i class="fa-brands fa-instagram"></i>Respuestas en Instagram y Facebook</span>
-                  <span class="pf pf-lo"><i class="fa-solid fa-users"></i>CRM / Gestión de leads</span>
-                  <span class="pf pf-lo"><i class="fa-solid fa-calendar-check"></i>Agenda y citas automáticas</span>
-                  <span class="pf pf-lo"><i class="fa-solid fa-envelope"></i>Email marketing</span>
-                </div>
-              </div>
-              <div class="pc-right">
-                <div class="pc-price-blk">
-                  <span class="pp-lbl">Implementación única</span>
-                  <span class="pp-val"><sup>Bs.</sup>1000</span>
-                  <div class="pp-sep"></div>
-                  <span class="pp-lbl">Soporte y evolución</span>
-                  <span class="pp-mo">100<sub> Bs./mes</sub></span>
-                </div>
-                <button class="pc-cta" onclick="UI.openOrderModal('IA & Automatización P.02 — Bs.1000 + Bs.100/mes')">
-                  <i class="fa-solid fa-arrow-right"></i>Quiero este
-                </button>
-              </div>
-            </div>
-          </div>
+// ═══ SCROLL REVEAL ═══
+const cards = document.querySelectorAll('[data-reveal]');
+if('IntersectionObserver' in window){
+  const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+  cards.forEach(c=>io.observe(c));
+}else{cards.forEach(c=>c.classList.add('in'));}
 
-          <!-- P.03 CONTROL LABORAL -->
-          <div class="pc pc-p">
-            <div class="pc-topbar"></div>
-            <div class="pc-canvas"></div>
-            <div class="pc-shell">
-              <div class="pc-left">
-                <div class="pc-icon"><i class="fa-solid fa-location-crosshairs"></i></div>
-                <span class="pc-dot">P · 03</span>
-              </div>
-              <div class="pc-center">
-                <div class="pc-title-row">
-                  <span class="pc-name">Control Laboral</span>
-                  <span class="pc-audience"><i class="fa-solid fa-building"></i>Empresas con sucursales</span>
-                </div>
-                <p class="pc-tagline">"Control total en segundos — supervisa todas tus sucursales desde un solo lugar"</p>
-                <div class="pc-feats">
-                  <span class="pf pf-hi"><i class="fa-solid fa-map-pin"></i>Asistencia por geolocalización</span>
-                  <span class="pf pf-hi"><i class="fa-solid fa-clock"></i>Auditoría en tiempo real</span>
-                  <span class="pf pf-hi"><i class="fa-solid fa-chart-bar"></i>Reportes automáticos de cumplimiento</span>
-                  <span class="pf pf-lo"><i class="fa-solid fa-sitemap"></i>Panel multi-sucursal central</span>
-                  <span class="pf pf-lo"><i class="fa-solid fa-shield-halved"></i>Datos seguros en la nube</span>
-                  <span class="pf pf-lo"><i class="fa-solid fa-mobile"></i>Acceso desde cualquier dispositivo</span>
-                </div>
-              </div>
-              <div class="pc-right">
-                <div class="pc-price-blk">
-                  <span class="pp-lbl">Creación única</span>
-                  <span class="pp-val"><sup>Bs.</sup>800</span>
-                  <div class="pp-sep"></div>
-                  <span class="pp-lbl">Soporte y evolución</span>
-                  <span class="pp-mo">100<sub> Bs./mes</sub></span>
-                </div>
-                <button class="pc-cta" onclick="UI.openOrderModal('Control Laboral P.03 — Bs.800 + Bs.100/mes')">
-                  <i class="fa-solid fa-arrow-right"></i>Quiero este
-                </button>
-                <span class="pc-note">Precio por sucursal · escalable</span>
-              </div>
-            </div>
-          </div>
+// ═══ MODAL ═══
+const bd = document.getElementById('orderBackdrop');
+function openOrder(item){document.querySelector('#orderForm [name="item"]').value=item;bd.classList.add('show');}
+function closeOrder(){bd.classList.remove('show');}
+bd.addEventListener('click',e=>{if(e.target===bd)closeOrder();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeOrder();});
 
-          <div class="plans-footer">
-            Creación 100% boliviana &nbsp;·&nbsp; Soporte real &nbsp;·&nbsp; Evolución continua<br>
-            ¿Dudas? <a href="https://wa.me/59175265734?text=Quiero%20información%20sobre%20los%20planes%20AURENSTAR" target="_blank">Escríbenos por WhatsApp →</a>
-          </div>`;
-        setListModal('SOLUCIONES AURENSTAR — ELIGE TU PLAN',html);
-      },
+// ═══ TOAST ═══
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
 
-      showProductos:function(){
-        var html=`<div class="catalog-container">
-          <div class="opportunity-card" style="border-left:4px solid #2ecc71;">
-            <div style="display:flex;justify-content:space-between;align-items:center;"><h4 style="margin:0;">Fase Actual: Ecosistema Autónomo</h4><span class="badge-premium" style="background:#2ecc71">ACTIVO</span></div>
-            <p>Despliegue de interfaces con <strong>Ingeniería de Autor</strong>. Sistemas que no dependen de plataformas de terceros.</p>
-          </div>
-          <div class="opportunity-card" style="border-left:4px solid var(--gold);">
-            <div style="display:flex;justify-content:space-between;align-items:center;"><h4 style="margin:0;">Próximo Hito: P.02 Holográfico</h4><span class="future-badge">DESPLEGANDO</span></div>
-            <p>Arquitectura preparada para visualización en entornos de realidad mixta.</p>
-          </div>
-        </div>`;
-        setListModal('TENDENCIAS & NOVEDADES AURENSTAR',html);
-      },
+// ═══ ORDER FORM ═══
+document.getElementById('orderForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const f=new FormData(e.target);
+  const item=f.get('item'),nom=f.get('nombre'),tel=f.get('telefono');
+  const txt=`🛰️ *NUEVA SOLICITUD AURENSTAR*%0A%0A*Cliente:* ${encodeURIComponent(nom)}%0A*WhatsApp:* ${encodeURIComponent(tel)}%0A*Sistema:* ${encodeURIComponent(item)}`;
+  closeOrder();
+  window.open(`https://wa.me/${WHATS}?text=${txt}`,'_blank');
+  toast('✓ Pedido enviado — revisá WhatsApp');
+  e.target.reset();
+});
 
-      showPromos:function(){
-        var html=`<div class="catalog-container">
-          <div class="opportunity-card" style="background:linear-gradient(135deg,rgba(212,175,55,.1),transparent);border:1px solid var(--gold);">
-            <div style="display:flex;justify-content:space-between;"><h4 style="color:var(--gold);">BONO DE LANZAMIENTO P.01</h4><span class="badge-premium" style="background:red;color:#fff;">-20% OFF</span></div>
-            <p style="margin:10px 0;">Despliegue de tu terminal AURENSTAR con hosting de alta velocidad incluido por 1 año.</p>
-            <small style="color:var(--gold);">Válido para las próximas 48 horas.</small>
-            <button class="btn btn-success" onclick="UI.openOrderModal('PROMO LANZAMIENTO P.01')" style="margin-top:10px;">APLICAR AHORA</button>
-          </div>
-        </div>`;
-        setListModal('OPORTUNIDADES DE INVERSIÓN',html);
-      },
-
-      showFAQ:function(){
-        var html=`<div class="list">
-          <div class="list-item" style="flex-direction:column;align-items:flex-start;border-left:4px solid var(--gold);">
-            <strong>¿Qué es Ingeniería de Autor?</strong>
-            <p style="font-size:.85rem;color:var(--muted);margin:5px 0;">Software creado desde cero, sin plantillas, diseñado para la identidad única de AURENSTAR.</p>
-          </div>
-          <div class="list-item" style="flex-direction:column;align-items:flex-start;border-left:4px solid var(--gold);">
-            <strong>¿El sistema es escalable?</strong>
-            <p style="font-size:.85rem;color:var(--muted);margin:5px 0;">Totalmente. El P.01 es solo el núcleo de un ecosistema que puede integrar pagos y logística.</p>
-          </div>
-          <button class="btn btn-primary" onclick="window.open('https://wa.me/59175265734?text=SOLICITO%20ASESORIA%20ELITE%20AURENSTAR','_blank')" style="margin-top:15px;">
-            <i class="fa-solid fa-headset"></i> HABLAR CON UN INGENIERO
-          </button>
-        </div>`;
-        setListModal('CENTRO DE ASISTENCIA AURENSTAR',html);
-      },
-
-      openOrderModal:function(planName){
-        var of=document.getElementById('orderForm');if(!of)return;
-        of.reset();if(planName)of.querySelector('input[name="item"]').value=planName;
-        Modal('list').hide();Modal('order').show();
-      },
-      openPaymentModal:function(){Modal('payment').show();}
-    };
-
-    function attachFormHandlers(){
-      var orderForm=document.getElementById('orderForm');
-      if(orderForm){orderForm.addEventListener('submit',async function(e){
-        e.preventDefault();var form=new FormData(e.target);
-        var order={item:form.get('item'),nombre:form.get('nombre_cliente'),telefono:form.get('telefono_cliente')};
-        Modal('order').hide();
-        var tel="59175265734",texto=`🚀 *NUEVA SOLICITUD AURENSTAR*%0A%0A*Cliente:* ${order.nombre}%0A*WhatsApp:* ${order.telefono}%0A*Servicio:* ${order.item}%0A%0A_Enviado desde el Terminal de Gestión P.01_`;
-        window.open(`https://wa.me/${tel}?text=${texto}`,'_blank');
-        setListModal('ORDEN TRANSMITIDA',`<div style="text-align:center;padding:20px;"><i class="fa-solid fa-circle-check" style="font-size:3rem;color:#2ecc71;margin-bottom:15px;"></i><p>Se ha generado el protocolo de contacto con ingeniería vía WhatsApp.</p></div>`);
-      });}
-      var paymentForm=document.getElementById('paymentForm');
-      if(paymentForm){paymentForm.addEventListener('submit',async function(e){
-        e.preventDefault();var form=new FormData(e.target),payment={amount:Number(form.get('amount')),description:form.get('description')};
-        var btn=e.target.querySelector('button');btn.innerHTML='CIFRANDO...';
-        var r=await postChat('ACTION:PAGAR',payment);
-        if(r&&r.data&&r.data.payment_link){var res=document.getElementById('paymentResult'),a=document.getElementById('paymentLink');a.textContent=r.data.payment_link;a.href=r.data.payment_link;res.style.display='block';}
-        btn.innerHTML='<i class="fa-solid fa-lock"></i> GENERAR ENLACE SEGURO';
-      });}
-    }
-
-    window.addEventListener('DOMContentLoaded',function(){
-      addBackdropClick('listBackdrop');addBackdropClick('orderBackdrop');addBackdropClick('paymentBackdrop');
-      attachFormHandlers();
-      var wisdoms=["Tu servicio es la publicidad más poderosa.","Bienvenido al estándar de oro digital."];
-      var we=document.getElementById('dailyWisdom');if(we)we.innerText=`"${wisdoms[Math.floor(Math.random()*wisdoms.length)]}"`;
-      var hour=new Date().getHours(),title=document.getElementById('dynamicGreeting');
-      if(title){var g=hour<12?"Hola Buenos Días":hour<19?"Hola Buenas Tardes":"Hola Buenas Noches";title.innerHTML=`${g}<br><span class="gold-subtitle">Bienvenido a AURENSTAR</span>`;}
-    });
-  </script>
+// ═══ QUICK FORM ═══
+document.getElementById('quickForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const msg=document.getElementById('quickMsg').value.trim();
+  if(!msg)return;
+  window.open(`https://wa.me/${WHATS}?text=${encodeURIComponent('Hola AURENSTAR, '+msg)}`,'_blank');
+  toast('✓ Abriendo WhatsApp…');
+  e.target.reset();
+});
+</script>
 </body>
 </html>
