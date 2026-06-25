@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AURENSTAR — Catálogos, IA y Control Laboral para tu negocio</title>
+<title>AURENSTAR — Innovación digital, IA y Control Laboral para tu negocio</title>
 <meta name="description" content="Tres sistemas listos para tu negocio: catálogo digital, asistente de IA 24/7 y control laboral. Implementación en días. Bolivia.">
 <meta name="theme-color" content="#050407">
 <link rel="icon" href="assets/aurenstar-planet.webp">
@@ -13,8 +13,8 @@
 <style>
 :root{
   --bg:#050407;--bg-soft:#0b0812;
-  --ink:#EDEAE2;--muted:rgba(237,234,226,.46);--muted-2:rgba(237,234,226,.72);
-  --line:rgba(255,255,255,.08);
+  --ink:#F0EDE6;--muted:rgba(240,237,230,.62);--muted-2:rgba(240,237,230,.82);
+  --line:rgba(255,255,255,.10);
   --gold:#D4AF37;--gold-l:#F5D78E;--gold-d:#8a6a1c;--gold-dim:rgba(212,175,55,.18);
   --ember:#FF5A36;--ember-dim:rgba(255,90,54,.14);
   --green:#2BD97C;--green-d:#15803d;
@@ -22,6 +22,9 @@
   --wa:#25D366;
   --radius-lg:24px;
 }
+
+/* ══ WARP CANVAS — viaje estelar hacia el frente ══ */
+#warp{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.72;}
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 @media(prefers-reduced-motion:reduce){
@@ -242,16 +245,16 @@ main{position:relative;z-index:1;}
 .ch-gold   .channel:hover .ch-body h3{text-shadow:2px 2px 0 rgba(212,175,55,.3);transform:perspective(300px) rotateX(3deg);}
 .ch-violet .channel:hover .ch-body h3{text-shadow:2px 2px 0 rgba(164,118,255,.3);transform:perspective(300px) rotateX(3deg);}
 
-.ch-list li{position:relative;padding-left:22px;color:var(--muted-2);font-size:.88rem;line-height:1.75;}
+.ch-list li{position:relative;padding-left:22px;color:rgba(240,237,230,.88);font-size:.88rem;line-height:1.75;}
 .ch-list li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;}
 .ch-green  .ch-list li::before{background:var(--green); box-shadow:0 0 6px var(--green);}
 .ch-gold   .ch-list li::before{background:var(--gold);  box-shadow:0 0 6px var(--gold);}
 .ch-violet .ch-list li::before{background:var(--violet);box-shadow:0 0 6px var(--violet);}
 
 .price-row{display:flex;flex-direction:column;gap:1px;}
-.price-row span{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
+.price-row span{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,237,230,.6);}
 .price-row strong{font-family:'Rajdhani',sans-serif;font-size:1.5rem;font-weight:700;}
-.price-row strong small{font-size:.6rem;color:var(--muted);font-family:'Inter',sans-serif;font-weight:500;}
+.price-row strong small{font-size:.6rem;color:rgba(240,237,230,.55);font-family:'Inter',sans-serif;font-weight:500;}
 .price-sep{height:1px;background:var(--line);}
 
 .ch-cta{width:100%;padding:12px;border-radius:12px;border:0;cursor:pointer;font-family:'Rajdhani',sans-serif;
@@ -260,9 +263,9 @@ main{position:relative;z-index:1;}
 .ch-gold   .ch-cta{background:linear-gradient(135deg,var(--gold-d),var(--gold),var(--gold-l));color:#1a1306;box-shadow:0 6px 20px rgba(212,175,55,.3);}
 .ch-violet .ch-cta{background:linear-gradient(135deg,var(--violet-d),var(--violet));color:#fff;box-shadow:0 6px 20px rgba(164,118,255,.28);}
 .ch-cta:hover{transform:translateY(-2px);filter:brightness(1.1);}
-.ch-live{display:block;text-align:center;font-size:.74rem;color:var(--muted);margin-top:2px;transition:.2s;}
+.ch-live{display:block;text-align:center;font-size:.74rem;color:rgba(240,237,230,.6);margin-top:2px;transition:.2s;}
 .ch-live:hover{color:var(--gold-l);}
-.ch-note{font-size:.62rem;color:var(--muted);text-align:center;}
+.ch-note{font-size:.64rem;color:rgba(240,237,230,.58);text-align:center;}
 
 /* Mini-visuals CSS */
 .v-phone{width:74px;height:96px;border-radius:11px;border:1.5px solid rgba(255,255,255,.14);
@@ -285,7 +288,7 @@ main{position:relative;z-index:1;}
 /* ═══════════════ TRUST STRIP ═══════════════ */
 .trust{max-width:980px;margin:28px auto 0;padding:22px 18px;display:flex;flex-wrap:wrap;
   justify-content:center;gap:26px 36px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-.trust-item{display:flex;align-items:center;gap:9px;font-size:.78rem;color:var(--muted-2);font-weight:500;}
+.trust-item{display:flex;align-items:center;gap:9px;font-size:.78rem;color:rgba(240,237,230,.85);font-weight:500;}
 .trust-icon{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;
   font-size:.9rem;background:var(--gold-dim);border:1px solid rgba(212,175,55,.22);}
 
@@ -317,8 +320,8 @@ footer{position:relative;max-width:980px;margin:0 auto;padding:68px 20px 72px;
 .foot-tagbox{padding:7px 20px;border:1px solid rgba(212,175,55,.4);border-radius:6px;
   background:rgba(212,175,55,.04);}
 .foot-tagbox span{font-size:.62rem;letter-spacing:1.2px;color:var(--gold-l);font-weight:600;}
-/* rights visibles — dorado tenue, no plomo */
-.rights{font-size:.68rem;color:rgba(212,175,55,.42);letter-spacing:.8px;margin-top:2px;}
+/* rights visibles — dorado medio, perfectamente legible */
+.rights{font-size:.68rem;color:rgba(212,175,55,.58);letter-spacing:.8px;margin-top:2px;}
 
 /* ═══════════════ MODAL ═══════════════ */
 .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.87);backdrop-filter:blur(8px);
@@ -342,19 +345,168 @@ footer{position:relative;max-width:980px;margin:0 auto;padding:68px 20px 72px;
   box-shadow:0 12px 30px rgba(0,0,0,.4);}
 .toast.show{transform:translate(-50%,0);}
 
-/* ═══════════════ RESPONSIVE ═══════════════ */
+/* ═══════════════ PANELES LATERALES ═══════════════ */
+.lateral{position:fixed;top:50%;transform:translateY(-50%);z-index:40;
+  display:flex;flex-direction:column;gap:12px;width:148px;pointer-events:none;}
+.lateral.izq{left:14px;}
+.lateral.der{right:14px;}
+
+.lbox{background:rgba(8,7,12,.72);border:1px solid var(--line);border-radius:14px;
+  padding:14px 13px;backdrop-filter:blur(12px);pointer-events:all;
+  opacity:0;transform:translateX(-18px);transition:opacity .6s ease,transform .6s ease;}
+.lateral.der .lbox{transform:translateX(18px);}
+.lbox.in{opacity:1;transform:translateX(0);}
+
+/* acento de color en la barra superior de cada box */
+.lbox-top{height:2px;border-radius:4px 4px 0 0;margin:-14px -13px 11px;border-radius:13px 13px 0 0;}
+.lbox-gold  .lbox-top{background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.lbox-green .lbox-top{background:linear-gradient(90deg,transparent,var(--green),transparent);}
+.lbox-ember .lbox-top{background:linear-gradient(90deg,transparent,var(--ember),transparent);}
+.lbox-violet .lbox-top{background:linear-gradient(90deg,transparent,var(--violet),transparent);}
+
+.lbox-label{font-size:.56rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(240,237,230,.55);margin-bottom:5px;}
+.lbox-value{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;
+  line-height:1.2;color:var(--ink);}
+.lbox-value.gold{color:var(--gold-l);}
+.lbox-value.green{color:var(--green);}
+.lbox-value.violet{color:var(--violet);}
+.lbox-sub{font-size:.66rem;color:rgba(240,237,230,.72);margin-top:4px;line-height:1.4;}
+
+.lbox-status{display:flex;align-items:center;gap:6px;margin-top:6px;}
+.lbox-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;animation:pulseDot 2s ease-in-out infinite;}
+.lbox-dot.green{background:var(--green);box-shadow:0 0 7px var(--green);}
+.lbox-dot.gold{background:var(--gold);box-shadow:0 0 7px var(--gold);}
+.lbox-status span{font-size:.62rem;color:var(--muted-2);font-weight:600;}
+
+.lbox-cta{display:block;margin-top:10px;padding:9px 10px;border-radius:9px;
+  background:linear-gradient(135deg,#1c9c52,var(--green));color:#031a0b;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.8px;
+  text-transform:uppercase;text-align:center;transition:.2s;border:0;cursor:pointer;width:100%;}
+.lbox-cta:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.lbox-cta.gold{background:linear-gradient(135deg,var(--gold-d),var(--gold));}
+.lbox-cta.violet{background:linear-gradient(135deg,var(--violet-d),var(--violet));color:#fff;}
+
+/* ocultar en pantallas chicas */
+@media(max-width:1180px){.lateral{display:none;}}
 @media(max-width:720px){
   .ch-grid{grid-template-columns:1fr;}
   .ch-visual{border-right:none;border-bottom:1px solid var(--line);padding:18px;}
   .ch-price{border-left:none;border-top:1px solid var(--line);}
   .bar-wa-label{display:none;}
   .stage .neb-a,.stage .neb-b,.stage .neb-c{animation:none;}
+  .side-panels{display:none;}
 }
+
+/* ═══════════════ PANELES LATERALES ═══════════════ */
+.side-panels{position:fixed;top:50%;transform:translateY(-50%);z-index:40;display:flex;
+  flex-direction:column;gap:12px;pointer-events:auto;}
+.side-left{left:12px;}
+.side-right{right:12px;align-items:flex-end;}
+
+.intel-card{
+  width:152px;padding:13px 14px;border-radius:14px;
+  background:rgba(5,4,7,.72);border:1px solid var(--line);
+  backdrop-filter:blur(14px);
+  transition:border-color .3s,box-shadow .3s,transform .25s;
+  animation:slideInLeft .6s cubic-bezier(.16,1,.3,1) both;
+}
+.side-right .intel-card{animation-name:slideInRight;}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-24px);}to{opacity:1;transform:translateX(0);}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(24px);}to{opacity:1;transform:translateX(0);}}
+
+.intel-card:nth-child(2){animation-delay:.15s;}
+
+.intel-card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.5);}
+.intel-card.gold-card{border-color:rgba(212,175,55,.28);}
+.intel-card.gold-card:hover{border-color:rgba(212,175,55,.6);box-shadow:0 8px 28px rgba(212,175,55,.12);}
+.intel-card.green-card{border-color:rgba(43,217,124,.22);}
+.intel-card.green-card:hover{border-color:rgba(43,217,124,.55);box-shadow:0 8px 28px rgba(43,217,124,.1);}
+.intel-card.ember-card{border-color:rgba(255,90,54,.24);}
+.intel-card.ember-card:hover{border-color:rgba(255,90,54,.55);box-shadow:0 8px 28px rgba(255,90,54,.1);}
+.intel-card.promo-card{border-color:rgba(212,175,55,.4);cursor:pointer;
+  background:linear-gradient(135deg,rgba(212,175,55,.08),rgba(5,4,7,.8));}
+.intel-card.promo-card:hover{border-color:var(--gold);box-shadow:0 10px 36px rgba(212,175,55,.2);transform:translateY(-3px);}
+
+.ic-eyebrow{font-size:.54rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:6px;display:flex;align-items:center;gap:5px;}
+.ic-eyebrow .dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.gold-card  .ic-eyebrow{color:var(--gold-l);}  .gold-card  .ic-eyebrow .dot{background:var(--gold);  box-shadow:0 0 6px var(--gold);}
+.green-card .ic-eyebrow{color:var(--green);}   .green-card .ic-eyebrow .dot{background:var(--green); box-shadow:0 0 6px var(--green);}
+.ember-card .ic-eyebrow{color:#ff8060;}         .ember-card .ic-eyebrow .dot{background:var(--ember); box-shadow:0 0 6px var(--ember);}
+.promo-card .ic-eyebrow{color:var(--gold-l);animation:shine 4s linear infinite;
+  background-image:linear-gradient(100deg,var(--gold-d),var(--gold),var(--gold-l),#fff8e0,var(--gold));
+  background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+
+.ic-value{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.02rem;line-height:1.25;color:var(--ink);}
+.ic-sub{font-size:.68rem;color:var(--muted);margin-top:4px;line-height:1.5;}
+.ic-arrow{display:block;text-align:right;font-size:.72rem;color:var(--gold-l);margin-top:6px;font-weight:700;}
+/* Tip rotativo */
+.tip-text{font-size:.72rem;color:var(--muted-2);line-height:1.5;min-height:52px;transition:opacity .4s;}
+.tip-text.fade{opacity:0;}
+
+/* ===================== ESTRELLAS FUGACES REALISTAS (exacto como tu otro sistema) ===================== */
+.shooting-star {
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow:
+        0 0 10px #fff,
+        2px 0 15px #D4AF37,
+        -5px 0 20px rgba(255,255,255,0.4),
+        -15px 0 30px rgba(212,175,55,0.25);
+    opacity: 0;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.shooting-star::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 75px;
+    height: 1.5px;
+    background: linear-gradient(to left, rgba(255,255,255,0.9), transparent);
+    border-radius: 100%;
+}
+
+@keyframes shoot {
+    0% {
+        transform: translate(0, 0) rotate(var(--rotation, 0deg));
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% {
+        transform: translate(var(--moveX), var(--moveY)) rotate(var(--rotation, 0deg));
+        opacity: 0;
+    }
+}
+
 </style>
 </head>
 <body>
 
 <!-- ═══ FONDO VIVO ═══ -->
+<canvas id="warp" aria-hidden="true"></canvas>
+
+<!-- ESTRELLAS FUGACES - Ángulos corregidos -->
+<div class="shooting-star" style="top: 15%; left: -8%; --moveX: 1450px; --moveY: 550px; --rotation: 25deg; animation: shoot 9.8s linear infinite 0s;"></div>
+<div class="shooting-star" style="top: 42%; left: -5%; --moveX: 1320px; --moveY: -420px; --rotation: -12deg; animation: shoot 10.2s linear infinite 2.3s;"></div>
+<div class="shooting-star" style="top: 42%; left: -5%; --moveX: 1320px; --moveY: -420px; --rotation: -12deg; animation: shoot 12.8s linear infinite 2.3s;"></div>
+<!-- Cometa horizontal desde derecha hacia izquierda -->
+<div class="shooting-star" 
+     style="top: 35%; left: 105%; 
+            --moveX: -1600px; 
+            --moveY: 30px; 
+            --rotation: 175deg; 
+            animation: shoot 8.5s linear infinite 1.5s;">
+</div>
+
 <div class="stage" aria-hidden="true">
   <div class="stars"></div>
   <div class="stars stars-2"></div>
@@ -394,6 +546,64 @@ footer{position:relative;max-width:980px;margin:0 auto;padding:68px 20px 72px;
   <div class="ember e4"><i></i></div>
 </div>
 
+<!-- ═══ PANEL LATERAL IZQUIERDO ═══ -->
+<aside class="lateral izq" aria-label="Información del sistema">
+  <!-- Fecha actual -->
+  <div class="lbox lbox-gold">
+    <div class="lbox-top"></div>
+    <div class="lbox-label">Fecha actual</div>
+    <div class="lbox-value gold" id="lat-fecha">—</div>
+    <div class="lbox-sub" id="lat-hora">—</div>
+  </div>
+  <!-- Estado del sistema -->
+  <div class="lbox lbox-green">
+    <div class="lbox-top"></div>
+    <div class="lbox-label">Sistema</div>
+    <div class="lbox-value green">AURENSTAR</div>
+    <div class="lbox-status">
+      <span class="lbox-dot green"></span>
+      <span>Operativo · Bolivia</span>
+    </div>
+  </div>
+  <!-- Clientes activos (dato fijo de confianza) -->
+  <div class="lbox lbox-ember">
+    <div class="lbox-top"></div>
+    <div class="lbox-label">Negocios digitalizados</div>
+    <div class="lbox-value gold" id="lat-clientes">+12</div>
+    <div class="lbox-sub">y contando en Bolivia</div>
+  </div>
+</aside>
+
+<!-- ═══ PANEL LATERAL DERECHO ═══ -->
+<aside class="lateral der" aria-label="Canal destacado y contacto">
+  <!-- Canal destacado del mes -->
+  <div class="lbox lbox-gold">
+    <div class="lbox-top"></div>
+    <div class="lbox-label">Canal del mes</div>
+    <div class="lbox-value gold" id="lat-canal-nombre">—</div>
+    <div class="lbox-sub" id="lat-canal-razon">—</div>
+    <div class="lbox-status">
+      <span class="lbox-dot gold"></span>
+      <span id="lat-canal-badge">Recomendado</span>
+    </div>
+  </div>
+  <!-- Tip del mes -->
+  <div class="lbox lbox-violet">
+    <div class="lbox-top"></div>
+    <div class="lbox-label">Tip de negocio</div>
+    <div class="lbox-sub" id="lat-tip" style="color:var(--muted-2);font-size:.68rem;line-height:1.5;">—</div>
+  </div>
+  <!-- CTA directo -->
+  <div class="lbox lbox-green">
+    <div class="lbox-top"></div>
+    <div class="lbox-label">¿Listo para empezar?</div>
+    <div class="lbox-sub">Respondemos hoy mismo.</div>
+    <a class="lbox-cta" href="https://wa.me/59175265734?text=Hola%2C%20vi%20la%20tarjeta%20AURENSTAR%20y%20quiero%20comenzar" target="_blank" rel="noopener">
+      Escribir ahora →
+    </a>
+  </div>
+</aside>
+
 <!-- ═══ NAVBAR ═══ -->
 <header class="bar">
   <div class="bar-brand">
@@ -430,14 +640,14 @@ footer{position:relative;max-width:980px;margin:0 auto;padding:68px 20px 72px;
   <!-- Wordmark con brillo metálico -->
   <div class="wordmark">
     <span class="wm-name shine-text">AURENSTAR</span>
-    <span class="wm-tag">Automatización - Inteligencia - Evolución</span>
+    <span class="wm-tag">Blindaje Global · Evolución Infinita · Interfaces Sin Límites</span>
   </div>
 
   <!-- Titular con vida -->
   <div class="hero-headline">
-    <h1>Tu negocio merece tecnología<br><em>Única que impulse hacia el futuro.</em></h1>
+    <h1>Tu negocio merece tecnología<br><em>que trabaja mientras dormís.</em></h1>
   </div>
-  <p class="hero-sub">Presencia digital · Inteligencia Artificial · Control total</p>
+  <p class="hero-sub">Catálogos digitales · Inteligencia Artificial · Control de personal</p>
 
   <div class="hero-actions">
     <a class="btn btn-wa" href="https://wa.me/59175265734?text=Hola%2C%20vi%20la%20tarjeta%20AURENSTAR%20y%20quiero%20saber%20m%C3%A1s" target="_blank" rel="noopener">
@@ -523,7 +733,7 @@ footer{position:relative;max-width:980px;margin:0 auto;padding:68px 20px 72px;
       <div class="ch-visual"><div class="v-radar" aria-hidden="true"><i></i><i></i><i></i><b></b></div></div>
       <div class="ch-body">
         <span class="ch-tag">Sistema 03 · Control Laboral</span>
-        <h3>Control de tu negocio, siempre</h3>
+        <h3>Sabé dónde está tu equipo, siempre</h3>
         <ul class="ch-list">
           <li>Asistencia verificada por geolocalización</li>
           <li>Auditoría de llegadas y salidas en tiempo real</li>
@@ -604,6 +814,85 @@ const WHATS = "59175265734";
 // TODO: reemplazá por la URL real de P.02 desplegado en Render
 const P02_URL = "https://aurenstar-motor-central.onrender.com";
 document.getElementById('p02LiveLink').href = P02_URL;
+
+
+
+// ═══ PANELES LATERALES — datos dinámicos ═══
+(function(){
+  // FECHA Y HORA en tiempo real (hora Bolivia GMT-4)
+  const MESES = ["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO",
+                 "JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"];
+  function actualizarReloj(){
+    const now = new Date();
+    const bo  = new Date(now.toLocaleString("en-US",{timeZone:"America/La_Paz"}));
+    const dia  = bo.getDate();
+    const mes  = MESES[bo.getMonth()];
+    const anio = bo.getFullYear();
+    const hh   = String(bo.getHours()).padStart(2,"0");
+    const mm   = String(bo.getMinutes()).padStart(2,"0");
+    const el_f = document.getElementById('lat-fecha');
+    const el_h = document.getElementById('lat-hora');
+    if(el_f) el_f.textContent = `${dia} DE ${mes}`;
+    if(el_h) el_h.textContent = `${anio} · ${hh}:${mm} Bolivia`;
+  }
+  actualizarReloj();
+  setInterval(actualizarReloj, 30000);
+
+  // CANAL DEL MES — rota según bimestre para dar sensación de campaña viva
+  const mes = new Date().getMonth(); // 0–11
+  const canales = [
+    // ENE–FEB: inicio de año, negocios quieren presencia digital rápida → P.01
+    { nombre:"P.01 · Catálogo",    razon:"Ideal para arrancar el año con presencia digital",     badge:"Para tiendas y negocios" },
+    { nombre:"P.01 · Catálogo",    razon:"Ideal para arrancar el año con presencia digital",     badge:"Para tiendas y negocios" },
+    // MAR–ABR: temporada de cambios, ventas en alza → P.02 IA
+    { nombre:"P.02 · IA 24/7",     razon:"Más ventas sin más trabajo — tu asistente nunca duerme", badge:"Motor Central activo" },
+    { nombre:"P.02 · IA 24/7",     razon:"Más ventas sin más trabajo — tu asistente nunca duerme", badge:"Motor Central activo" },
+    // MAY–JUN: temporada fría Bolivia, comercio interior → P.01
+    { nombre:"P.01 · Catálogo",    razon:"Temporada de frío: tus clientes compran más desde casa", badge:"Para tiendas y salones" },
+    { nombre:"P.01 · Catálogo",    razon:"Temporada de frío: tus clientes compran más desde casa", badge:"Para tiendas y salones" },
+    // JUL–AGO: fiestas patrias Bolivia → P.02 IA (alta demanda)
+    { nombre:"P.02 · IA 24/7",     razon:"Fiestas patrias: automatizá pedidos en temporada alta",  badge:"Alta demanda — Bolivia" },
+    { nombre:"P.02 · IA 24/7",     razon:"Fiestas patrias: automatizá pedidos en temporada alta",  badge:"Alta demanda — Bolivia" },
+    // SEP–OCT: empresas cierran año, control de personal → P.03
+    { nombre:"P.03 · Control",     razon:"Fin de año: auditá asistencia con datos reales",          badge:"Para empresas" },
+    { nombre:"P.03 · Control",     razon:"Fin de año: auditá asistencia con datos reales",          badge:"Para empresas" },
+    // NOV–DIC: cyber/navidad, máximas ventas → P.02 IA
+    { nombre:"P.02 · IA 24/7",     razon:"Navidad: la IA atiende mientras vos descansás",          badge:"Temporada de ventas" },
+    { nombre:"P.02 · IA 24/7",     razon:"Navidad: la IA atiende mientras vos descansás",          badge:"Temporada de ventas" },
+  ];
+  const canal = canales[mes];
+  const n=document.getElementById('lat-canal-nombre');
+  const r=document.getElementById('lat-canal-razon');
+  const b=document.getElementById('lat-canal-badge');
+  if(n) n.textContent = canal.nombre;
+  if(r) r.textContent = canal.razon;
+  if(b) b.textContent = canal.badge;
+
+  // TIP DEL MES — consejo de negocio que rota mensualmente
+  const tips = [
+    "Un catálogo digital bien compartido puede duplicar tus consultas en 30 días.",
+    "El 78% de las ventas por WhatsApp viene de catálogos bien organizados.",
+    "Un asistente IA responde 3× más rápido que cualquier empleado humano.",
+    "Negocios que digitalizan su catálogo venden 40% más sin más personal.",
+    "En invierno los clientes compran más desde el celular — tenés que estar ahí.",
+    "La automatización no reemplaza personas: libera tiempo para lo que importa.",
+    "Control de asistencia en tiempo real reduce ausencias hasta un 35%.",
+    "Las fiestas patrias mueven más dinero si tenés tu catálogo activo 24/7.",
+    "Un sistema de control laboral paga su costo en el primer mes de ahorro.",
+    "Negocios con IA activa capturan leads mientras el dueño descansa.",
+    "El mejor regalo de fin de año para tu negocio: automatizarlo antes de enero.",
+    "Empieza el año nuevo con sistemas que trabajan solos — no con más empleados.",
+  ];
+  const tip = document.getElementById('lat-tip');
+  if(tip) tip.textContent = `"${tips[mes]}"`;
+
+  // REVEAL de los lateral boxes con pequeño delay escalonado
+  setTimeout(()=>{
+    document.querySelectorAll('.lbox').forEach((el,i)=>{
+      setTimeout(()=>el.classList.add('in'), i*120);
+    });
+  }, 600);
+})();
 
 // ═══ BIENVENIDA DINÁMICA por hora ═══
 (function(){
